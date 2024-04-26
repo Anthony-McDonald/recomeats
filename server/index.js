@@ -9,6 +9,7 @@ const bcrypt = require("bcrypt");
 const router = express.Router();
 const validInfo = require("./middleware/validInfo");
 const authorisation = require("./middleware/authorise")
+const callChat = require("./middleware/openai");
 
 
 
@@ -388,6 +389,44 @@ app.get("/getingredients/:recipe_id", asyncHandler(async(req, res, next) => {
 
     res.json(ingredients);
 }));
+
+// call chat api
+
+app.get("/foods", asyncHandler(async (req, res, next) => {
+    const { user_id, ingredients } = req.query;
+    const foodPrefNames = [];
+
+    let chatMessage = "I like exclusively ";
+
+    const userFoodPrefIds = await pool.query("SELECT preference_id FROM UserCuisinePreferences WHERE user_id = $1", [user_id]);
+    for (let i = 0; i < userFoodPrefIds.rows.length; i++) {
+        const prefId = userFoodPrefIds.rows[i].preference_id;
+        const prefName = await pool.query("SELECT preference_name FROM CuisinePreferences WHERE preference_id = $1", [prefId]);
+        foodPrefNames.push(prefName.rows[0].preference_name);
+    }
+
+    for (let j = 0; j < foodPrefNames.length; j++) {
+        let foodPreference = foodPrefNames[j];
+        chatMessage += foodPreference + ", ";
+    }
+    chatMessage += " food and have ";
+
+    for (let k = 0; k < ingredients.length; k++) {
+        let ingredient = ingredients[k];
+        chatMessage += ingredient;
+    }
+
+    chatMessage += " in my pantry. Recommend me 10 dishes to cook.";
+
+    const recommendations = await callChat(chatMessage);
+
+    const response = {
+        chatMessage: chatMessage,
+        recommendations: recommendations,
+    }
+    res.json(response);
+}));
+
 
 app.listen(5000, () => {
     console.log("Server has started on port 5000")
