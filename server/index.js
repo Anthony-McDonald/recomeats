@@ -4,40 +4,107 @@ const cors = require("cors");
 const pool = require("./db")
 const asyncHandler = require("express-async-handler");
 const { DateTime } = require("luxon");
+const jwtGenerator = require("./utils/jwtGenerator");
+const bcrypt = require("bcrypt");
+const router = express.Router();
+const validInfo = require("./middleware/validInfo");
+const authorisation = require("./middleware/authorise")
+
+
 
 //middleware
 app.use(cors());
 app.use(express.json());
 
 //ROUTES//
+// Require Route modules
+const userRoutes = require("./routes/userRoutes");
+const cuisineRoutes = require("./routes/cuisineRoutes");
+const recipeRoutes = require("./routes/recipeRoutes");
+
+// Dash
+
+app.post("/dashboard", authorisation, asyncHandler(async (req, res) => {
+    try {
+      const user = await pool.query(
+        "SELECT user_name FROM users WHERE user_id = $1",
+        [req.user.id] 
+      ); 
+      
+      
+      res.json(user.rows[0]);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server error");
+    }
+  }));
 
 // User Registration
 
-app.post("/createuser", asyncHandler(async(req, res, next) => {
+app.post("/register", validInfo, asyncHandler(async(req, res, next) => {
 
-const { user_name, first_name, last_name, date_of_birth, email_address, password_hash, permission_level } = req.body;
+const { user_name, first_name, last_name, date_of_birth, email_address, password, permission_level } = req.body;
+
+const salt = await bcrypt.genSalt(10);
+const password_hash = await bcrypt.hash(password, salt);
 
 const newUser = await pool.query(
-    "INSERT INTO Users (user_name, email_address, password_hash) VALUES ($1, $2, $3) RETURNING *",
-    [user_name, email_address, password_hash]
-);
+    "INSERT INTO Users (user_name, email_address, password_hash, password_salt) VALUES ($1, $2, $3, $4) RETURNING *",
+    [user_name, email_address, password_hash, salt]
+);``
+const user_id = newUser.rows[0].user_id;
 const newUserProfile = await pool.query(
     "INSERT INTO UserProfiles (user_id, first_name, last_name, date_of_birth) VALUES ($1, $2, $3, $4) RETURNING *",
-    [newUser.rows[0].user_id, first_name, last_name, date_of_birth]
+    [user_id, first_name, last_name, date_of_birth]
 );
 const newUserPermission = await pool.query(
     "INSERT INTO UserPermissions (user_id, permission_level) VALUES ($1, $2) RETURNING *",
-    [newUser.rows[0].user_id, permission_level]
+    [user_id, permission_level]
 );
 
-const response = {
-    user: newUser.rows[0],
-    profile: newUserProfile.rows[0],
-    permission: newUserPermission.rows[0]
-};
+const jwtToken = jwtGenerator({ user_id });
 
-res.json(response);
+// const response = {
+//     user: newUser.rows[0],
+//     profile: newUserProfile.rows[0],
+//     permission: newUserPermission.rows[0],
+//     token: jwtToken,
+// };
+
+res.json({ jwtToken});
+
+return res.json({ jwtToken});
 }));
+
+// Login User
+
+app.post("/login", asyncHandler(async(req, res, next) => {
+
+    const{email, password} = req.body;
+
+    const user = await pool.query("SELECT * FROM Users WHERE email_address = $1",
+    [email]);
+
+    if (user.rows.length ===0) {
+        return res.status(401).send("Password or Email is incorrect");
+    }
+
+    const validPassword = await bcrypt.compare(password, user.rows[0].password_hash);
+
+    if (!validPassword) {
+        return res.status(401).send("Password or Email incorrect")
+    }
+
+    const token = jwtGenerator(user.rows[0].user_id);
+
+    res.json({token});
+}))
+
+// Check if user login valid
+
+app.get("/is-verify", authorisation, asyncHandler(async (req, res) => {
+    res.json(true);
+}))
 
 // Delete User
 
@@ -59,6 +126,12 @@ app.delete("/deleteuser/:user_id", asyncHandler(async(req, res, next) => {
         // Delete all info regarding that particular user's food preferences
         await pool.query(
             "DELETE FROM UserCuisinePreferences WHERE user_id = $1",
+            [user_id]
+        );
+
+        // Delete records from recipeingredients table related to the user's recipes
+        await pool.query(
+            "DELETE FROM recipeingredients WHERE recipe_id IN (SELECT recipe_id FROM recipes WHERE user_id = $1)",
             [user_id]
         );
 
@@ -245,6 +318,8 @@ app.delete("/deleterecipe/:user_id/:recipe_id", asyncHandler(async(req, res, nex
     res.send();
 
 }))
+
+
 
 app.post("/changerecipe/:user_id/:recipe_id", asyncHandler(async(req, res, next) => {
     const user_id = req.params.user_id;
