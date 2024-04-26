@@ -196,23 +196,59 @@ app.get("/getcuisine/:cuisine_id", asyncHandler(async(req, res, next) => {
 }))
 
 
-// // Add Recipe To User 
+// Add Recipe To User 
 
-// app.post("/addrecipe/:user_id", asyncHandler(async(req, res, next) => {
+app.post("/addrecipe/:user_id", asyncHandler(async(req, res, next) => {
+    const user_id = req.params.user_id;
+    const { recipe_name, recipe_ingredients, recipe_description } = req.body;
+    const addedIngredients = [];
 
-// }))
+    // Insert new recipe
+    const newRecipe = await pool.query("INSERT INTO Recipes (user_id, recipe_name, recipe_description) VALUES ($1, $2, $3) RETURNING *",
+    [user_id, recipe_name, recipe_description]);
 
-// // Delete Recipe From User
+    // Insert ingredients for the recipe
+    for (let i = 0; i < recipe_ingredients.length; i++) {
+        const ingredient = recipe_ingredients[i];
+        const newIngredient = await pool.query("INSERT INTO RecipeIngredients (recipe_id, ingredient_name) VALUES ($1, $2) RETURNING *",
+        [newRecipe.rows[0].recipe_id, ingredient]);
+        addedIngredients.push(newIngredient.rows[0]); // Push the inserted ingredient object to addedIngredients array
+    }
 
-// app.delete("/deleterecipe/:user_id/:recipe_id", asyncHandler(async(req, res, next) => {
+    // Construct the response object
+    const response = {
+        recipe: newRecipe.rows[0], // Include details of the newly added recipe
+
+        // Construct the details for each added ingredient
+        ingredients: addedIngredients.map(ingredient => {
+            return {
+                ingredient_id: ingredient.ingredient_id,
+                ingredient_name: ingredient.ingredient_name
+            };
+        })
+    };
+
+    res.json(response);
+}));
+
+
+// Delete Recipe From User
+
+app.delete("/deleterecipe/:user_id/:recipe_id", asyncHandler(async(req, res, next) => {
     
-// }))
+}))
 
-// // Change Recipe Details
+// Change Recipe Details
 
-// app.update("/changerecipe/:user_id/recipe_id", asyncHandler(async(req, res, next) => {
+app.put("/changerecipe/:user_id/recipe_id", asyncHandler(async(req, res, next) => {
     
-// }))
+}))
+
+// Get User Recipes
+
+app.get("/getrecipe/:recipe_id", asyncHandler(async(req, res, next) => {
+
+}))
 
 app.listen(5000, () => {
     console.log("Server has started on port 5000")
