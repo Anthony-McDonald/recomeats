@@ -22,3 +22,28 @@
     color: white;
     border: none;
 }
+
+.header-button {
+    background-color: #3e362E;
+}
+
+.modal-title, .modal-body {
+    color: #3e362E;
+}
+
+.submit-register {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.register-div {
+    position: absolute;
+}
+
+.register {
+    position: relative;
+    left: 25rem;
+    top: 1rem;
+    color: #3e362E;
+}
