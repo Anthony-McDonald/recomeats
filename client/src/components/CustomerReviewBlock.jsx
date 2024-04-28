@@ -16,8 +16,8 @@ const CustomerReviewBlock = ({ personImage, personName, personReview }) => {
                 <img className="person-img" src={personImageSrc} alt={altText} />
             </div>
             <div className="review-holder">
-                <h1 className='review-name'>{personName}</h1>
-                <h5 className='review-body'>{personReview}</h5>
+                <h1 className='review-name playfair-display'>{personName}</h1>
+                <h5 className='review-body helvetica'>{personReview}</h5>
             </div>
         </div>
     );

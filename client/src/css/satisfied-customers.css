@@ -1,10 +1,27 @@
 #satisfied-customers-div {
     background-color: #AC8968;
     color: white;
-    height: 100vh;
-    margin-top: -6rem;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 80%;
+    text-align: center;
 }
 
 .customer-layout {
     margin: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin-left: 10rem;
+}
+
+.satisfied-title {
+    font-weight: bolder;
+    font-size: 3rem;
+    color: white;
+    text-align: center;
+    margin-top: -2rem;
 }

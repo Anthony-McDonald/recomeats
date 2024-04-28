@@ -1,5 +1,42 @@
 #contact-area-div {
     background-color: #A69080;
+    margin-top: 2rem;
     height: 30vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+}
 
+.contact-title {
+    color: white;
+    padding: 2rem;
+    font-size: 3rem;
+}
+
+.svg {
+    height: 5rem;
+}
+
+.contact-boxes {
+    display: flex;
+    justify-content: space-around;
+}
+
+.contact-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-variable-title {
+    font-weight: bolder;
+    margin-top: 1rem;
+
+
+}
+
+.contact-desc {
+    text-align: center;
 }
