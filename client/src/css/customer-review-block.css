@@ -1,0 +1,32 @@
+.person-img {
+    height: 13rem;
+    border-radius: 5rem;
+}
+
+#customer-review-div {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 3rem;
+    margin-left: 1rem;
+    background-color: #865D36;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.review-holder {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    margin-left: 2rem;
+    margin-top: 1rem;
+    flex-direction: column;
+}
+
+.review-name {
+    font-weight: bolder;
+}
+
+.review-body {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+}

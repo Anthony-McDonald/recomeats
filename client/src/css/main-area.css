@@ -1,0 +1,23 @@
+#main-area {
+    height: 100vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.display-1 {
+    font-weight: 500;
+    font-size: rem;
+}
+.display-1, .display-2 {
+    margin-left: 2rem;
+}
+
+.playfair-display {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+  }
+

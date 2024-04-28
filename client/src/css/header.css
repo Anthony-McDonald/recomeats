@@ -1,0 +1,24 @@
+#header {
+    height: 6rem;
+    background-color: rgba(147, 120, 91, 0.1);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+    font-weight: bolder;
+    font-size: 1.2rem;
+}
+
+.recomeats {
+    height: 5rem;
+}
+
+.log-button {
+    border-radius: 1rem;
+    margin: 1rem;
+    padding: 0.4rem 1.3rem 0.4rem 1.2rem;
+    background-color: #3e362E;
+    color: white;
+    border: none;
+}
