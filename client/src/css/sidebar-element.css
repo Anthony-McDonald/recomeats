@@ -1,0 +1,21 @@
+#sidebar-element {
+    margin: 0.5rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+#sidebar-element:hover {
+    background-color: grey;
+}
+
+.sidebar-svg {
+    width: 2.5rem;
+    margin-right: 1rem;
+}
+
+.side-el-right {
+    font-size: 1.5rem;
+}

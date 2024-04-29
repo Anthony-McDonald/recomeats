@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import RegisterModal from './RegisterModal';
-import 'react-toastify/dist/ReactToastify.css';
 
 
 const Modal = ({setAuth}) => {
