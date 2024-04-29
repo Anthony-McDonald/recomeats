@@ -33,7 +33,7 @@ const Modal = ({setAuth}) => {
             const parseRes = await response.json();
             console.log(parseRes)
 
-            localStorage.setItem("token", parseRes.jwtToken)
+            localStorage.setItem("token", parseRes.token)
 
             setAuth(true);
             document.getElementById("closeBtn").click();
