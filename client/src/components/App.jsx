@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 
+
 function App({setAuth, isAuthenticated}) {
 
   const navigate = useNavigate(); // Define useNavigate hook

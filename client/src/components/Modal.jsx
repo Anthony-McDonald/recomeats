@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import RegisterModal from './RegisterModal';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Modal = ({setAuth}) => {
     const [inputs, setInputs] = useState({
@@ -33,10 +35,12 @@ const Modal = ({setAuth}) => {
             const parseRes = await response.json();
             console.log(parseRes)
 
+            if (parseRes.token) {
             localStorage.setItem("token", parseRes.token)
-
             setAuth(true);
             document.getElementById("closeBtn").click();
+            }
+
             
         } catch(err) {
             console.error(err.message);
