@@ -11,8 +11,5 @@ const Dashboard = ({ authenticateSwitch }) => {
   );
 };
 
-Dashboard.propTypes = {
-  authenticateSwitch: PropTypes.func.isRequired,
-};
 
 export default Dashboard;

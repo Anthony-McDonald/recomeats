@@ -3,54 +3,86 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import RegisterModal from './RegisterModal';
 
-const Modal = () => {
-  const [showRegister, setShowRegister] = useState(false);
+const Modal = ({setAuth}) => {
+    const [inputs, setInputs] = useState({
+        email: "",
+        password: "",
+    })
+    const {email, password} = inputs;
+    
+    const onChange = (e) => {
+        const updatedInputs = { ...inputs, [e.target.id]: e.target.value };
+        setInputs(updatedInputs);
+    };
+    
+    
 
-  const switchReg = () => {
-    console.log("switching reg")
-    event.preventDefault();
-    setShowRegister(!showRegister); // Toggle the state of showRegister
-  };
+    const onSubmitForm = async e => {
+        e.preventDefault();
+
+        try {
+            const body = {email, password}
+            console.log(body);
+            const response = await fetch("http://localhost:5000/login", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(body)
+            });
+            console.log(response);
+
+            const parseRes = await response.json();
+            console.log(parseRes)
+
+            localStorage.setItem("token", parseRes.jwtToken)
+
+            setAuth(true);
+            document.getElementById("closeBtn").click();
+            
+        } catch(err) {
+            console.error(err.message);
+        }
+
+    };
 
   return (
     <>
-      <button type="button" className="header-button btn btn-primary log-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button type="button" className="header-button btn btn-primary log-button" data-bs-toggle="modal" data-bs-target="#Modal">
         Sign in
       </button>
 
-      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div className="modal fade" id="Modal" tabIndex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">Sign in</h5>
+              <h5 className="modal-title" id="ModalLabel">Sign in</h5>
               <button type="button" className="header-button btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
-              <form>
+              <form onSubmit={onSubmitForm}>
                 <div className="mb-3">
-                  <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                  <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="" />
+                  <label htmlFor="email" className="form-label">Email address</label>
+                  <input onChange={onChange} type="email" className="form-control" id="email" aria-describedby="emailHelp" />
                   <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                  <input type="password" className="form-control" id="exampleInputPassword1" value="" />
+                  <label htmlFor="password" className="form-label">Password</label>
+                  <input onChange={onChange} type="password" className="form-control" id="password"  />
                 </div>
                 <div className="submit-register">
                   <button type="submit" className="header-button btn btn-primary">Submit</button>
                   <div className="register-div">
-                    <a href="" onClick={switchReg} data-bs-toggle="modal" data-bs-target="#innerModal" className="register">Register</a>
+                    <a href="" data-bs-toggle="modal" data-bs-target="#innerModal" className="register">Register</a>
                   </div>
                 </div>
               </form>
             </div>
             <div className="modal-footer">
-              <button type="button" className="header-button btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" id="closeBtn" className="header-button btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
       </div>
-      <RegisterModal></RegisterModal>
+      <RegisterModal setAuth={setAuth}></RegisterModal>
     </>
   );
 };

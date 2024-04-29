@@ -3,11 +3,11 @@ import Modal from './Modal';
 import '../css/header.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
-const Header = () => {
+const Header = ({setAuth}) => {
   return (
     <div id="header">
         <img className='recomeats' src="../../../public/images/recomeats.png" alt="reco-logo" />
-        <Modal></Modal>
+        <Modal setAuth={setAuth}></Modal>
     </div>
   );
 };

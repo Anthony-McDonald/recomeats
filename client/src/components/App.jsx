@@ -7,11 +7,11 @@ import MainArea from './MainArea';
 import ContactArea from './ContactArea';
 
 
-function App() {
+function App({setAuth}) {
 
   return (
     <div className='whole-page'>
-      <Header></Header>
+      <Header setAuth={setAuth}></Header>
       <MainArea></MainArea>
       <SatisfiedCustomers></SatisfiedCustomers>
       <ContactArea></ContactArea>

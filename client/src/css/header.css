@@ -27,6 +27,10 @@
     background-color: #3e362E;
 }
 
+.header-button:hover {
+    background-color: #a69080;
+}
+
 .modal-title, .modal-body {
     color: #3e362E;
 }
@@ -39,11 +43,14 @@
 
 .register-div {
     position: absolute;
+    margin-left: 10rem;
+
 }
 
 .register {
     position: relative;
-    left: 25rem;
-    top: 1rem;
+    left: 15rem;
+    top: 1.5rem;
+    font-size: 1rem;
     color: #3e362E;
 }

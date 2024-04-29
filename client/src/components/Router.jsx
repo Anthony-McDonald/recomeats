@@ -10,13 +10,13 @@ const Router = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     const authenticateSwitch = () => {
-        setIsAuthenticated(!isAuthenticated);
+        setIsAuthenticated(true);
         console.log(isAuthenticated);
     }
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <App />,
+      element: <App setAuth={authenticateSwitch}/>,
       errorElement: <ErrorPage />,
     },
     {
