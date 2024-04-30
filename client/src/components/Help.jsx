@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const Help = () => {
   return (
     <div id="help">
-        
+        Help element
     </div>
   );
 };

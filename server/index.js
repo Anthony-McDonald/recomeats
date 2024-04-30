@@ -376,6 +376,17 @@ app.get("/getrecipe/:recipe_id", asyncHandler(async(req, res, next) => {
 
     res.json(response);
 }));
+
+// app.post("/dashboard", authorisation, asyncHandler(async (req, res) => {
+//     const userId = req.user.id;
+
+//     const user = await pool.query(
+//         "SELECT user_name FROM users WHERE user_id = $1",
+//         [userId]
+//     );
+
+//     res.json(user.rows[0]);
+// }));
 // Get Recipe Ingredients
 
 app.get("/getingredients/:recipe_id", asyncHandler(async(req, res, next) => {

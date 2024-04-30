@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const Profile = () => {
   return (
     <div id="profile">
-        
+        profile element
     </div>
   );
 };
