@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../css/cuisines.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const Cuisines = () => {
   const [isCuisineAdding, setIsCuisineAdding] = useState(false);
@@ -169,71 +170,95 @@ const Cuisines = () => {
       {/* if true */}
       {isCuisineAdding?
       // first component
-        <div>
-      <label>
-        <input
-          type="checkbox"
-          name="chinese"
-          checked={isChecked.chinese}
-          onChange={handleCheckboxChange}
-        />
-        Chinese
-      </label>
+      <>
+        <div className="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+        <label className={`btn btn-outline-primary ${isChecked.chinese ? 'active' : ''}`}>
+  <input
+    type="checkbox"
+    name="chinese"
+      className="btn-check"
+    checked={isChecked.chinese}
+    onChange={handleCheckboxChange}
+    autoComplete='off'
+  />
+  Chinese
+</label>
+      
+      
       <br />
-      <label>
-        <input
-          type="checkbox"
-          name="indian"
-          checked={isChecked.indian}
-          onChange={handleCheckboxChange}
-        />
-        Indian
-      </label>
+<label className={`btn btn-outline-primary ${isChecked.indian ? 'active' : ''}`}>
+  <input
+    type="checkbox"
+    name="indian"
+    className="btn-check"
+    checked={isChecked.indian}
+    onChange={handleCheckboxChange}
+    autoComplete='off'
+  />
+  Indian
+</label>
+
+<label className={`btn btn-outline-primary ${isChecked.italian ? 'active' : ''}`}>
+  <input
+    type="checkbox"
+    name="italian"
+    className="btn-check"
+    checked={isChecked.italian}
+    onChange={handleCheckboxChange}
+    autoComplete='off'
+  />
+  Italian
+</label>
+
+<label className={`btn btn-outline-primary ${isChecked.african ? 'active' : ''}`}>
+  <input
+    type="checkbox"
+    name="african"
+    className="btn-check"
+    checked={isChecked.african}
+    onChange={handleCheckboxChange}
+    autoComplete='off'
+  />
+  African
+</label>
+
+<label className={`btn btn-outline-primary ${isChecked.mediterranean ? 'active' : ''}`}>
+  <input
+    type="checkbox"
+    name="mediterranean"
+    className="btn-check"
+    checked={isChecked.mediterranean}
+    onChange={handleCheckboxChange}
+    autoComplete='off'
+  />
+  Mediterranean
+</label>
+
       <br />
-      <label>
-        <input
-          type="checkbox"
-          name="italian"
-          checked={isChecked.italian}
-          onChange={handleCheckboxChange}
-        />
-        Italian
-      </label>
-      <br />
-      <label>
-        <input
-          type="checkbox"
-          name="african"
-          checked={isChecked.african}
-          onChange={handleCheckboxChange}
-        />
-        African
-      </label>
-      <br />
-      <label>
-        <input
-          type="checkbox"
-          name="mediterranean"
-          checked={isChecked.mediterranean}
-          onChange={handleCheckboxChange}
-        />
-        Mediterannean
-      </label>
-      <br />
-            <button onClick={confirmHandler}>Confirm Cuisines</button>
         </div> 
+        <button className="btn btn-primary mr-left" onClick={confirmHandler}>Confirm Cuisines</button>
+        </>
         : 
         // second component, if false
         <div>
-        <ul>
+        <ul className='mt-2'>
         {userCuisines.map((cuisine, index) => (
-          <li key={index}>{cuisine}</li>
+          <li className="d-flex align-items-center ingred-entry" key={index}>
+                <div className='ingred-div'>
+              {cuisine}
+              </div>
+          
+          </li>
         ))}
       </ul>
       </div>
       }
 
-        <button onClick={addCuisineSwitch}>Add Cuisine</button>
+    {isCuisineAdding ? (
+            null
+          ) : <button className="btn btn-primary mr-left"onClick={addCuisineSwitch}>Add Cuisine</button>}
+
+
 
     </div>
   );
