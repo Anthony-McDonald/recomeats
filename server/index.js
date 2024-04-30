@@ -253,8 +253,12 @@ app.delete("/deletecuisine/:cuisine_id", authorisation, asyncHandler(async(req, 
 app.get("/getuserpreferences", authorisation, asyncHandler(async(req, res, next) => {
     const user_id = req.user.id;
     const result = await pool.query("SELECT preference_id FROM UserCuisinePreferences WHERE user_id = $1", [user_id]);
+    const response = result.rows.map(cuisine => ({
+        preference_id: cuisine.preference_id,
+        
+    }));
 
-    res.json(result);
+    res.json(response);
 }))
 
 // Get Cuisine Name from cuisineID
@@ -263,7 +267,10 @@ app.get("/getcuisine/:cuisine_id", asyncHandler(async(req, res, next) => {
     const cuisine_id = parseInt(req.params.cuisine_id);
     const result = await pool.query("SELECT preference_name FROM CuisinePreferences WHERE preference_id = $1", [cuisine_id]);
 
-    res.json(result);
+    const response = result.rows.map(cuisine => ({
+        preference_name: cuisine.preference_name,
+    }));
+    res.json(response);
 }))
 
 
@@ -377,6 +384,7 @@ app.get("/getrecipes", authorisation, asyncHandler(async(req, res, next) => {
 
     res.json(response);
 }));
+
 
 
 // Get Recipe Ingredients

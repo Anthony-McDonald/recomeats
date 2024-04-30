@@ -164,7 +164,6 @@ const Recipes = () => {
   
   return (
     <div id="recipes">
-      editRecipeName: {editRecipeName}
       <div className="desc-div">
       <h3>Here are some of your saved recipes:</h3>
       <button onClick={addRecipeManually} >Add a recipe manually</button>
