@@ -106,8 +106,8 @@ app.get("/is-verify", authorisation, asyncHandler(async (req, res) => {
 
 // Delete User
 
-app.delete("/deleteuser/:user_id", asyncHandler(async(req, res, next) => {
-    const user_id = req.params.user_id;
+app.delete("/deleteuser", authorisation, asyncHandler(async(req, res, next) => {
+    const user_id = req.user.id;
 
         // Delete the user's profile from the UserProfiles table
         await pool.query(
@@ -150,9 +150,9 @@ app.delete("/deleteuser/:user_id", asyncHandler(async(req, res, next) => {
 
 // Change User Information
 
-app.post("/edituser/:user_id", asyncHandler(async(req, res, next) => {
+app.post("/edituser", authorisation, asyncHandler(async(req, res, next) => {
     const { user_name, first_name, last_name, date_of_birth, email_address, password_hash, permission_level } = req.body;
-    const user_id = req.params.user_id;
+    const user_id = req.user.id;
 
     // Update Users table
     const updateUser = await pool.query(
@@ -185,8 +185,8 @@ app.post("/edituser/:user_id", asyncHandler(async(req, res, next) => {
 
 // Get User Information
 
-app.get("/getuser/profile/:user_id", asyncHandler(async(req, res, next) => {
-    const user_id = parseInt(req.params.user_id); 
+app.get("/getuser/profile", authorisation, asyncHandler(async(req, res, next) => {
+    const user_id = req.user.id;
     const result = await pool.query("SELECT first_name, last_name, date_of_birth FROM userprofiles WHERE user_id = $1", [user_id]);
     const userProfile = result.rows[0];
 
@@ -225,9 +225,9 @@ app.delete("/deletecuisine/:cuisine_id", asyncHandler(async(req, res, next) => {
 
 // Add User Cuisine Preference
 
-app.post("/addusercuisine/:user_id/:cuisine_id", asyncHandler(async(req, res, next) => {
-    const user_id = parseInt(req.params.user_id); 
-    const cuisine_id = parseInt(req.params.cuisine_id); 
+app.post("/addusercuisine/:cuisine_id", authorisation, asyncHandler(async(req, res, next) => {
+    const user_id = req.user.id;
+    const cuisine_id = req.params.cuisine_id; 
 
     const newCuisinePreference = await pool.query("INSERT INTO UserCuisinePreferences (user_id, preference_id) VALUES ($1, $2) RETURNING *",
     [user_id, cuisine_id]);
@@ -238,9 +238,9 @@ app.post("/addusercuisine/:user_id/:cuisine_id", asyncHandler(async(req, res, ne
 
 // Delete User Cuisine Preference
 
-app.delete("/deletecuisine/:user_id/:cuisine_id", asyncHandler(async(req, res, next) => {
-    const user_id = parseInt(req.params.user_id); 
-    const cuisine_id = parseInt(req.params.cuisine_id); 
+app.delete("/deletecuisine/:cuisine_id", authorisation, asyncHandler(async(req, res, next) => {
+    const user_id = req.user.id;
+    const cuisine_id = req.params.cuisine_id; 
 
     await pool.query("DELETE FROM UserCuisinePreferences WHERE user_id = $1 AND preference_id = $2",[user_id, cuisine_id]);
 
@@ -250,8 +250,8 @@ app.delete("/deletecuisine/:user_id/:cuisine_id", asyncHandler(async(req, res, n
 }))
 
 // Get all user cuisine preferences
-app.get("/getuserpreferences/:user_id", asyncHandler(async(req, res, next) => {
-    const user_id = parseInt(req.params.user_id);
+app.get("/getuserpreferences", authorisation, asyncHandler(async(req, res, next) => {
+    const user_id = req.user.id;
     const result = await pool.query("SELECT preference_id FROM UserCuisinePreferences WHERE user_id = $1", [user_id]);
 
     res.json(result);
@@ -269,8 +269,8 @@ app.get("/getcuisine/:cuisine_id", asyncHandler(async(req, res, next) => {
 
 // Add Recipe To User 
 
-app.post("/addrecipe/:user_id", asyncHandler(async(req, res, next) => {
-    const user_id = req.params.user_id;
+app.post("/addrecipe", authorisation, asyncHandler(async(req, res, next) => {
+    const user_id = req.user.id;
     const { recipe_name, recipe_ingredients, recipe_description } = req.body;
     const addedIngredients = [];
 
@@ -305,8 +305,8 @@ app.post("/addrecipe/:user_id", asyncHandler(async(req, res, next) => {
 
 // Delete Recipe From User
 
-app.delete("/deleterecipe/:user_id/:recipe_id", asyncHandler(async(req, res, next) => {
-    const user_id = req.params.user_id;
+app.delete("/deleterecipe/:recipe_id", authorisation, asyncHandler(async(req, res, next) => {
+    const user_id = req.user.id;
     const recipe_id = req.params.recipe_id;
 
     await pool.query("DELETE FROM RecipeIngredients WHERE recipe_id = $1", [recipe_id]);
@@ -319,8 +319,8 @@ app.delete("/deleterecipe/:user_id/:recipe_id", asyncHandler(async(req, res, nex
 
 
 
-app.post("/changerecipe/:user_id/:recipe_id", asyncHandler(async(req, res, next) => {
-    const user_id = req.params.user_id;
+app.post("/changerecipe/:recipe_id", authorisation, asyncHandler(async(req, res, next) => {
+    const user_id = req.user.id;
     const recipe_id = req.params.recipe_id;
     const { recipe_name, recipe_ingredients, recipe_description } = req.body;
     const addedIngredients = [];
@@ -363,30 +363,22 @@ app.post("/changerecipe/:user_id/:recipe_id", asyncHandler(async(req, res, next)
 
 // Get User Recipes
 
-app.get("/getrecipe/:recipe_id", asyncHandler(async(req, res, next) => {
-    const recipe_id = req.params.recipe_id;
+app.get("/getrecipes", authorisation, asyncHandler(async(req, res, next) => {
+    const userId = req.user.id;
 
-    const result = await pool.query("SELECT recipe_name, recipe_description FROM recipes WHERE recipe_id = $1", [recipe_id]);
-    const recipe = result.rows[0];
+    const result = await pool.query("SELECT recipe_id, recipe_name, recipe_description FROM recipes WHERE user_id = $1", [userId]);
 
-    const response = {
+    // Map the result array to create the response array
+    const response = result.rows.map(recipe => ({
+        recipe_id: recipe.recipe_id,
         recipe_name: recipe.recipe_name,
         recipe_description: recipe.recipe_description
-    };
+    }));
 
     res.json(response);
 }));
 
-// app.post("/dashboard", authorisation, asyncHandler(async (req, res) => {
-//     const userId = req.user.id;
 
-//     const user = await pool.query(
-//         "SELECT user_name FROM users WHERE user_id = $1",
-//         [userId]
-//     );
-
-//     res.json(user.rows[0]);
-// }));
 // Get Recipe Ingredients
 
 app.get("/getingredients/:recipe_id", asyncHandler(async(req, res, next) => {

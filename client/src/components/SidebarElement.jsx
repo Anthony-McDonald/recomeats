@@ -7,7 +7,6 @@ const SidebarElement = ({svgImage, text, onClick}) => {
   const imageSrc = "/public/images/svgs/" + svgImage + ".svg";
   
 
-    console.log(imageSrc);
   return (
     <div id="sidebar-element" onClick={onClick}>
         <div className="side-el-left">
