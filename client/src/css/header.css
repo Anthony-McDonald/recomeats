@@ -1,6 +1,5 @@
 #header {
     height: 6rem;
-    background-color: rgba(147, 120, 91, 0.1);
     display: flex;
     flex-direction: row;
     justify-content: space-around;

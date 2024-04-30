@@ -1,6 +1,10 @@
 #recipe-box {
-    background-color: aqua;
-    height: 5rem;
+    background-color: white;
+    height: auto;
     width: 70vw;
     margin: 1rem;
+}
+
+.recipe-box-del {
+margin-right: 1rem;
 }

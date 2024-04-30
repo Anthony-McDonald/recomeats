@@ -6,9 +6,8 @@
 
 .dash-sidebar {
     height: 100vh;  
-    background-color: white;
+    background-color: #a69080;
     width: 20rem;
-    border-right: 3px solid #a69080;
 }
 
 .reco-logo {

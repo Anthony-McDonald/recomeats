@@ -11,7 +11,7 @@ import Help from './Help';
 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("basename");
-  const [selectedElement, setSelectedElement] = useState(null);
+  const [selectedElement, setSelectedElement] = useState("profile");
 
   const mainChange = (e) => {
     console.log(e);
@@ -64,7 +64,7 @@ const Dashboard = ({ setAuth }) => {
       <div className="dash-mainarea">  
       <div className="dash-main-top">
       <h1>Welcome: {name}</h1>
-      <button className="dash-logout btn btn-primary" onClick={logout}>Log out</button>
+      <button className="dash-logout btn btn-danger" onClick={logout}>Log out</button>
       </div>
       <div className="dash-main-bottom">
       {selectedElement === "profile" && <Profile/>}

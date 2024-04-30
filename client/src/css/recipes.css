@@ -4,3 +4,21 @@
     margin-left: 2rem;
     margin-right: 2rem;
 }
+
+.btn-primary {
+    background-color: #865d36;
+    border: 1px solid #865d36;
+}
+.btn-primary:hover {
+    background-color: #ac8968;
+    border: 1px solid #ac8968;
+}
+
+.btn-danger {
+    background-color: #3e362e;
+    border: 1px solid #3e362e;
+}
+
+.ai-btn{
+    margin-right: 2rem;
+}

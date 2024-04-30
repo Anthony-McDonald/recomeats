@@ -5,24 +5,11 @@ import SatisfiedCustomers from './SatisfiedCustomers';
 import Header from './Header';
 import MainArea from './MainArea';
 import ContactArea from './ContactArea';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 
 
-function App({setAuth, isAuthenticated}) {
-
-  const navigate = useNavigate(); // Define useNavigate hook
-
-  const location = useLocation();
-
-  useEffect(() => {
-    // Check if the user is accessing the "/dashboard" route and is not authenticated
-    if (location.pathname === "/dashboard" && !isAuthenticated) {
-      // Navigate to the home page "/"
-      navigate("/");
-    }
-  }, [location, isAuthenticated, navigate]); // Add dependencies to useEffect
+function App({setAuth}) {
 
   async function verifyAuthentication() {
     try {

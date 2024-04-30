@@ -166,7 +166,11 @@ const Recipes = () => {
     <div id="recipes">
       <div className="desc-div">
       <h3>Here are some of your saved recipes:</h3>
-      <button onClick={addRecipeManually} >Add a recipe manually</button>
+      <div className="recipe-buttons">
+        <a href="/ai-recipe">      <button className='btn btn-primary ai-btn'> Add with AI </button></a>
+      <button className='btn btn-primary' onClick={addRecipeManually} >Add a recipe manually</button>
+      </div>
+
       </div>
         <div className="recipe-boxes">
         {isAddingRecipe ? <AddRecipeForm setRecipeForm={setIsAddingRecipe} setRecipeName={setAddRecipeName} setRecipeDescription={setAddRecipeDescription} setRecipeIngredients={setAddRecipeIngredients} recipeIngredients={addRecipeIngredients} submitFunction={addRecipeSubmit}/> : null}

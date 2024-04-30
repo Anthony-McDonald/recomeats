@@ -14,6 +14,7 @@
 .sidebar-svg {
     width: 2.5rem;
     margin-right: 1rem;
+    filter: invert(17%) sepia(7%) saturate(1603%) hue-rotate(349deg) brightness(92%) contrast(83%);
 }
 
 .side-el-right {
