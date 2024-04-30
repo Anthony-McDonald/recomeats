@@ -223,6 +223,8 @@ app.delete("/deletecuisine/:cuisine_id", asyncHandler(async(req, res, next) => {
 
 }))
 
+// Get Cuisines
+
 // Add User Cuisine Preference
 
 app.post("/addusercuisine/:cuisine_id", authorisation, asyncHandler(async(req, res, next) => {
@@ -238,11 +240,9 @@ app.post("/addusercuisine/:cuisine_id", authorisation, asyncHandler(async(req, r
 
 // Delete User Cuisine Preference
 
-app.delete("/deletecuisine/:cuisine_id", authorisation, asyncHandler(async(req, res, next) => {
+app.delete("/deleteusercuisine/", authorisation, asyncHandler(async(req, res, next) => {
     const user_id = req.user.id;
-    const cuisine_id = req.params.cuisine_id; 
-
-    await pool.query("DELETE FROM UserCuisinePreferences WHERE user_id = $1 AND preference_id = $2",[user_id, cuisine_id]);
+    await pool.query("DELETE FROM UserCuisinePreferences WHERE user_id = $1",[user_id]);
 
 
     res.send();
