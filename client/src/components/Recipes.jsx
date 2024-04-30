@@ -8,6 +8,44 @@ import AddRecipeForm from './AddRecipeForm';
 const Recipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [isAddingRecipe, setIsAddingRecipe] = useState(false);
+  const [addRecipeName, setAddRecipeName] = useState("test");
+  const [addRecipeDescription, setAddRecipeDescription] = useState("");
+  const [addRecipeIngredients, setAddRecipeIngredients] = useState([]);
+  
+  const addRecipeSubmit = (e) => {
+    e.preventDefault();
+    setIsAddingRecipe(false);
+    addRecipe(addRecipeName, addRecipeDescription, addRecipeIngredients);
+    setAddRecipeName('');
+    setAddRecipeDescription('');
+    setAddRecipeIngredients([]);
+  }
+
+  async function addRecipe(recipe_name, recipe_description, recipe_ingredients) {
+    console.log("atteempting to print frm aync")
+    console.log(recipe_name, recipe_description, recipe_ingredients)
+    try {
+      const requestBody = JSON.stringify({
+        recipe_name: recipe_name,
+        recipe_ingredients: recipe_ingredients,
+        recipe_description: recipe_description
+      })
+      console.log(requestBody)
+      await fetch("http://localhost:5000/addrecipe/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "token": localStorage.getItem("token")
+        },
+        body: requestBody
+      });
+      getRecipes()
+
+    } catch (error) {
+      console.error("Error posting manual recipe:", error)
+    }
+  }
+
   useEffect(() => {
     getRecipes();
   }, []); 
@@ -69,7 +107,7 @@ const Recipes = () => {
       <button onClick={addRecipeManually} >Add a recipe manually</button>
       </div>
         <div className="recipe-boxes">
-        {isAddingRecipe ? <AddRecipeForm setRecipeForm={setIsAddingRecipe}/> : null}
+        {isAddingRecipe ? <AddRecipeForm setRecipeForm={setIsAddingRecipe} setRecipeName={setAddRecipeName} setRecipeDescription={setAddRecipeDescription} setRecipeIngredients={setAddRecipeIngredients} recipeIngredients={addRecipeIngredients} submitFunction={addRecipeSubmit}/> : null}
 
           {recipes.map((recipe, index) => (
             <RecipeBox key={index} recipe={recipe} editRecipe={editRecipe} deleteRecipe={deleteRecipe}></RecipeBox>
