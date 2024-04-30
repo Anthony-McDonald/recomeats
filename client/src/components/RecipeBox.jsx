@@ -20,7 +20,7 @@ const RecipeBox = ({recipe, deleteRecipe, editRecipe}) => {
         </div>
         <div className="control-div">
             <button onClick={handleDelete}>Delete</button>
-            {/* <button onClick={editRecipe}>Edit</button> */}
+            <button onClick={() => editRecipe(recipe_id)}>Edit</button>
         </div>
 
 
