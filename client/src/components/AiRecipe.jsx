@@ -1,8 +1,25 @@
 import React from 'react';
 import "../css/ai-recipe.css"
-import { useEffect } from 'react';
+import { useState,useEffect } from 'react';
 
-const AiRecipe = (setAuth ) => {
+const AiRecipe = ({setAuth, cuisinePreferences}) => {
+  const [recipes, setRecipes] = useState([]);
+  const [ingredients, setIngredients] = useState(["potatoes", "cheese", "garlic"]);
+
+  useEffect(() => {
+    verifyAuthentication();
+  }, []);
+
+
+
+  // async function getRecipes() {
+  //   try {
+  //     const response = await fetch
+  //   }
+  // }
+
+    
+
     async function verifyAuthentication() {
         try {
         const response = await fetch("http://localhost:5000/is-verify", {
@@ -20,9 +37,6 @@ const AiRecipe = (setAuth ) => {
         console.error(err.message);
       }
       }
-      useEffect(() => {
-        verifyAuthentication();
-      }, []);
   return (
     <div id="ai-recipe">
       Ai Recipe page

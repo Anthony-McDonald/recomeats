@@ -10,6 +10,7 @@ import RedirectComponent from "./RedirectComponent";
 const Router = () => {
     
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userCuisines, setUserCuisines] = useState([]);
 
   const authenticateSwitch = (input) => {
     setIsAuthenticated(input);
@@ -19,12 +20,12 @@ const Router = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: isAuthenticated ? <Dashboard setAuth={authenticateSwitch} /> : <App setAuth={authenticateSwitch} />,
+      element: isAuthenticated ? <Dashboard setAuth={authenticateSwitch}  /> : <App setAuth={authenticateSwitch} />,
       errorElement: <ErrorPage />,
     },
     {
       path:"/ai-recipe",
-      element: isAuthenticated ? <AiRecipe setAuth={authenticateSwitch} /> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
+      element: isAuthenticated ? <AiRecipe setAuth={authenticateSwitch} cuisinePreferences={userCuisines}/> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
       errorElement: <ErrorPage />,
     },
   ]);

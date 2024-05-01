@@ -1,4 +1,8 @@
 #add-recipe-div {
     width: 50rem;
-    background-color: green;
+    margin: 3rem;
+}
+
+.close-form-btn {
+    margin-left: 1rem;
 }

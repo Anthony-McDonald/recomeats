@@ -1,0 +1,19 @@
+#help {
+    justify-content: space-around;
+    align-items: center;
+    height: 90vh;
+    flex-direction: column;
+    display: flex;
+    width: 50vw;
+}
+
+.help-top, .help-mid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.accordian-element {
+    width: 60vw;
+}

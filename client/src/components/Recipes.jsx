@@ -19,6 +19,8 @@ const Recipes = () => {
   const [editRecipeName, setEditRecipeName] = useState("");
   const [editRecipeDescription, setEditRecipeDescription] = useState("");
   const [editRecipeIngredients, setEditRecipeIngredients] = useState([]);
+  // loading
+  const [isLoading, setIsLoading] = useState(false);
   
   
   const addRecipeSubmit = (e) => {
@@ -69,6 +71,7 @@ const Recipes = () => {
   }, []); 
 
   async function getRecipes() {
+    setIsLoading(true);
     try {
       const response = await fetch("http://localhost:5000/getrecipes/", {
         method: "GET",
@@ -80,6 +83,7 @@ const Recipes = () => {
       console.log(parseRes);
 
       setRecipes(parseRes);
+      setIsLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -175,9 +179,16 @@ const Recipes = () => {
         <div className="recipe-boxes">
         {isAddingRecipe ? <AddRecipeForm setRecipeForm={setIsAddingRecipe} setRecipeName={setAddRecipeName} setRecipeDescription={setAddRecipeDescription} setRecipeIngredients={setAddRecipeIngredients} recipeIngredients={addRecipeIngredients} submitFunction={addRecipeSubmit}/> : null}
         {isEditingRecipe ? <EditRecipeForm editRecipeName={editRecipeName} editRecipeDescription={editRecipeDescription} setRecipeForm={setIsEditingRecipe} setRecipeName={setEditRecipeName} setRecipeDescription={setEditRecipeDescription} setRecipeIngredients={setEditRecipeIngredients} recipeIngredients={editRecipeIngredients} submitFunction={editRecipeSubmit}/> : null}
-          {recipes.map((recipe, index) => (
+        {isLoading ? (
+          <h1 className='loading-message'>Loading...</h1>
+        ) : recipes.length === 0 ? (
+          <h1 className='no-recipes'>No recipes currently, but you can change that! Click on one of those handy dandy buttons on the right and get started</h1>
+        ) : (
+          recipes.map((recipe, index) => (
             <RecipeBox key={index} recipe={recipe} editRecipe={editRecipeManually} deleteRecipe={deleteRecipe}></RecipeBox>
-          ))}
+          ))
+)}
+
         </div>
     </div>
   );

@@ -52,18 +52,20 @@ const Dashboard = ({ setAuth }) => {
         <img className="reco-logo"src="/public/images/recomeats.png" alt="reco-logo" />
       </div>
       <div className="main-sidebar">
-      <SidebarSeperator/>
+        <div className="top-elements">
         <SidebarElement svgImage={"profile"} text={"My Profile"} onClick={() => mainChange("profile")}/>
-        <SidebarElement svgImage={"cuisines"} text={"My Cuisines"} onClick={() => mainChange("cuisines")}/>
         <SidebarElement svgImage={"recipes"} text={"My Recipes"} onClick={() => mainChange("recipes")}/>
+        </div>
+        <div className="bottom-elements">
         <SidebarSeperator/>
-        <SidebarElement svgImage={"help"} text={"Help"} onClick={() => mainChange("help")}/>
-        <SidebarSeperator/>
+        <SidebarElement svgImage={"help"} text={"FAQ / Help"} onClick={() => mainChange("help")}/>
+        </div>
+
       </div>
        </div>
       <div className="dash-mainarea">  
       <div className="dash-main-top">
-      <h1>Welcome: {name}</h1>
+      <h1 className='welcome-msg'>Welcome, {name}</h1>
       <button className="dash-logout btn btn-danger" onClick={logout}>Log out</button>
       </div>
       <div className="dash-main-bottom">

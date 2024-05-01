@@ -14,6 +14,10 @@
     height: 4rem;
 }
 
+.welcome-msg {
+    margin: 1rem;
+}
+
 .dash-mainarea {
 width: 100%;
 display: flex;
@@ -28,6 +32,18 @@ flex-direction: column;
     margin-left: 1rem;
 }
 
+.dash-main-bottom {
+    display: flex;
+    justify-content: center;
+}
+
 .dash-logout {
     margin: 1rem;
+}
+
+.main-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 93vh;
 }

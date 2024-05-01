@@ -1,3 +1,55 @@
 .mr-left {
     margin-left: 2rem;
 }
+
+.btn-group {
+    margin-left: 2rem;
+}
+
+#cuisines {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    justify-content: center;
+}
+.btn-outline-primary {
+    border: 1px solid #ac8968;
+    color: black;
+}
+.btn-outline-primary:active {
+    background-color: #ac8968 !important;
+    border: 1px solid #ac8968;
+}
+.btn-outline-primary:hover {
+    background-color: #a69080;
+    border: 1px solid #a69080;
+}
+
+.active {
+    background-color: #ac8968 !important;
+    border: 1px solid #ac8968 !important;
+}
+
+
+
+.confirm-btn {
+    margin-top: 1rem;
+    width: 10rem;
+}
+
+.cuisine-div {
+    display: flex;
+}
+
+.cuisines {
+    margin-left: 1rem;
+}
+
+.cuisine-entry {
+    width: 20rem;
+}
+
+.add-cuisine-btn {
+    width: 10rem;
+    margin-top: 2rem;
+}

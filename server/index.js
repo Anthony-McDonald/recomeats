@@ -400,8 +400,9 @@ app.get("/getingredients/:recipe_id", asyncHandler(async(req, res, next) => {
 
 // call chat api
 
-app.get("/foods", asyncHandler(async (req, res, next) => {
-    const { user_id, ingredients } = req.query;
+app.get("/foods", authorisation, asyncHandler(async (req, res, next) => {
+    const user_id = req.user.id;
+    const { ingredients } = req.query;
     const foodPrefNames = [];
 
     let chatMessage = "I like exclusively ";
@@ -424,13 +425,12 @@ app.get("/foods", asyncHandler(async (req, res, next) => {
         chatMessage += ingredient;
     }
 
-    chatMessage += " in my pantry. Recommend me 10 dishes to cook.";
+    chatMessage += " in my pantry. Recommend me 10 dishes to cook. Give it to me as csv with recipe names, descriptions and ingredients";
 
     const recommendations = await callChat(chatMessage);
 
     const response = {
-        chatMessage: chatMessage,
-        recommendations: recommendations,
+        reccomendations: recommendations.message.content,
     }
     res.json(response);
 }));

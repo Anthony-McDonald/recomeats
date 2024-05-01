@@ -22,3 +22,8 @@
 .ai-btn{
     margin-right: 2rem;
 }
+
+.no-recipes {
+    color: gray;
+    margin: 3rem;
+}
