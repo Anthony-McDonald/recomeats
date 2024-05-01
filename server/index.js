@@ -405,7 +405,8 @@ app.get("/foods", authorisation, asyncHandler(async (req, res, next) => {
     const { ingredients } = req.query;
     const foodPrefNames = [];
 
-    let chatMessage = "I like exclusively ";
+    let chatMessage = "You are a JSON API for taking in ingredients and culinary preferences. You are to return a json api that follows this format without deviation: {'recipe_name': 'the name of the recipe', 'recipe_description': 'a summary of the recipe','recipe_ingredients': 'a comma seperated array of ingredients'}.  You are to return the json in a form that can be extracted with the following code:       const recommendations = JSON.parse(parseRes.reccomendations); const recipes = Object.values(recommendations).map(recipeData => ({recipe_name: recipeData.recipe_name,recipe_description: recipeData.recipe_description,recipe_ingredients: recipeData.recipe_ingredients.split('|')})); ignore the recommendations section and DO NOT have rows like 'recipe1' or '1', only seperate recipes with a , and only return the json api and no other content, but return 10 entries";
+    
 
     const userFoodPrefIds = await pool.query("SELECT preference_id FROM UserCuisinePreferences WHERE user_id = $1", [user_id]);
     for (let i = 0; i < userFoodPrefIds.rows.length; i++) {
@@ -425,7 +426,7 @@ app.get("/foods", authorisation, asyncHandler(async (req, res, next) => {
         chatMessage += ingredient;
     }
 
-    chatMessage += " in my pantry. Recommend me 10 dishes to cook. Give it to me as csv with recipe names, descriptions and ingredients";
+    chatMessage += " in my pantry. Recommend me 10 dishes to cook. Give it to me as a csv but seperate by | instead of ,. Give me it with recipe names, descriptions and ingredients.";
 
     const recommendations = await callChat(chatMessage);
 

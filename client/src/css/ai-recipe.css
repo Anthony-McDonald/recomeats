@@ -1,0 +1,98 @@
+#ai-recipe {
+    display: flex;
+    flex-direction: column;
+    background:linear-gradient(0deg, rgba(147, 120, 91, 0.2), rgba(147, 120, 91, 0.8)), url('../../public/images/1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    height: 100vh;
+    color: white;
+    
+}
+
+.recipe-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.suggested-recipes {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 2rem;
+}
+
+.recipe-break {
+    margin-top: 13rem;
+    margin-left: 2rem;
+}
+
+#ingred {
+    height: 1.5rem;
+    margin-right: 1rem;
+}
+
+.text-big {
+    font-size: 5rem;
+}
+
+.text-mid {
+    font-size: 4rem;
+}
+
+.text-small {
+    font-size: 3rem;
+    margin: 3rem;
+    margin-top: 5rem;
+}
+
+.text-tiny {
+    font-size: 2rem;
+}
+
+.explanation {
+    font-size: 0.9rem;
+    margin-left: 4rem;
+    margin-top: -3rem;
+    margin-bottom: 2rem;
+}
+
+.top-bar {
+    display: flex;
+    align-items: start;
+    justify-content: space-around;
+}
+
+#ingredientInputBox {
+    width: 50vw;
+}
+
+.ingredient-input-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem;
+    margin-top: 5rem;
+    flex-direction: column;
+}
+
+.gen-recipe-btn {
+    width: 20vw;
+}
+.gen-recipe-btn:active {
+    background-color: #865d36 !important;
+    border: 1px solid #865d36 !important;
+}
+
+.home-btn {
+    margin-top: 2rem;
+}
+
+
+.cuisine-preferences {
+    display: flex;
+    justify-content: space-around;
+}
+

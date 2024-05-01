@@ -3,7 +3,7 @@ import '../css/profile.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import Cuisines from './Cuisines';
 
-const Profile = () => {
+const Profile = ({userCuisines, getCuisines}) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
@@ -41,7 +41,7 @@ const Profile = () => {
           <h5>date of birth: {dateOfBirth}</h5>
         </div>
         <div className="info-bottom">
-        <Cuisines/>
+        <Cuisines userCuisines={userCuisines} getCuisines={getCuisines}/>
         </div>
     </div>
 

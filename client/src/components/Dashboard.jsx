@@ -9,7 +9,7 @@ import Recipes from './Recipes';
 import Help from './Help';
 
 
-const Dashboard = ({ setAuth }) => {
+const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
   const [name, setName] = useState("basename");
   const [selectedElement, setSelectedElement] = useState("profile");
 
@@ -69,8 +69,8 @@ const Dashboard = ({ setAuth }) => {
       <button className="dash-logout btn btn-danger" onClick={logout}>Log out</button>
       </div>
       <div className="dash-main-bottom">
-      {selectedElement === "profile" && <Profile/>}
-          {selectedElement === "cuisines" && <Cuisines/>}
+        {console.log(userCuisines, getCuisines, " FROM DASHBOARD")}
+          {selectedElement === "profile" && <Profile userCuisines={userCuisines} getCuisines={getCuisines} />}
           {selectedElement === "recipes" && <Recipes/>}
           {selectedElement === "help" && <Help />}
       </div>

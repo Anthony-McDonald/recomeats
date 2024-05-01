@@ -1,43 +1,45 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import '../css/cuisines.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-const Cuisines = ({ setCuisinePreferences}) => {
+const Cuisines = ({userCuisines, getCuisines}) => {
   const [isCuisineAdding, setIsCuisineAdding] = useState(false);
-  const [userCuisines, setUserCuisines] = useState([]);
-  const [userCuisineIds, setUserCuisineIds] = useState([]);
+
+  console.log("from cuisine: ", userCuisines)
 
   const addCuisineSwitch = () => {
     setIsCuisineAdding(true);
 
-    for (let i = 0; i < userCuisineIds.length; i++) {
-      switch (userCuisineIds[i]) {
-        case 1: 
+    for (let i = 0; i < userCuisines.length; i++) {
+      console.log(userCuisines[i])
+      switch (userCuisines[i]) {
+        case 'Chinese': 
         setIsChecked(prevState => ({
           ...prevState,
           chinese: true
         }));
           break;
-        case 2: 
+        case 'Indian': 
         setIsChecked(prevState => ({
           ...prevState,
           indian: true
         }));
           break;
-        case 3: 
+        case 'Italian': 
         setIsChecked(prevState => ({
           ...prevState,
           italian: true
         }));
           break;
-        case 4: 
+        case 'African': 
         setIsChecked(prevState => ({
           ...prevState,
           african: true
         }));
           break;
-        case 5: 
+        case 'Mediterranean': 
         setIsChecked(prevState => ({
           ...prevState,
           mediterranean: true
@@ -99,7 +101,6 @@ const Cuisines = ({ setCuisinePreferences}) => {
     if (mediterranean) {
       saveCuisine(5);
     }
-    getCuisines();
   }
 
   async function saveCuisine(cuisine_id) {
@@ -115,44 +116,6 @@ const Cuisines = ({ setCuisinePreferences}) => {
     getCuisines();
   }
   
-
-  useEffect(() => {
-    getCuisines();
-  }, []);
-
-  async function getCuisines() {
-    try {
-      const response = await fetch("http://localhost:5000/getuserpreferences", {
-        method: "GET",
-        headers: { token: localStorage.getItem("token") }
-      });
-
-      const parseRes = await response.json();
-
-
-      // Get cuisine names for each preference_id
-      const cuisineIds = parseRes.map(cuisine => cuisine.preference_id);
-      const cuisineNames = await Promise.all(parseRes.map(cuisine => getCuisineName(cuisine.preference_id)));
-
-      setUserCuisineIds(cuisineIds);
-      setUserCuisines(cuisineNames);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }
-
-  async function getCuisineName(cuisine_id) {
-    try {
-      const response = await fetch("http://localhost:5000/getcuisine/" + cuisine_id, {
-        method: "GET",
-        headers: { token: localStorage.getItem("token") }
-      });
-      const parseRes = await response.json();
-      return parseRes[0].preference_name;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }
 
   async function deleteUserCuisine() {
     try {
@@ -244,7 +207,7 @@ const Cuisines = ({ setCuisinePreferences}) => {
         <div>
         <ul className='mt-2 list-group list-group-horizontal cuisines'>
         {userCuisines.length === 0 ? (
-          <p className='no-recipes'>You have not chosen a cuisine yet!</p>
+          <p>You have not chosen a</p>
         ) : (
           <ul className="list-group">
             {userCuisines.map((cuisine, index) => (
@@ -269,5 +232,11 @@ const Cuisines = ({ setCuisinePreferences}) => {
     </div>
   );
 };
+
+Cuisines.propTypes = {
+  getCuisines: PropTypes.func.isRequired,
+  userCuisinePassed: PropTypes.array.isRequired
+};
+
 
 export default Cuisines;
