@@ -179,7 +179,6 @@ const Recipes = () => {
     }
   };
 
-  // Function to switch to previous page
   const prevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
@@ -203,6 +202,7 @@ const Recipes = () => {
     <div id="recipes">
       <div className="desc-div">
       <h3>Here are some of your saved recipes:</h3>
+      <p>Page: {currentPage} of {totalPages}</p>
       <div className="recipe-buttons">
         <a href="/ai-recipe">      <button className='btn btn-primary ai-btn'> Add with AI </button></a>
       <button className='btn btn-primary' onClick={addRecipeManually} >Add a recipe manually</button>
