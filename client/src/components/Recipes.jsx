@@ -14,11 +14,13 @@ const Recipes = () => {
   const [addRecipeName, setAddRecipeName] = useState("");
   const [addRecipeDescription, setAddRecipeDescription] = useState("");
   const [addRecipeIngredients, setAddRecipeIngredients] = useState([]);
+  const [addRecipeInstructions, setAddRecipeInstructions] = useState("");
   // Edit recipe states
   const [editRecipeID, setEditRecipeID] = useState(0);
   const [editRecipeName, setEditRecipeName] = useState("");
   const [editRecipeDescription, setEditRecipeDescription] = useState("");
   const [editRecipeIngredients, setEditRecipeIngredients] = useState([]);
+  const [editRecipeInstructions, setEditRecipeInstructions] = useState("");
   // loading
   const [isLoading, setIsLoading] = useState(false);
   
@@ -26,29 +28,43 @@ const Recipes = () => {
   const addRecipeSubmit = (e) => {
     e.preventDefault();
     setIsAddingRecipe(false);
-    addRecipe(addRecipeName, addRecipeDescription, addRecipeIngredients);
-    setAddRecipeName('');
-    setAddRecipeDescription('');
-    setAddRecipeIngredients([]);
+    if (addRecipeName != "" && addRecipeDescription != "" && addRecipeIngredients != [] && addRecipeInstructions != "") {
+      addRecipe(addRecipeName, addRecipeDescription, addRecipeIngredients, addRecipeInstructions);
+      setAddRecipeName('');
+      setAddRecipeDescription('');
+      setAddRecipeIngredients([]);
+      setAddRecipeInstructions('');
+    } else {
+      console.log("parameters not all full")
+    }
+    
+
   }
 
   const editRecipeSubmit = (e) => {
     e.preventDefault();
-    setIsAddingRecipe(false);
-    editRecipe(editRecipeID, editRecipeName, editRecipeDescription, editRecipeIngredients);
-    setEditRecipeName('');
-    setEditRecipeDescription('');
-    setEditRecipeIngredients([]);
+    setIsEditingRecipe(false);
+    if (editRecipeName != "" && editRecipeDescription != "" && editRecipeIngredients != [] && editRecipeInstructions != "") {
+      editRecipe(editRecipeID, editRecipeName, editRecipeDescription, editRecipeIngredients, editRecipeInstructions);
+      setEditRecipeName('');
+      setEditRecipeDescription('');
+      setEditRecipeInstructions('');
+      setEditRecipeIngredients([]);
+    } else {
+      console.log("parameters not full")
+    }
+
   }
 
-  async function addRecipe(recipe_name, recipe_description, recipe_ingredients) {
+  async function addRecipe(recipe_name, recipe_description, recipe_ingredients, recipe_instructions) {
     console.log("atteempting to print frm aync")
     console.log(recipe_name, recipe_description, recipe_ingredients)
     try {
       const requestBody = JSON.stringify({
         recipe_name: recipe_name,
         recipe_ingredients: recipe_ingredients,
-        recipe_description: recipe_description
+        recipe_description: recipe_description,
+        recipe_instructions: recipe_instructions,
       })
       console.log(requestBody)
       await fetch("http://localhost:5000/addrecipe/", {
@@ -106,12 +122,13 @@ const Recipes = () => {
     }
   }
 
-  async function editRecipe(recipe_id, recipe_name, recipe_description, recipe_ingredients)  {
+  async function editRecipe(recipe_id, recipe_name, recipe_description, recipe_ingredients, recipe_instructions)  {
     try {
       const requestBody = JSON.stringify({
         recipe_name: recipe_name,
         recipe_ingredients: recipe_ingredients,
-        recipe_description: recipe_description
+        recipe_description: recipe_description,
+        recipe_instructions: recipe_instructions,
       })
       console.log(requestBody)
       await fetch("http://localhost:5000/changerecipe/" + recipe_id, {
@@ -141,12 +158,13 @@ const Recipes = () => {
     console.log(recipe_id_entered);
   
     for (let i = 0; i < recipes.length; i++) {
-      let currentRecipe = recipes[i]; // Rename the variable to avoid naming conflict
+      let currentRecipe = recipes[i]; 
       let recipe_id = currentRecipe.recipe_id;
       if (recipe_id === recipe_id_entered) {
         setEditRecipeID(recipe_id);
         setEditRecipeName(currentRecipe.recipe_name);
-        setEditRecipeDescription(currentRecipe.recipe_description); // Assuming you have this state variable
+        setEditRecipeDescription(currentRecipe.recipe_description); 
+        setEditRecipeInstructions(currentRecipe.recipe_instructions);
         getIngredients(recipe_id);
         break;
       }
@@ -177,8 +195,8 @@ const Recipes = () => {
 
       </div>
         <div className="recipe-boxes">
-        {isAddingRecipe ? <AddRecipeForm setRecipeForm={setIsAddingRecipe} setRecipeName={setAddRecipeName} setRecipeDescription={setAddRecipeDescription} setRecipeIngredients={setAddRecipeIngredients} recipeIngredients={addRecipeIngredients} submitFunction={addRecipeSubmit}/> : null}
-        {isEditingRecipe ? <EditRecipeForm editRecipeName={editRecipeName} editRecipeDescription={editRecipeDescription} setRecipeForm={setIsEditingRecipe} setRecipeName={setEditRecipeName} setRecipeDescription={setEditRecipeDescription} setRecipeIngredients={setEditRecipeIngredients} recipeIngredients={editRecipeIngredients} submitFunction={editRecipeSubmit}/> : null}
+        {isAddingRecipe ? <AddRecipeForm setRecipeForm={setIsAddingRecipe} setRecipeName={setAddRecipeName} setRecipeDescription={setAddRecipeDescription} setRecipeIngredients={setAddRecipeIngredients} setRecipeInstructions={setAddRecipeInstructions} recipeIngredients={addRecipeIngredients} submitFunction={addRecipeSubmit}/> : null}
+        {isEditingRecipe ? <EditRecipeForm editRecipeName={editRecipeName} editRecipeDescription={editRecipeDescription} editRecipeInstructions={editRecipeInstructions} setRecipeInstructions={setEditRecipeInstructions} setRecipeForm={setIsEditingRecipe} setRecipeName={setEditRecipeName} setRecipeDescription={setEditRecipeDescription} setRecipeIngredients={setEditRecipeIngredients} recipeIngredients={editRecipeIngredients} recipeInstructions={editRecipeInstructions} submitFunction={editRecipeSubmit}/> : null}
         {isLoading ? (
           <h1 className='loading-message'>Loading...</h1>
         ) : recipes.length === 0 ? (

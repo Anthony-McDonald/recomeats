@@ -329,12 +329,12 @@ app.delete("/deleterecipe/:recipe_id", authorisation, asyncHandler(async(req, re
 app.post("/changerecipe/:recipe_id", authorisation, asyncHandler(async(req, res, next) => {
     const user_id = req.user.id;
     const recipe_id = req.params.recipe_id;
-    const { recipe_name, recipe_ingredients, recipe_description } = req.body;
+    const { recipe_name, recipe_ingredients, recipe_description, recipe_instructions } = req.body;
     const addedIngredients = [];
 
         await pool.query(
-            "UPDATE Recipes SET user_id = $1, recipe_name = $2, recipe_description = $3 WHERE recipe_id = $4",
-            [user_id, recipe_name, recipe_description, recipe_id]
+            "UPDATE Recipes SET user_id = $1, recipe_name = $2, recipe_description = $3, recipe_instructions = $4 WHERE recipe_id = $5",
+            [user_id, recipe_name, recipe_description, recipe_instructions, recipe_id]
         );
 
         await pool.query("DELETE FROM RecipeIngredients WHERE recipe_id = $1", [recipe_id]);

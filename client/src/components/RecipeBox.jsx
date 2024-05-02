@@ -8,7 +8,7 @@ const RecipeBox = ({ recipe, deleteRecipe, editRecipe }) => {
 
     useEffect(() => {
         getIngredients(recipe_id)
-    })
+    },[])
 
     async function getIngredients(recipe_id) {
         try {
