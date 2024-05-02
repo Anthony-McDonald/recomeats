@@ -13,6 +13,10 @@
     background-color: #ac8968;
     border: 1px solid #ac8968;
 }
+.btn-primary:disabled {
+    background-color: #3e362e;
+    border: 1px solid #3e362e;
+}
 
 .btn-danger {
     background-color: #3e362e;

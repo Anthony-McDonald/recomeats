@@ -23,6 +23,14 @@ const Recipes = () => {
   const [editRecipeInstructions, setEditRecipeInstructions] = useState("");
   // loading
   const [isLoading, setIsLoading] = useState(false);
+  // misc
+  const [currentPage, setCurrentPage] = useState(1);
+  const recipesPerPage = 3; 
+
+  const totalPages = Math.ceil(recipes.length / recipesPerPage);
+  const indexOfLastRecipe = currentPage * recipesPerPage;
+  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+  const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
   
   
   const addRecipeSubmit = (e) => {
@@ -170,6 +178,20 @@ const Recipes = () => {
       }
     }
   }
+
+
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  // Function to switch to previous page
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
   
   async function deleteRecipe(recipeId) {
     try {
@@ -192,19 +214,34 @@ const Recipes = () => {
         <a href="/ai-recipe">      <button className='btn btn-primary ai-btn'> Add with AI </button></a>
       <button className='btn btn-primary' onClick={addRecipeManually} >Add a recipe manually</button>
       </div>
+      {totalPages > 1 && (
+        <div className="pagination">
+          <button className='btn btn-primary' onClick={prevPage} disabled={currentPage === 1}>
+            Previous
+          </button>
+          <button className='btn btn-primary' onClick={nextPage} disabled={currentPage === totalPages}>
+            Next
+          </button>
+        </div>
+      )}
 
       </div>
         <div className="recipe-boxes">
         {isAddingRecipe ? <AddRecipeForm setRecipeForm={setIsAddingRecipe} setRecipeName={setAddRecipeName} setRecipeDescription={setAddRecipeDescription} setRecipeIngredients={setAddRecipeIngredients} setRecipeInstructions={setAddRecipeInstructions} recipeIngredients={addRecipeIngredients} submitFunction={addRecipeSubmit}/> : null}
         {isEditingRecipe ? <EditRecipeForm editRecipeName={editRecipeName} editRecipeDescription={editRecipeDescription} editRecipeInstructions={editRecipeInstructions} setRecipeInstructions={setEditRecipeInstructions} setRecipeForm={setIsEditingRecipe} setRecipeName={setEditRecipeName} setRecipeDescription={setEditRecipeDescription} setRecipeIngredients={setEditRecipeIngredients} recipeIngredients={editRecipeIngredients} recipeInstructions={editRecipeInstructions} submitFunction={editRecipeSubmit}/> : null}
         {isLoading ? (
-          <h1 className='loading-message'>Loading...</h1>
-        ) : recipes.length === 0 ? (
-          <h1 className='no-recipes'>No recipes currently, but you can change that! Click on one of those handy dandy buttons on the right and get started</h1>
-        ) : (
-          recipes.map((recipe, index) => (
-            <RecipeBox key={index} recipe={recipe} editRecipe={editRecipeManually} deleteRecipe={deleteRecipe}></RecipeBox>
-          ))
+        <h1 className='loading-message'>Loading...</h1>
+      ) : recipes.length === 0 ? (
+        <h1 className='no-recipes'>No recipes currently, but you can change that! Click on one of those handy dandy buttons on the right and get started</h1>
+      ) : currentRecipes.length === 0 ? (
+        <>
+          {prevPage()}
+          <h1 className='no-recipes'>No recipes on this page</h1>
+        </>
+      ) : (
+        currentRecipes.map((recipe, index) => (
+          <RecipeBox key={index} recipe={recipe} editRecipe={editRecipeManually} deleteRecipe={deleteRecipe}></RecipeBox>
+        ))
 )}
 
         </div>

@@ -47,3 +47,8 @@ flex-direction: column;
     justify-content: space-between;
     height: 93vh;
 }
+
+.btn-primary:active {
+    background-color: #93785b !important;
+    border: 2px solid #93785b !important;
+}

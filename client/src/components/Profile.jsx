@@ -36,10 +36,11 @@ const Profile = ({userCuisines, getCuisines}) => {
 
   return (
     <div id="profile">
-        <div className="profile-info">
-          <h3>{fullName}</h3>
-          <h5>date of birth: {dateOfBirth}</h5>
-        </div>
+  <div className="profile-info">
+    <h3 className="mb-4">{fullName}</h3>
+    <h5 className="text-muted">Date of Birth: {dateOfBirth}</h5>
+  </div>
+
         <div className="info-bottom">
         <Cuisines userCuisines={userCuisines} getCuisines={getCuisines}/>
         </div>
