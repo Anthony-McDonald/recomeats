@@ -1,5 +1,5 @@
 #ai-recipe-box {
-    width: 40vw;
+    width: 45vw;
     border: 3px solid #865d36;
     margin: 1rem;
     border-radius: 1rem;
@@ -28,7 +28,12 @@
     justify-content: center;
     align-items: center;
     border-radius: 1rem;
-    font-size: 0.8rem;
+    font-size: 0.5rem;
     color: white;
     margin-bottom: 1rem;
+}
+
+.ingredients {
+    display: flex;
+    flex-wrap: wrap;
 }

@@ -22,16 +22,22 @@
     flex-direction: column;
     align-items: center;
     margin-left: 2rem;
+    margin-top: 3rem;
 }
 
 .recipe-break {
-    margin-top: 13rem;
+    margin-top: 5rem;
     margin-left: 2rem;
 }
 
 #ingred {
     height: 1.5rem;
     margin-right: 1rem;
+    font-size: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .text-big {
@@ -81,7 +87,7 @@
 .gen-recipe-btn {
     width: 20vw;
 }
-.gen-recipe-btn:active {
+.gen-recipe-btn:active, .home-btn:active {
     background-color: #865d36 !important;
     border: 1px solid #865d36 !important;
 }

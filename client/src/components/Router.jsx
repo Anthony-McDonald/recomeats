@@ -16,14 +16,15 @@ const Router = () => {
     getCuisines(); // Fetch user cuisines when the component mounts
   }, []);
 
-  async function addRecipe(recipe_name, recipe_description, recipe_ingredients) {
+  async function addRecipe(recipe_name, recipe_description, recipe_ingredients, recipe_instructions) {
     console.log("atteempting to print frm aync")
-    console.log(recipe_name, recipe_description, recipe_ingredients)
+    console.log(recipe_name, recipe_description, recipe_ingredients, recipe_instructions)
     try {
       const requestBody = JSON.stringify({
         recipe_name: recipe_name,
         recipe_ingredients: recipe_ingredients,
-        recipe_description: recipe_description
+        recipe_description: recipe_description,
+        recipe_instructions: recipe_instructions
       })
       console.log(requestBody)
       await fetch("http://localhost:5000/addrecipe/", {

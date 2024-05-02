@@ -51,13 +51,14 @@ const removeClicked = (i) => {
       });
 
       const parseRes = await response.json();
-      console.log(parseRes);
-      const recommendations = JSON.parse(parseRes.reccomendations); 
-      const recipes = Object.values(recommendations).map(recipeData => ({
-          recipe_name: recipeData.recipe_name,
-          recipe_description: recipeData.recipe_description,
-          recipe_ingredients: recipeData.recipe_ingredients.split('|')
-      }));
+      const recommendations = JSON.parse(parseRes.reccomendations);
+            console.log(parseRes);
+const recipes = recommendations.recipes.map(recipeData => ({
+    recipe_name: recipeData.recipe_name,
+    recipe_description: recipeData.recipe_description,
+    recipe_ingredients: recipeData.recipe_ingredients.split('|'),
+    recipe_instructions: recipeData.recipe_instructions,
+}));
       console.log(recipes);
       
 
@@ -72,6 +73,7 @@ const removeClicked = (i) => {
 
   const handleRecipeClick = () => {
     setLoading(true);
+    setRecipes([]);
     getRecipes();
   }
 
@@ -135,22 +137,22 @@ const removeClicked = (i) => {
         </form>
 
         <button className='btn btn-primary gen-recipe-btn' onClick={handleRecipeClick}> Generate Recipes</button>
-      </div>
-
-      {isLoading ? (
-        <h1 className='playfair-display text-big recipe-break'>Loading...</h1>
+        {isLoading ? (
+        <h1 className='playfair-display text-big'>Loading...</h1>
       ) : null}
-
-
-      {recipes.length === 0 ? null : (
+            {recipes.length === 0  || isLoading ? null : (
         <>
-            <h1 className='playfair-display text-big recipe-break'>Recipes:</h1>
+            <h1 className='playfair-display text-big recipe-break'>Recipes Below ↓</h1>
         </>
       )}
+      </div>
+
+
+
 
       <div className="suggested-recipes">
         {recipes.map((recipe, index) => (
-          <h5 key={index}> <AiRecipeBox recipeName={recipe.recipe_name} recipeDescription={recipe.recipe_description} recipeIngredients={recipe.recipe_ingredients} addRecipe={addRecipe}/> </h5>
+          <h5 key={index}> <AiRecipeBox recipeName={recipe.recipe_name} recipeDescription={recipe.recipe_description} recipeIngredients={recipe.recipe_ingredients} recipeInstructions={recipe.recipe_instructions} addRecipe={addRecipe}/> </h5>
         ))}
 
         </div>

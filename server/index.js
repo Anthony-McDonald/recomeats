@@ -278,12 +278,12 @@ app.get("/getcuisine/:cuisine_id", asyncHandler(async(req, res, next) => {
 
 app.post("/addrecipe", authorisation, asyncHandler(async(req, res, next) => {
     const user_id = req.user.id;
-    const { recipe_name, recipe_ingredients, recipe_description } = req.body;
+    const { recipe_name, recipe_ingredients, recipe_description, recipe_instructions } = req.body;
     const addedIngredients = [];
 
     // Insert new recipe
-    const newRecipe = await pool.query("INSERT INTO Recipes (user_id, recipe_name, recipe_description) VALUES ($1, $2, $3) RETURNING *",
-    [user_id, recipe_name, recipe_description]);
+    const newRecipe = await pool.query("INSERT INTO Recipes (user_id, recipe_name, recipe_description, recipe_instructions) VALUES ($1, $2, $3, $4) RETURNING *",
+    [user_id, recipe_name, recipe_description, recipe_instructions]);
 
     // Insert ingredients for the recipe
     for (let i = 0; i < recipe_ingredients.length; i++) {
@@ -373,13 +373,14 @@ app.post("/changerecipe/:recipe_id", authorisation, asyncHandler(async(req, res,
 app.get("/getrecipes", authorisation, asyncHandler(async(req, res, next) => {
     const userId = req.user.id;
 
-    const result = await pool.query("SELECT recipe_id, recipe_name, recipe_description FROM recipes WHERE user_id = $1", [userId]);
+    const result = await pool.query("SELECT recipe_id, recipe_name, recipe_description, recipe_instructions FROM recipes WHERE user_id = $1", [userId]);
 
     // Map the result array to create the response array
     const response = result.rows.map(recipe => ({
         recipe_id: recipe.recipe_id,
         recipe_name: recipe.recipe_name,
-        recipe_description: recipe.recipe_description
+        recipe_description: recipe.recipe_description,
+        recipe_instructions: recipe.recipe_instructions
     }));
 
     res.json(response);
@@ -405,7 +406,7 @@ app.get("/foods", authorisation, asyncHandler(async (req, res, next) => {
     const { ingredients } = req.query;
     const foodPrefNames = [];
 
-    let chatMessage = "You are a JSON API for taking in ingredients and culinary preferences. You are to return a json api that follows this format without deviation: {'recipe_name': 'the name of the recipe', 'recipe_description': 'a summary of the recipe','recipe_ingredients': 'a comma seperated array of ingredients'}.  You are to return the json in a form that can be extracted with the following code:       const recommendations = JSON.parse(parseRes.reccomendations); const recipes = Object.values(recommendations).map(recipeData => ({recipe_name: recipeData.recipe_name,recipe_description: recipeData.recipe_description,recipe_ingredients: recipeData.recipe_ingredients.split('|')})); ignore the recommendations section and DO NOT have rows like 'recipe1' or '1', only seperate recipes with a , and only return the json api and no other content, but return 10 entries";
+    let chatMessage = "You are a JSON API for taking in ingredients and culinary preferences. You are to return a json api that only provides a  RFC8259 compliant JSON response  following this format without deviation: {'recipe_name': 'the name of the recipe', 'recipe_description': 'a summary of the recipe','recipe_ingredients': 'a | seperated array of all ingredients neccessary to make the dish, feel free to add in extra if required'}, 'recipe_instructions':'a string of instructions to follow to make the recipe', return 10 entries";
     
 
     const userFoodPrefIds = await pool.query("SELECT preference_id FROM UserCuisinePreferences WHERE user_id = $1", [user_id]);

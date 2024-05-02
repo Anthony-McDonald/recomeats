@@ -3,13 +3,13 @@ import '../css/ai-recipe-box.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import Cuisines from './Cuisines';
 
-const AiRecipeBox = ({recipeName, recipeDescription, recipeIngredients, addRecipe}) => {
+const AiRecipeBox = ({recipeName, recipeDescription, recipeIngredients, recipeInstructions, addRecipe}) => {
 
   return (
     <div id="ai-recipe-box">
         <div className="top-recipe-box">
         <h3>{recipeName}</h3>
-        <button onClick={() => addRecipe(recipeName, recipeDescription, recipeIngredients)} className='btn btn-primary add-recipe-btn'>Add to Recipes</button>
+        <button onClick={() => addRecipe(recipeName, recipeDescription, recipeIngredients, recipeInstructions)} className='btn btn-primary add-recipe-btn'>Add to Recipes</button>
         </div>
 
         <h5>{recipeDescription}</h5>

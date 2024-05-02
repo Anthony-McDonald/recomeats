@@ -8,3 +8,29 @@
 .recipe-box-del {
 margin-right: 1rem;
 }
+
+.ingredient-div {
+    display: flex;
+}
+
+.ingred-entry {
+    font-size: 0.8rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.recipe-box-ingred {
+    padding-top: 0.25rem !important;
+    padding-left: 0.8rem !important;
+    height: 1.5rem;
+    margin-right: 1rem;
+    background-color: #a69080;
+    border-radius: 1rem;
+    color: white;
+
+}
+
+.instructions {
+    margin-top: 1rem;
+}

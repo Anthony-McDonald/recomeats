@@ -233,10 +233,6 @@ const Cuisines = ({userCuisines, getCuisines}) => {
   );
 };
 
-Cuisines.propTypes = {
-  getCuisines: PropTypes.func.isRequired,
-  userCuisinePassed: PropTypes.array.isRequired
-};
 
 
 export default Cuisines;
