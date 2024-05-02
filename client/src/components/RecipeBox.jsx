@@ -12,7 +12,7 @@ const RecipeBox = ({ recipe, deleteRecipe, editRecipe }) => {
 
     async function getIngredients(recipe_id) {
         try {
-          const response = await fetch("http://localhost:5000/getingredients/" + recipe_id, {
+          const response = await fetch("http://localhost:5000/recipes/getingredients/" + recipe_id, {
             method: "GET",
             headers: { token: localStorage.getItem("token") }
           });

@@ -13,7 +13,7 @@ function App({setAuth}) {
 
   async function verifyAuthentication() {
     try {
-    const response = await fetch("http://localhost:5000/is-verify", {
+    const response = await fetch("http://localhost:5000/users/is-verify", {
       method: "GET",
       headers: {token: localStorage.getItem("token")}
     });

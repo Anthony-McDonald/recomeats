@@ -28,7 +28,7 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
 
   async function getName() {
     try {
-      const response = await fetch("http://localhost:5000/dashboard/", {
+      const response = await fetch("http://localhost:5000/users/dashboard/", {
         method: "POST",
         headers: { token: localStorage.getItem("token") }
       });

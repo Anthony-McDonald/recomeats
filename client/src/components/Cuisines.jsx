@@ -68,7 +68,6 @@ const Cuisines = ({userCuisines, getCuisines}) => {
   };
 
   const confirmHandler = () => {
-    // addUserCuisine()
     setIsCuisineAdding(false);
     saveSelectedCuisines(isChecked);
     resetBoxes();
@@ -106,7 +105,7 @@ const Cuisines = ({userCuisines, getCuisines}) => {
 
   async function saveCuisine(cuisine_id) {
     try {
-      await fetch("http://localhost:5000/addusercuisine/" + cuisine_id, {
+      await fetch("http://localhost:5000/cuisines/addusercuisine/" + cuisine_id, {
         method: "POST",
         headers: { token: localStorage.getItem("token") }
       })
@@ -120,7 +119,7 @@ const Cuisines = ({userCuisines, getCuisines}) => {
 
   async function deleteUserCuisine() {
     try {
-      await fetch("http://localhost:5000/deleteusercuisine/", {
+      await fetch("http://localhost:5000/cuisines/deleteusercuisine/", {
         method: "DELETE",
         headers: { token: localStorage.getItem("token") }
       });
