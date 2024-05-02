@@ -65,8 +65,6 @@ const Recipes = () => {
   }
 
   async function addRecipe(recipe_name, recipe_description, recipe_ingredients, recipe_instructions) {
-    console.log("atteempting to print frm aync")
-    console.log(recipe_name, recipe_description, recipe_ingredients)
     try {
       const requestBody = JSON.stringify({
         recipe_name: recipe_name,
@@ -74,7 +72,6 @@ const Recipes = () => {
         recipe_description: recipe_description,
         recipe_instructions: recipe_instructions,
       })
-      console.log(requestBody)
       await fetch("http://localhost:5000/addrecipe/", {
         method: "POST",
         headers: {
@@ -104,7 +101,6 @@ const Recipes = () => {
 
       const parseRes = await response.json();
 
-      console.log(parseRes);
 
       setRecipes(parseRes);
       setIsLoading(false);
@@ -122,7 +118,6 @@ const Recipes = () => {
 
       const parseRes = await response.json();
 
-      console.log(parseRes);
 
       setEditRecipeIngredients(parseRes);
     } catch (error) {
@@ -138,7 +133,6 @@ const Recipes = () => {
         recipe_description: recipe_description,
         recipe_instructions: recipe_instructions,
       })
-      console.log(requestBody)
       await fetch("http://localhost:5000/changerecipe/" + recipe_id, {
         method: "POST",
         headers: {
@@ -163,7 +157,6 @@ const Recipes = () => {
   function editRecipeManually(recipe_id_entered) {
     setIsEditingRecipe(true);
     setIsAddingRecipe(false);
-    console.log(recipe_id_entered);
   
     for (let i = 0; i < recipes.length; i++) {
       let currentRecipe = recipes[i]; 

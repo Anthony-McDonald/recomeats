@@ -7,13 +7,16 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 const Cuisines = ({userCuisines, getCuisines}) => {
   const [isCuisineAdding, setIsCuisineAdding] = useState(false);
 
-  console.log("from cuisine: ", userCuisines)
+
+  useEffect( () => {
+    getCuisines();
+  }, []);
+
 
   const addCuisineSwitch = () => {
     setIsCuisineAdding(true);
 
     for (let i = 0; i < userCuisines.length; i++) {
-      console.log(userCuisines[i])
       switch (userCuisines[i]) {
         case 'Chinese': 
         setIsChecked(prevState => ({
@@ -62,8 +65,6 @@ const Cuisines = ({userCuisines, getCuisines}) => {
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
     setIsChecked({ ...isChecked, [name]: checked });
-    console.log(name);
-    console.log(checked);
   };
 
   const confirmHandler = () => {
@@ -207,7 +208,7 @@ const Cuisines = ({userCuisines, getCuisines}) => {
         <div className='cuisine-button-formatter'>
         <ul className='mt-2 list-group list-group-horizontal cuisines'>
         {userCuisines.length === 0 ? (
-          <p>You have not chosen a</p>
+          <p>You have not chosen a cuisine!</p>
         ) : (
           <ul className="list-group">
             {userCuisines.map((cuisine, index) => (

@@ -43,7 +43,6 @@ const removeClicked = (i) => {
 
 
   async function getRecipes() {
-    console.log(ingredients);
     try {
       const response = await fetch(url, {
         method: "GET",
@@ -52,18 +51,16 @@ const removeClicked = (i) => {
 
       const parseRes = await response.json();
       const recommendations = JSON.parse(parseRes.reccomendations);
-            console.log(parseRes);
 const recipes = recommendations.recipes.map(recipeData => ({
     recipe_name: recipeData.recipe_name,
     recipe_description: recipeData.recipe_description,
     recipe_ingredients: recipeData.recipe_ingredients.split('|'),
     recipe_instructions: recipeData.recipe_instructions,
 }));
-      console.log(recipes);
       
 
       setRecipes(recipes);
-      console.log(recipes)
+
       setLoading(false);
 
     } catch (err) {
@@ -90,7 +87,6 @@ const recipes = recommendations.recipes.map(recipeData => ({
     
         parseRes === true ? setAuth(true) : setAuth(false)
     
-        console.log(parseRes);
     
       } catch (err) {
         console.error(err.message);

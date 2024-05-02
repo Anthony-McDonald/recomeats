@@ -22,8 +22,6 @@ function App({setAuth}) {
 
     parseRes === true ? setAuth(true) : setAuth(false)
 
-    console.log(parseRes);
-
   } catch (err) {
     console.error(err.message);
   }

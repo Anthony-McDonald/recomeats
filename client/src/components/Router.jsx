@@ -17,8 +17,6 @@ const Router = () => {
   }, []);
 
   async function addRecipe(recipe_name, recipe_description, recipe_ingredients, recipe_instructions) {
-    console.log("atteempting to print frm aync")
-    console.log(recipe_name, recipe_description, recipe_ingredients, recipe_instructions)
     try {
       const requestBody = JSON.stringify({
         recipe_name: recipe_name,
@@ -26,7 +24,6 @@ const Router = () => {
         recipe_description: recipe_description,
         recipe_instructions: recipe_instructions
       })
-      console.log(requestBody)
       await fetch("http://localhost:5000/addrecipe/", {
         method: "POST",
         headers: {
@@ -42,7 +39,6 @@ const Router = () => {
   }
 
   async function getCuisines() {
-    console.log("getCuisines called")
     try {
       const response = await fetch("http://localhost:5000/getuserpreferences", {
         method: "GET",
@@ -56,7 +52,6 @@ const Router = () => {
       const cuisineNames = await Promise.all(parseRes.map(cuisine => getCuisineName(cuisine.preference_id)));
 
       setUserCuisines(cuisineNames);
-      console.log(cuisineNames)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -77,7 +72,6 @@ const Router = () => {
 
   const authenticateSwitch = (input) => {
     setIsAuthenticated(input);
-    console.log(isAuthenticated);
   };
 
   const router = createBrowserRouter([

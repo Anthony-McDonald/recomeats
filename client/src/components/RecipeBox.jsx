@@ -19,7 +19,6 @@ const RecipeBox = ({ recipe, deleteRecipe, editRecipe }) => {
     
           const parseRes = await response.json();
     
-          console.log(parseRes);
     
           setIngredients(parseRes);
         } catch (error) {

@@ -25,16 +25,13 @@ const RegisterModal = ({ setAuth }) => {
 
         try {
             const body = {user_name, first_name, last_name, date_of_birth, email_address, password}
-            console.log(body);
             const response = await fetch("http://localhost:5000/register", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)
             });
-            console.log(response , "register response");
 
             const parseRes = await response.json();
-            console.log(parseRes, " register parseres")
 
             localStorage.setItem("token", parseRes.jwtToken)
 

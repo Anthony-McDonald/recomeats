@@ -23,16 +23,13 @@ const Modal = ({setAuth}) => {
 
         try {
             const body = {email, password}
-            console.log(body);
             const response = await fetch("http://localhost:5000/login", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)
             });
-            console.log(response);
 
             const parseRes = await response.json();
-            console.log(parseRes)
 
             if (parseRes.token) {
             localStorage.setItem("token", parseRes.token)

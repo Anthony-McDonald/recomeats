@@ -19,7 +19,6 @@ const RedirectComponent = ({setAuth, isAuth}) => {
     
         parseRes === true ? setAuth(true) : negateAuthAndRedirect();
     
-        console.log(parseRes);
     
       } catch (err) {
         console.error(err.message);

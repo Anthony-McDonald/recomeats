@@ -13,7 +13,6 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
   const [selectedElement, setSelectedElement] = useState("profile");
 
   const mainChange = (e) => {
-    console.log(e);
     setSelectedElement(e);
   }
 
@@ -34,10 +33,8 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
         headers: { token: localStorage.getItem("token") }
       });
 
-      console.log("REGISTER RESPONSE PASSING THROUGH::", response);
       const parseRes = await response.json();
 
-      console.log(parseRes);
 
       setName(parseRes.user_name);
     } catch (error) {
@@ -69,7 +66,6 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
       <button className="dash-logout btn btn-danger" onClick={logout}>Log out</button>
       </div>
       <div className="dash-main-bottom">
-        {console.log(userCuisines, getCuisines, " FROM DASHBOARD")}
           {selectedElement === "profile" && <Profile userCuisines={userCuisines} getCuisines={getCuisines} />}
           {selectedElement === "recipes" && <Recipes/>}
           {selectedElement === "help" && <Help />}

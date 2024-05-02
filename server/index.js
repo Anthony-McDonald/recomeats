@@ -51,7 +51,6 @@ const newUser = await pool.query(
     [user_name, email_address, password_hash, salt]
 );``
 const user_id = newUser.rows[0].user_id;
-console.log("USER ID IS: ", user_id)
 const newUserProfile = await pool.query(
     "INSERT INTO UserProfiles (user_id, first_name, last_name, date_of_birth) VALUES ($1, $2, $3, $4) RETURNING *",
     [user_id, first_name, last_name, date_of_birth]
@@ -434,5 +433,4 @@ app.get("/foods", authorisation, asyncHandler(async (req, res, next) => {
 
 
 app.listen(5000, () => {
-    console.log("Server has started on port 5000")
 })
