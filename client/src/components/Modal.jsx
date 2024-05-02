@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import RegisterModal from './RegisterModal';
@@ -36,6 +36,7 @@ const Modal = ({setAuth}) => {
 
             if (parseRes.token) {
             localStorage.setItem("token", parseRes.token)
+            
             setAuth(true);
             document.getElementById("closeBtn").click();
             }

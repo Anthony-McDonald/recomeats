@@ -51,6 +51,7 @@ const newUser = await pool.query(
     [user_name, email_address, password_hash, salt]
 );``
 const user_id = newUser.rows[0].user_id;
+console.log("USER ID IS: ", user_id)
 const newUserProfile = await pool.query(
     "INSERT INTO UserProfiles (user_id, first_name, last_name, date_of_birth) VALUES ($1, $2, $3, $4) RETURNING *",
     [user_id, first_name, last_name, date_of_birth]
@@ -60,14 +61,8 @@ const newUserPermission = await pool.query(
     [user_id, permission_level]
 );
 
-const jwtToken = jwtGenerator({ user_id });
+const jwtToken = jwtGenerator( user_id );
 
-// const response = {
-//     user: newUser.rows[0],
-//     profile: newUserProfile.rows[0],
-//     permission: newUserPermission.rows[0],
-//     token: jwtToken,
-// };
 
 res.json({ jwtToken});
 

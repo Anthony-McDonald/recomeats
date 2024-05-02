@@ -20,7 +20,7 @@
 }
 
 
-.helvetica {
+h1, h2, h3, h4, h5, p, div{
   font-family: "Helvetica", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;

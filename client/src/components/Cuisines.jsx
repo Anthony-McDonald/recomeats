@@ -130,7 +130,7 @@ const Cuisines = ({userCuisines, getCuisines}) => {
 
   return (
     <div id="cuisines">
-      <h3>Your current cuisines are:</h3>
+      <h3 className='cuisine-header'>Your current cuisines are:</h3>
       {/* if true */}
       {isCuisineAdding?
       // first component
@@ -204,7 +204,7 @@ const Cuisines = ({userCuisines, getCuisines}) => {
         </>
         : 
         // second component, if false
-        <div>
+        <div className='cuisine-button-formatter'>
         <ul className='mt-2 list-group list-group-horizontal cuisines'>
         {userCuisines.length === 0 ? (
           <p>You have not chosen a</p>
@@ -220,12 +220,15 @@ const Cuisines = ({userCuisines, getCuisines}) => {
           </ul>
         )}
       </ul>
+      {isCuisineAdding ? (
+            null
+          ) : <button className="btn btn-primary mr-left add-cuisine-btn"onClick={addCuisineSwitch}>Add Cuisine</button>}
       </div>
       }
 
-    {isCuisineAdding ? (
+    {/* {isCuisineAdding ? (
             null
-          ) : <button className="btn btn-primary mr-left add-cuisine-btn"onClick={addCuisineSwitch}>Add Cuisine</button>}
+          ) : <button className="btn btn-primary mr-left add-cuisine-btn"onClick={addCuisineSwitch}>Add Cuisine</button>} */}
 
 
 

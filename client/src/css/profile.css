@@ -3,8 +3,8 @@
     justify-content: space-between;
     align-items: start;
     width: 100%;
-    flex-direction: column;
-    height: 90vh;
+    flex-direction: row;
+    height: 80vh;
 }
 
 .info-bottom {
@@ -13,5 +13,6 @@
 }
 
 .profile-info {
-    margin-left: 2rem;
+    margin-left: 7vw;
+    margin-top: 7vh;
 }

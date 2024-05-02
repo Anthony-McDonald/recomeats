@@ -1,5 +1,5 @@
 #sidebar-element {
-    margin: 0.5rem;
+    padding: 0.5rem;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -8,7 +8,7 @@
 }
 
 #sidebar-element:hover {
-    background-color: grey;
+    background-color: #93785b
 }
 
 .sidebar-svg {

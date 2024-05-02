@@ -11,6 +11,7 @@
     flex-direction: column;
     width: 50vw;
     justify-content: center;
+    margin-right: 3rem;
 }
 .btn-outline-primary {
     border: 1px solid #ac8968;
@@ -46,7 +47,26 @@
 }
 
 .cuisine-entry {
-    width: 20rem;
+    width: 40rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    }
+
+.cuisine-button-formatter {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.cuisine-header {
+    margin-bottom: 4vw;
+}
+
+.btn-outline-primary {
+    font-size: 1.5rem;
 }
 
 .add-cuisine-btn {

@@ -1,4 +1,3 @@
-import React from 'react';
 import Modal from './Modal';
 import '../css/header.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 

@@ -4,7 +4,6 @@ import "../css/dashboard.css"
 import SidebarElement from './SidebarElement';
 import SidebarSeperator from './SidebarSeperator';
 import Profile from './Profile';
-import Cuisines from './Cuisines';
 import Recipes from './Recipes';
 import Help from './Help';
 
@@ -35,6 +34,7 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
         headers: { token: localStorage.getItem("token") }
       });
 
+      console.log("REGISTER RESPONSE PASSING THROUGH::", response);
       const parseRes = await response.json();
 
       console.log(parseRes);

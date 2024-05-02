@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
@@ -31,10 +31,10 @@ const RegisterModal = ({ setAuth }) => {
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)
             });
-            console.log(response);
+            console.log(response , "register response");
 
             const parseRes = await response.json();
-            console.log(parseRes)
+            console.log(parseRes, " register parseres")
 
             localStorage.setItem("token", parseRes.jwtToken)
 
