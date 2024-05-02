@@ -4,12 +4,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Cuisines from './Cuisines';
 
 const AiRecipeBox = ({recipeName, recipeDescription, recipeIngredients, recipeInstructions, addRecipe}) => {
+  const [buttonClicked, setButtonClicked] = useState(false);
+
+  const handleButtonClick = () => {
+    addRecipe(recipeName, recipeDescription, recipeIngredients, recipeInstructions)
+    setButtonClicked(true);
+  }
 
   return (
     <div id="ai-recipe-box">
         <div className="top-recipe-box">
         <h3>{recipeName}</h3>
-        <button onClick={() => addRecipe(recipeName, recipeDescription, recipeIngredients, recipeInstructions)} className='btn btn-primary add-recipe-btn'>Add to Recipes</button>
+    
+        {buttonClicked ? (<h4 className='button-clicked-alternate'> Added! </h4>) : (  <button onClick={handleButtonClick} className='btn btn-primary add-recipe-btn'>Add to Recipes</button>)}
         </div>
 
         <h5>{recipeDescription}</h5>

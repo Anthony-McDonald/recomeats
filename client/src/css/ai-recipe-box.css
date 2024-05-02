@@ -37,3 +37,10 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.button-clicked-alternate {
+    margin-right: 1rem;
+    border: 3px solid #865d36;
+    border-radius: 1rem;
+    padding: 0.2rem;
+}
