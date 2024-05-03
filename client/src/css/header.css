@@ -13,6 +13,10 @@
     height: 5rem;
 }
 
+.reco-header {
+    filter: brightness(0) invert(1);
+}
+
 .log-button {
     border-radius: 1rem;
     margin: 1rem;
