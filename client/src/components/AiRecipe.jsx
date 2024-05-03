@@ -134,11 +134,18 @@ const recipes = recommendations.recipes.map(recipeData => ({
 
         <button className='btn btn-primary gen-recipe-btn' onClick={handleRecipeClick}> Generate Recipes</button>
         {isLoading ? (
-        <h1 className='playfair-display text-big'>Loading...</h1>
+          <div className="recipes-below-text">
+
+<h1 className='playfair-display text-big recipe-break'>Loading...</h1>
+          </div>
+
       ) : null}
             {recipes.length === 0  || isLoading ? null : (
         <>
-            <h1 className='playfair-display text-big recipe-break'>Recipes Below ↓</h1>
+        <div className="recipes-below-text">
+        <h1 className='playfair-display text-big recipe-break'>Recipes Below ↓</h1>
+        </div>
+
         </>
       )}
       </div>

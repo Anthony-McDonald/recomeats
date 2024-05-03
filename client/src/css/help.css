@@ -1,10 +1,19 @@
+@media (max-width: 1600px) {
+    #help {
+        width: auto !important;
+        text-align: center;
+        font-size: 1rem !important;
+        margin: 2rem;
+        margin-top: 0rem;
+    }
+}
+
 #help {
     justify-content: space-around;
-    align-items: center;
-    height: 90vh;
+    height: 80vh;
     flex-direction: column;
     display: flex;
-    width: 50vw;
+    align-items: center;
 }
 
 .help-top, .help-mid {
@@ -12,8 +21,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-size: 0.8rem;
 }
 
-.accordian-element {
-    width: 60vw;
+/* .accordian-element {
+}
+
+.accordion-body {
+} */
+
+.accordion-div {
+    width: 80%;
+}
+.faq-header {
+    margin-left: 2rem;
+    display: none;
 }

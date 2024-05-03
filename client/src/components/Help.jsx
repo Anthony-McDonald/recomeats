@@ -11,7 +11,8 @@ const Help = () => {
           <h1 className='faq-header'>FAQ:</h1>
 
     <div id="help">
-<Accordion defaultActiveKey="0" className='accordian-element'>
+      <div className="accordion-div">
+      <Accordion defaultActiveKey="0" className='accordian-element'>
       <Accordion.Item eventKey="0">
         <Accordion.Header>Why can't I access the ai recipe page or dashboard?</Accordion.Header>
         <Accordion.Body>
@@ -29,6 +30,7 @@ const Help = () => {
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>
+      </div>
     <div className="help-top">
       <h2>This is a demo application</h2>
         <br />

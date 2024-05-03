@@ -33,7 +33,7 @@ function App({setAuth}) {
     <div className='whole-page'>
       <Header setAuth={setAuth}></Header>
       <MainArea></MainArea>
-      <SatisfiedCustomers></SatisfiedCustomers>
+      <SatisfiedCustomers className='sat-cust'></SatisfiedCustomers>
       <ContactArea></ContactArea>
     </div>
   )

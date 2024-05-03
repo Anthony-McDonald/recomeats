@@ -1,5 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
+@media (max-width: 1375px) {
+    .customer-layout {
+        display: flex;
+       flex-wrap: wrap !important;
+       
+    }
+
+    .customer-review-div {
+        display: flex;
+    }
+
+    .whole-page {
+        height: auto;
+    }
+
+    .sat-cust {
+        flex-grow: 1;
+    }
+
+    .contact-boxes {
+        display: grid !important;
+        grid-template-columns: 100%;
+        margin-bottom: 2rem !important;
+    }
+
+    #header {
+        flex-wrap: wrap !important;
+    }
+  }
+
+
 .whole-page {
     background:linear-gradient(0deg, rgba(147, 120, 91, 0.2), rgba(147, 120, 91, 0.4)), url('../../public/images/2.jpg');
     background-repeat: no-repeat;
@@ -27,6 +58,7 @@ h1, h2, h3, h4, h5, p, div{
 }
 
 html {
-    background-color: #AC8968;
+/* background-color: #AC8968; */
+background-color: white;
 }
 

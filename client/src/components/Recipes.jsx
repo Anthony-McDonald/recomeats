@@ -203,9 +203,10 @@ const Recipes = () => {
       <div className="desc-div">
       <h3>Here are some of your saved recipes:</h3>
       <p>Page: {currentPage} of {totalPages}</p>
+      <div className="buttons">
       <div className="recipe-buttons">
         <a href="/ai-recipe">      <button className='btn btn-primary ai-btn'> Add with AI </button></a>
-      <button className='btn btn-primary' onClick={addRecipeManually} >Add a recipe manually</button>
+      <button className='btn btn-primary man-btn' onClick={addRecipeManually} >Add a recipe manually</button>
       </div>
       {totalPages > 1 && (
         <div className="pagination">
@@ -217,6 +218,7 @@ const Recipes = () => {
           </button>
         </div>
       )}
+      </div>
 
       </div>
         <div className="recipe-boxes">

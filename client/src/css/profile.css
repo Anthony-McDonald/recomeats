@@ -1,6 +1,17 @@
+@media (max-width: 1375px) {
+    #profile {
+        flex-wrap: wrap !important;
+    }
+}
+@media (max-width: 975px) {
+    #profile {
+        flex-wrap: wrap !important;
+    }
+}
+
 #profile {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: start;
     width: 100%;
     flex-direction: row;

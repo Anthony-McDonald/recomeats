@@ -1,11 +1,29 @@
+@media (max-width: 900px) {
+    .dash-sidebar {
+        display: none !important;
+    }
+
+    .dropdown-btn {
+        display: block !important;
+    }
+}
+
+.dropdown-btn {
+    display: none;
+}
+
 .dash-holder {
     background-color: white;
     height: 100vh;
     display: flex;
 }
 
+.show-more-svg {
+    height: 2rem;
+}
+
 .dash-sidebar {
-    height: 100vh;  
+    height: 101vh;  
     background-color: #a69080;
     width: 20rem;
 }

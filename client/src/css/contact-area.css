@@ -1,7 +1,7 @@
 #contact-area-div {
     background-color: #A69080;
-    margin-top: 2rem;
-    height: 30vh;
+    /* margin-top: 2rem;
+    height: 30vh; */
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -39,4 +39,5 @@
 
 .contact-desc {
     text-align: center;
+    font-size: 1rem;
 }

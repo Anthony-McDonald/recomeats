@@ -1,3 +1,10 @@
+@media (max-width: 900px) {
+
+    #sidebar-element:hover {
+        background-color: transparent !important;
+    }
+}
+
 #sidebar-element {
     padding: 0.5rem;
     display: flex;

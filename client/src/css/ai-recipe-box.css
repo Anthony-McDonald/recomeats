@@ -1,3 +1,18 @@
+@media (max-width: 1300px) {
+#ai-recipe-box {
+    width: 90vw !important;
+}
+}
+
+@media (max-width: 450px) {
+    .recipes-below-text {
+        background-color: #AC8968;
+        width: 100%;
+        margin-top: 1rem !important;
+        height: auto;
+    }
+    }
+
 #ai-recipe-box {
     width: 45vw;
     border: 3px solid #865d36;
@@ -16,6 +31,12 @@
     justify-content: space-between;
 }
 
+.recipes-below-text {
+    background-color: #AC8968;
+    width: 100%;
+    margin-top: 7rem;
+    height: auto;
+}
 .add-recipe-btn {
     margin-right: 2rem;
     margin-bottom: 0.5rem;

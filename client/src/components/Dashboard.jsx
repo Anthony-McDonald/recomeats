@@ -6,20 +6,28 @@ import SidebarSeperator from './SidebarSeperator';
 import Profile from './Profile';
 import Recipes from './Recipes';
 import Help from './Help';
+import Dropdown from './Dropdown';
 
 
 const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
   const [name, setName] = useState("basename");
   const [selectedElement, setSelectedElement] = useState("profile");
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const mainChange = (e) => {
+    console.log("dropdown is setting the shown page to ", e)
     setSelectedElement(e);
+    setShowDropdown(false);
   }
 
   const logout = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
     setAuth(false);
+  }
+
+  const handleDropdown = () => {
+    setShowDropdown(!showDropdown);
   }
 
   useEffect(() => {
@@ -58,17 +66,21 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
         <SidebarElement svgImage={"help"} text={"FAQ / Help"} onClick={() => mainChange("help")}/>
         </div>
 
-      </div>
+      </div>  
        </div>
       <div className="dash-mainarea">  
       <div className="dash-main-top">
+      <button className='btn btn-primary dropdown-btn' onClick={handleDropdown}>
+      <img className='show-more-svg' src={"/public/images/svgs/show-more.svg"} alt="Show dropdown" />
+    </button>
       <h1 className='welcome-msg'>Welcome, {name}</h1>
       <button className="dash-logout btn btn-danger" onClick={logout}>Log out</button>
       </div>
       <div className="dash-main-bottom">
-          {selectedElement === "profile" && <Profile userCuisines={userCuisines} getCuisines={getCuisines} />}
-          {selectedElement === "recipes" && <Recipes/>}
-          {selectedElement === "help" && <Help />}
+          {showDropdown && <Dropdown mainChange={mainChange} />}
+          {!showDropdown && selectedElement === "profile" && <Profile userCuisines={userCuisines} getCuisines={getCuisines} />}
+          {!showDropdown && selectedElement === "recipes" && <Recipes/>}
+          {!showDropdown && selectedElement === "help" && <Help />}
       </div>
       </div>
 
