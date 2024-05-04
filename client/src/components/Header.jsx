@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const Header = ({setAuth}) => {
   return (
     <div id="header">
-        <img className='recomeats reco-header' src="../../../public/images/recomeats.png" alt="reco-logo" />
+        <img className='recomeats reco-header' src="/images/recomeats.png" alt="reco-logo" />
         <Modal setAuth={setAuth}></Modal>
     </div>
   );

@@ -16,7 +16,7 @@ const Profile = ({userCuisines, getCuisines}) => {
 
   async function getUserInfo() {
     try {
-      const response = await fetch("http://localhost:5000/users/getuser/profile", {
+      const response = await fetch("http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com:5000/users/getuser/profile", {
         method: "GET",
         headers: { token: localStorage.getItem("token") }
       });

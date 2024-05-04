@@ -1,3 +1,12 @@
+@media (max-width: 417px) {
+    .register {
+        top: -18.5rem !important
+    }
+    }
+
+@media (max-width: 575px) {
+    }
+
 #header {
     height: 6rem;
     display: flex;
@@ -10,7 +19,7 @@
 }
 
 .recomeats {
-    height: 5rem;
+    height: 3rem;
 }
 
 .reco-header {
@@ -52,8 +61,8 @@
 
 .register {
     position: relative;
-    left: 15rem;
-    top: 1.5rem;
+    left: -5rem;
+    top: -17.1rem;
     font-size: 1rem;
     color: #3e362E;
 }

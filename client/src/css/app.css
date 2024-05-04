@@ -32,7 +32,7 @@
 
 
 .whole-page {
-    background:linear-gradient(0deg, rgba(147, 120, 91, 0.2), rgba(147, 120, 91, 0.4)), url('../../public/images/2.jpg');
+    background:linear-gradient(0deg, rgba(147, 120, 91, 0.2), rgba(147, 120, 91, 0.4)), url('/images/2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top center;

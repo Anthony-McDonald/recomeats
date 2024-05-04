@@ -23,7 +23,7 @@ const Modal = ({setAuth}) => {
 
         try {
             const body = {email, password}
-            const response = await fetch("http://localhost:5000/users/login", {
+            const response = await fetch("http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com:5000/users/login", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)
@@ -51,7 +51,7 @@ const Modal = ({setAuth}) => {
         Sign in
       </button>
 
-      <div className="modal fade" id="Modal" tabIndex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+      <div className="modal fade modal-cover" id="Modal" tabIndex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
@@ -70,7 +70,7 @@ const Modal = ({setAuth}) => {
                   <input onChange={onChange} type="password" className="form-control" id="password"  />
                 </div>
                 <div className="submit-register">
-                  <button type="submit" className="header-button btn btn-primary">Submit</button>
+                  <button type="submit" className="header-button btn btn-primary">Login</button>
                   <div className="register-div">
                     <a href="" data-bs-toggle="modal" data-bs-target="#innerModal" className="register">Register</a>
                   </div>

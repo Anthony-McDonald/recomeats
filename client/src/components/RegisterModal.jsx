@@ -25,7 +25,7 @@ const RegisterModal = ({ setAuth }) => {
 
         try {
             const body = {user_name, first_name, last_name, date_of_birth, email_address, password}
-            const response = await fetch("http://localhost:5000/users/register", {
+            const response = await fetch("http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com:5000/users/register", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)
@@ -82,7 +82,7 @@ const RegisterModal = ({ setAuth }) => {
     <label htmlFor="password" className="form-label">Password</label>
     <input onChange={onChange} type="password" className="form-control" id="password"></input>
   </div>
-  <button type="submit" className="header-button btn btn-primary">Submit</button>
+  <button type="submit" className="header-button btn btn-primary">Register</button>
 </form>
         {/* form end */}
         

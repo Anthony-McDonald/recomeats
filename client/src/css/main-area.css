@@ -3,15 +3,13 @@
     color: white;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-
+    justify-content: space-evenly;
     z-index: 0;
 }
 
 
 .display-1 {
     font-weight: 500;
-    font-size: rem;
 }
 .display-1, .display-2 {
     margin-left: 2rem;
@@ -23,4 +21,3 @@
     font-weight: bold;
     font-style: normal;
   }
-

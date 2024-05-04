@@ -105,7 +105,7 @@ const Cuisines = ({userCuisines, getCuisines}) => {
 
   async function saveCuisine(cuisine_id) {
     try {
-      await fetch("http://localhost:5000/cuisines/addusercuisine/" + cuisine_id, {
+      await fetch("http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com:5000/cuisines/addusercuisine/" + cuisine_id, {
         method: "POST",
         headers: { token: localStorage.getItem("token") }
       })
@@ -119,7 +119,7 @@ const Cuisines = ({userCuisines, getCuisines}) => {
 
   async function deleteUserCuisine() {
     try {
-      await fetch("http://localhost:5000/cuisines/deleteusercuisine/", {
+      await fetch("http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com:5000/cuisines/deleteusercuisine/", {
         method: "DELETE",
         headers: { token: localStorage.getItem("token") }
       });

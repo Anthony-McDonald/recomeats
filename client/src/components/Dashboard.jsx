@@ -36,7 +36,7 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
 
   async function getName() {
     try {
-      const response = await fetch("http://localhost:5000/users/dashboard/", {
+      const response = await fetch("http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com:5000/users/dashboard/", {
         method: "POST",
         headers: { token: localStorage.getItem("token") }
       });
@@ -54,7 +54,7 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
     <div className="dash-holder">
       <div className="dash-sidebar"> 
       <div className="logo-holder">
-        <img className="reco-logo"src="/public/images/recomeats.png" alt="reco-logo" />
+        <img className="reco-logo"src="/images/recomeats.png" alt="reco-logo" />
       </div>
       <div className="main-sidebar">
         <div className="top-elements">
@@ -71,7 +71,7 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
       <div className="dash-mainarea">  
       <div className="dash-main-top">
       <button className='btn btn-primary dropdown-btn' onClick={handleDropdown}>
-      <img className='show-more-svg' src={"/public/images/svgs/show-more.svg"} alt="Show dropdown" />
+      <img className='show-more-svg' src={"/images/svgs/show-more.svg"} alt="Show dropdown" />
     </button>
       <h1 className='welcome-msg'>Welcome, {name}</h1>
       <button className="dash-logout btn btn-danger" onClick={logout}>Log out</button>

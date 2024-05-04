@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const SidebarElement = ({svgImage, text, onClick}) => {
 
-  const imageSrc = "/public/images/svgs/" + svgImage + ".svg";
+  const imageSrc = "/images/svgs/" + svgImage + ".svg";
   
 
   return (

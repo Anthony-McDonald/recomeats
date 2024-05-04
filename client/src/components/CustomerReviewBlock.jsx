@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/customer-review-block.css';
 
 const CustomerReviewBlock = ({ personImage, personName, personReview }) => {
-    const personImageSrc = `../../../public/images/profiles/${personImage}`;
+    const personImageSrc = `/images/profiles/${personImage}`;
 
     const altText = "Image: " + personName;
 
