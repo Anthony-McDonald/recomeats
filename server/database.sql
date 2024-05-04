@@ -40,6 +40,7 @@ CREATE TABLE Recipes (
     user_id INT,
     recipe_name VARCHAR(50),
     recipe_description VARCHAR(250),
+    recipe_instructions VARCHAR(500),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
