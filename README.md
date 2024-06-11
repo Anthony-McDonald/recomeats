@@ -3,5 +3,6 @@ An AI powered food recommendation website. Users can insert their favourite type
 Made with PERN stack.
 
 **Home Page**
-![homepage](https://github.com/Anthony-McDonald/recomeats/assets/89093671/1056017c-1152-4895-bb5e-325e2f54089c)
+
+![](https://github.com/Anthony-McDonald/recomeats/assets/89093671/1056017c-1152-4895-bb5e-325e2f54089c)
 
