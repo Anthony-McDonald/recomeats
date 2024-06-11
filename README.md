@@ -3,7 +3,7 @@
 An AI powered food recommendation website built to solve a problem that I was having, too much different ingredients in the pantry and not knowing what to do with them. Throught my problem solving process I had the idea that it could be a pretty nifty project if I did it correctly and so I went to town and made what you see here.
 
 
-**The Home Page**
+## The Home Page ##
 
 ![](https://github.com/Anthony-McDonald/recomeats/assets/89093671/1056017c-1152-4895-bb5e-325e2f54089c)
 
@@ -13,6 +13,11 @@ For the home page, I wanted to communicate a sense of comfort and homeliness and
 
   - The testimonials section was done with a react component reused with different information arranged with display flex. I spent some time experimenting with potentially using grid with css queries to change the desired amount of testimonials per line          dependent on on screen size but then decided on what is seen.
 
-**Register**
+### Registration ###
 
-![register](https://github.com/Anthony-McDonald/recomeats/assets/89093671/d2f7338a-46ac-4d3b-8682-fd2e74200ac4)
+![](https://github.com/Anthony-McDonald/recomeats/assets/89093671/d2f7338a-46ac-4d3b-8682-fd2e74200ac4)
+
+The registration modal as part of the home page kept the same theme as the home page as a whole. Accessing the registration window is as easy as clicking on sign in up at the top to open the login modal and then from there clicking on the register button as shown here:
+![](https://github.com/Anthony-McDonald/recomeats/assets/89093671/91cbcee1-cee8-4323-a88b-d168fbf60d97)
+**Both the login and register modals make use of the same authentication functionality, where a jwtAuth token is generated, stored in localstorage and then used as authentication for all other api calls to the backend specific to that user throughout the duration of the user's stay on the webapp.**
+
