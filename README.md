@@ -1,5 +1,7 @@
-An AI powered food recommendation website built to solve a problem that I was having, too much different ingredients in the pantry and not knowing what to do with them. Throught my problem solving process I had the idea that it could be a pretty nifty project if I did it correctly and so I went to town and made what you see here.
 # Recom-Eats #
+
+An AI powered food recommendation website built to solve a problem that I was having, too much different ingredients in the pantry and not knowing what to do with them. Throught my problem solving process I had the idea that it could be a pretty nifty project if I did it correctly and so I went to town and made what you see here.
+
 
 **The Home Page**
 
@@ -11,4 +13,6 @@ For the home page, I wanted to communicate a sense of comfort and homeliness and
 
   - The testimonials section was done with a react component reused with different information arranged with display flex. I spent some time experimenting with potentially using grid with css queries to change the desired amount of testimonials per line          dependent on on screen size but then decided on what is seen.
 
+**Register**
 
+![register](https://github.com/Anthony-McDonald/recomeats/assets/89093671/d2f7338a-46ac-4d3b-8682-fd2e74200ac4)
