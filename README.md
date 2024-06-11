@@ -1,6 +1,6 @@
 # Recom-Eats #
 
-An AI powered food recommendation website built to solve a problem that I was having, too much different ingredients in the pantry and not knowing what to do with them. Throught my problem solving process I had the idea that it could be a pretty nifty project if I did it correctly and so I went to town and made what you see here.
+An AI powered food recommendation website built to solve a problem that I was having, too much different ingredients in the pantry and not knowing what to do with them. Throughout my problem solving process I had the idea that it could be a pretty nifty project if I did it correctly and so I went to town and made what you see here.
 
 
 ## The Home Page ##
@@ -29,7 +29,7 @@ Once a user has successfully logged in, they are greeted with the page shown abo
 ## The Ai itself ##
 ![ai-recipes-add](https://github.com/Anthony-McDonald/recomeats/assets/89093671/291286e6-74e1-43d7-8d2c-6f94c0c72ebb)
 
-In terms of the AI usage itself, it is accessed at a click of a button from the recipes page. This takes you onto a new webpage where you can remove and add the desired ingredients you want to look for in your recipes. After this you click generate recipes and a list of recipes are generated using the ChatGPT api (note: waiting has been cut for the purposes of this demonstration image, in actual usage wait times can be 10+ seconds in certain cases due to the time taken for the api to deliver a response). Once recipes are listed, users can click add to add recipes of their liking to their personal recipe list, which they can then re-access through clicking back to recipes.
+In terms of the AI usage itself, it is accessed at a click of a button from the recipes page. This takes you onto a new webpage where you can remove and add the desired ingredients you want to look for in your recipes. After this you click generate recipes and a list of recipes are generated using the ChatGPT api **(note: waiting has been cut for the purposes of this demonstration image, in actual usage wait times can be 10+ seconds in certain cases due to the time taken for the api to deliver a response)**. Once recipes are listed, users can click add to add recipes of their liking to their personal recipe list, which they can then re-access through clicking back to recipes.
 
 ## CRUD ## 
 ![crud](https://github.com/Anthony-McDonald/recomeats/assets/89093671/8727fd22-9926-4cb3-abbc-99f41a726bbd)
