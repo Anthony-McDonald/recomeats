@@ -7,7 +7,7 @@ An AI-powered recipe recommendation website built to solve a problem that I was 
 
 ![](https://github.com/Anthony-McDonald/recomeats/assets/89093671/1056017c-1152-4895-bb5e-325e2f54089c)
 
-For the home page, I wanted to communicate a sense of comfort and warmth, which infmormed my colour palette. You'll notice the image of the lady with the psetle and mortar as the center piece. This was a deliberate decision designed to push the idea that anyone could use this website to achieve whatever dish they desire. 
+For the home page, I wanted to communicate a sense of comfort and warmth, which informed my colour palette. You'll notice the image of the lady with the psetle and mortar as the center piece. This was a deliberate decision designed to push the idea that anyone could use this website to achieve whatever dish they desire. 
 
 Regarding the tech side of things, I will say a few things about my thought process for the home page. Throughout the rest of this README, I will try to do similar things for the other pages.
 
