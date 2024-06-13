@@ -36,7 +36,7 @@ In terms of the AI used to generate recipe ideas, it is accessed at a click of a
 ## CRUD ## 
 ![crud](https://github.com/Anthony-McDonald/recomeats/assets/89093671/8727fd22-9926-4cb3-abbc-99f41a726bbd)
 
-This then opens up to the CRUD portion of the program. Other than the automatic recipe creation shown above, users can also manually add recipes, edit existing recipe information, delete recipes, with instant updating of the information allowing for easy access to visually see the information entered. Should more than one page of recipes be present, buttons will appear on the top right hand side of the page to switch between pages of recipes (again, if you are interested in seeing it yourself, [give it a go]((http://13.60.10.44/)).
+This then opens up to the CRUD portion of the program. Other than the automatic recipe creation shown above, users can also manually add recipes, edit existing recipe information, delete recipes, with instant updating of the information allowing for easy access to visually see the information entered. Should more than one page of recipes be present, buttons will appear on the top right hand side of the page to switch between pages of recipes (again, if you are interested in seeing it yourself, [give it a go](http://13.60.10.44/).
 
 ### The Back End ###
 
