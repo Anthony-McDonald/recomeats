@@ -26,7 +26,7 @@ The registration modal, as part of the home page, kept the same theme as the hom
 ### The Main Page ###
 ![cuisinenrecipes](https://github.com/Anthony-McDonald/recomeats/assets/89093671/116bbe43-dc6c-4e76-b83f-45d867a8988a)
 
-Once a user has successfully creted an account and/or logged in, they are greeted with the page shown above! Here users can access their profile (where they may select their preferred cuisine types), their recipe list and the FAQ (which won't be shown as part of this demonstration as it is mostly there as filler information but feel free to check it out [if you are so inclined!](http://13.60.10.44/)). You will notice that neither of these pages are particularly full. This is because they were built simply for the use case of the current program - if this was to go to production, I would add in further functionality to fill up the excess space.
+Once a user has successfully created an account and/or logged in, they are greeted with the page shown above! Here users can access their profile (where they may select their preferred cuisine types), their recipe list and the FAQ (which won't be shown as part of this demonstration as it is mostly there as filler information but feel free to check it out [if you are so inclined!](http://13.60.10.44/)). You will notice that neither of these pages are particularly full. This is because they were built simply for the use case of the current program - if this was to go to production, I would add in further functionality to fill up the excess space.
 
 ## The AI  ##
 ![ai-recipes-add](https://github.com/Anthony-McDonald/recomeats/assets/89093671/291286e6-74e1-43d7-8d2c-6f94c0c72ebb)
