@@ -16,6 +16,11 @@ const Dropdown = ({ mainChange }) => {
         <div className="bottom-elements">
         <SidebarSeperator/>
         <button className="btn btn-primary dropdown-btn">
+        {/* <SidebarElement svgImage={"help"} text={"Forum"} onClick={() => mainChange("help")}/> */}
+        <a href="/forum">      <button className='btn btn-primary ai-btn'> Forum </button></a>
+        </button>
+        <SidebarSeperator/>
+        <button className="btn btn-primary dropdown-btn">
         <SidebarElement svgImage={"help"} text={"FAQ / Help"} onClick={() => mainChange("help")}/>
         </button>
 
