@@ -1,0 +1,59 @@
+.post-div {
+    background-color: #AC8968;
+    width: 21rem;
+    border-radius: 0.5rem;
+    height: 7rem;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.usr-img-post {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 2rem;
+    margin-right: 0.5rem;
+}
+
+.pd-top {
+    display: flex;
+    justify-content:start
+}
+
+.pdtop-user {
+    font-size: 1rem;
+}
+
+.pd-title {
+    font-weight: bolder;
+    font-size: 1rem;
+}
+
+.post-div {
+    display: flex;
+    flex-direction: column;
+    padding-right: 1rem;
+}
+
+.pd-bot {
+    display: flex;
+    width: 100%;
+}
+
+.pd-bl {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.pd-br {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    width: 20%;
+    m
+}
+
+.food-primary-img {
+    height: 3rem;
+    width: 6rem;
+}

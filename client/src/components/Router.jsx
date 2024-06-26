@@ -3,6 +3,7 @@ import App from "./App";
 import Dashboard from "./Dashboard";
 import ErrorPage from "./ErrorPage";
 import AiRecipe from "./AiRecipe";
+import Forum from "./Forum";
 import { useState, useEffect } from 'react'
 import RedirectComponent from "./RedirectComponent";
 
@@ -83,6 +84,11 @@ const Router = () => {
     {
       path:"/ai-recipe",
       element: isAuthenticated ? <AiRecipe setAuth={authenticateSwitch} cuisinePreferences={userCuisines} addRecipe={addRecipe}/> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path:"/forum",
+      element: isAuthenticated ? <Forum setAuth={authenticateSwitch} /> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
       errorElement: <ErrorPage />,
     },
   ]);

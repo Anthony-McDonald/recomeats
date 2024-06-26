@@ -1,0 +1,40 @@
+#forum-header {
+    background-color: #A69080;
+    height: 5rem;
+    flex-shrink: 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.f-head-left {
+    width: 20%;
+}
+.f-head-right {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    margin-left: 3rem;
+}
+
+#forum-reco-logo {
+    height:2rem;
+    margin-left: 0.5rem;
+}
+
+.usr-img {
+height: 2.5rem;
+border-radius: 2rem;
+width: 2.5rem;
+}
+
+.logo {
+    display: flex;
+}
+.reco-logo-subtext {
+    font-size: 0.8rem;
+    position: absolute;
+    left: 10.2rem;
+    top: 3rem;
+}
