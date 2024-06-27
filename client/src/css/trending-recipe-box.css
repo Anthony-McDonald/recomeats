@@ -1,0 +1,19 @@
+@media (min-width: 960px) {
+    #trending-recipe-box {
+        display: flex !important;
+    }
+}
+
+#trending-recipe-box {
+    display: none;
+    justify-content: center;
+    width: 40%;
+    margin: 1rem;
+    align-items: center;
+    height: 20rem;
+    background-color: black;
+    width: 17rem;
+    position: sticky;
+    top: 1rem;  /* Adjust the top position */
+    right: 0.3rem;  /* Adjust the right position */
+}

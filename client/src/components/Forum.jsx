@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from 'react';
 import ForumHeader from './ForumHeader';
 import ForumPostDiv from './ForumPostDiv';
+import TrendingRecipeBox from './TrendingRecipeBox'
 
 const Forum = ({setAuth}) => {
 
@@ -26,6 +27,9 @@ const Forum = ({setAuth}) => {
         {/* currentComments.map((recipe, index) => (
           <RecipeBox key={index} recipe={recipe} editRecipe={editRecipeManually} deleteRecipe={deleteRecipe}></RecipeBox>
         )) */}
+        <div id="forum-main">
+          <div className="post-divs">
+          <ForumPostDiv/>
         <ForumPostDiv/>
         <ForumPostDiv/>
         <ForumPostDiv/>
@@ -34,7 +38,12 @@ const Forum = ({setAuth}) => {
         <ForumPostDiv/>
         <ForumPostDiv/>
         <ForumPostDiv/>
-        <ForumPostDiv/>
+          </div>
+          <div id="trending-recipes">
+            <TrendingRecipeBox/>
+          </div>
+        </div>
+
         
     </div>
   );

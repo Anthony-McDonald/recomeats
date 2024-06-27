@@ -1,10 +1,55 @@
+@media (min-width: 960px) {
+    .post-div {
+        width: 98% !important;
+    }
+}
+
 .post-div {
     background-color: #AC8968;
-    width: 21rem;
+    width: 100%;
     border-radius: 0.5rem;
-    height: 7rem;
     padding: 0.6rem;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
+    flex-grow: 1;
+    border-top: 2px solid #865D36;
+    border-bottom: 1px solid #865D36;
+    margin: 1rem;
+    margin-bottom: -0.8rem;
+}
+
+
+#post-description {
+    margin-top: -0.5rem;
+    font-size: 0.9rem;
+    line-height: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;  
+}
+
+.interact-box {
+    padding: 0.5rem;
+    height: 1.5rem;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    background-color: #865D36;
+    border-radius: 1rem;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -1rem;
+    font-size: 0.8rem;
+}
+
+.interactions {
+    display: flex;
+    justify-content: start;
+}
+
+.post-divs {
+    width: 100%;
 }
 
 .usr-img-post {
@@ -50,7 +95,7 @@
     justify-content: center;
     align-items: start;
     width: 20%;
-    m
+    
 }
 
 .food-primary-img {
