@@ -1,3 +1,21 @@
+@media (min-width: 1400px) {
+    #related-threads {
+        margin-left: 4rem !important;
+    }
+    #left-sidebar-div {
+        width: 15rem !important;
+    }
+}
+
+@media (min-width: 1300px) {
+    body > #related-threads {
+        margin-left: 4rem 
+    }
+    body > #left-sidebar-div {
+        width: 10rem 
+    }
+}
+
 @media (min-width: 1200px) {
     #left-sidebar-div {
         display: flex !important;
@@ -23,7 +41,7 @@
 }
 
 #left-sidebar-div {
-width: 15rem;
+width: 6rem;
 display: none;
 flex-shrink: 0;
 }
@@ -32,6 +50,15 @@ flex-shrink: 0;
 #thread-wrapper {
     display: flex;
     align-items: center;
+}
+
+#thr-r {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    height: 60rem;
 }
 
 #related-threads {
@@ -44,8 +71,8 @@ flex-shrink: 0;
     height: 20rem;
     background-color: #93785B;
     width: 17rem;
-    position: sticky;
-    top: 1rem;  /* put it higher */
+    top: 1rem;
+    position: sticky; 
     right: 0.3rem;  
     padding: 1rem;
 

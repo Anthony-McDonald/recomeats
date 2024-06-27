@@ -1,6 +1,14 @@
+@media (min-width: 1200px) {
+    .thread-img {
+       max-width: 800px !important;
+    }
+}
+
+
 #recipe-image-box {
     width: 100%;
     max-width: 100%; 
+
     height: auto; 
     overflow: hidden;
     display: flex;
