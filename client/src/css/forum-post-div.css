@@ -1,19 +1,22 @@
 @media (min-width: 960px) {
     .post-div {
         width: 98% !important;
+        border-radius: 0.5rem;
+        margin: 1rem;    
+    }
+    #post-description {
+        -webkit-line-clamp: 4 !important; 
     }
 }
 
 .post-div {
     background-color: #AC8968;
     width: 100%;
-    border-radius: 0.5rem;
+    /* border-radius: 0.5rem; */
     padding: 0.6rem;
-    /* margin-bottom: 1rem; */
     flex-grow: 1;
     border-top: 2px solid #865D36;
     border-bottom: 1px solid #865D36;
-    margin: 1rem;
     margin-bottom: -0.8rem;
 }
 
@@ -23,7 +26,7 @@
     font-size: 0.9rem;
     line-height: 1rem;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;  
 }

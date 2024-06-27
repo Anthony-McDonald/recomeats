@@ -6,14 +6,48 @@
 
 #trending-recipe-box {
     display: none;
-    justify-content: center;
+    justify-content: start;
+    flex-direction: column;
     width: 40%;
     margin: 1rem;
     align-items: center;
     height: 20rem;
-    background-color: black;
+    background-color: #93785B;
     width: 17rem;
     position: sticky;
     top: 1rem;  /* Adjust the top position */
     right: 0.3rem;  /* Adjust the right position */
+    padding: 1rem;
+}
+
+
+.trending-recipe-img {
+    height: 2rem;
+}
+
+#tr-entries {
+    width: 100%;
+}
+
+#trending-recipe {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 0.3rem;
+    width: 100%;
+}
+#trending-recipe:hover {
+    background-color: #a69080;
+}
+
+.tr-title {
+    margin-left: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+#tr-layout {
+    display: flex;
+    flex-direction: column;
+    line-height: 0;
 }
