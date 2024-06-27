@@ -6,6 +6,7 @@ import ForumHeader from './ForumHeader';
 import RecipeThreadDiv from './RecipeThreadDiv';
 import Interactions from './Interactions';
 import Comment from './Comment'
+import SimilarRecipe from './SimilarRecipe';
 
 const Thread = ({setAuth}) => {
 
@@ -36,6 +37,7 @@ const Thread = ({setAuth}) => {
         <h4 className="related-title">
             Similar Recipes
         </h4>
+        <SimilarRecipe/>
     </div>
             </div>
         </div>

@@ -1,0 +1,20 @@
+#comment-box {
+   display: flex;
+   flex-direction: column; 
+   margin: 1rem;
+}
+
+#msg-info {
+    display: flex;
+    align-items: center;
+}
+
+#msg-text {
+    margin-bottom: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.txt-usr-name {
+    font-size: 1rem;
+    margin-left: 1rem;
+}
