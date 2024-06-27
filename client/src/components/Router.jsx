@@ -4,6 +4,7 @@ import Dashboard from "./Dashboard";
 import ErrorPage from "./ErrorPage";
 import AiRecipe from "./AiRecipe";
 import Forum from "./Forum";
+import Thread from './Thread'
 import { useState, useEffect } from 'react'
 import RedirectComponent from "./RedirectComponent";
 
@@ -89,6 +90,11 @@ const Router = () => {
     {
       path:"/forum",
       element: isAuthenticated ? <Forum setAuth={authenticateSwitch} /> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path:"/thread",
+      element: isAuthenticated ? <Thread setAuth={authenticateSwitch} /> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
       errorElement: <ErrorPage />,
     },
   ]);

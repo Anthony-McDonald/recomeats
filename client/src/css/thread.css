@@ -1,0 +1,92 @@
+@media (min-width: 1200px) {
+    #left-sidebar-div {
+        display: flex !important;
+    }
+}
+
+@media (min-width: 769px) {
+    #related-threads {
+        display: flex !important;
+    }
+}
+
+#recipe-thread-div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+}
+#interaction-div {
+    margin-left: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+#left-sidebar-div {
+width: 15rem;
+display: none;
+flex-shrink: 0;
+}
+
+
+#thread-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+#related-threads {
+    display: none;
+    justify-content: start;
+    flex-direction: column;
+    width: 40%;
+    margin: 1rem;
+    align-items: center;
+    height: 20rem;
+    background-color: #93785B;
+    width: 17rem;
+    position: sticky;
+    top: 1rem;  /* put it higher */
+    right: 0.3rem;  
+    padding: 1rem;
+
+}
+
+#user-box {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.user-text {
+    font-size: 1rem;
+    margin-left: 0.5rem;
+}
+
+#timestamp {
+    color: grey;
+    font-size: 0.7rem;
+    margin-left: 1rem;
+}
+
+#thread-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+    line-height: 1.3rem;
+}
+
+#thread-desc {
+    margin-bottom: 0.5rem;
+}
+
+#ingredients {
+    display: flex;
+    justify-content: start;
+    margin-left: 1rem;
+}
+
+#ingredient {
+    margin-right: 0.3rem;
+}

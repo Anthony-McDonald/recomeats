@@ -1,6 +1,7 @@
 import React from 'react';
 import '../css/forum-post-div.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+import Interactions from './Interactions'
 
 const ForumPostDiv = () => {
 
@@ -16,10 +17,7 @@ const ForumPostDiv = () => {
                 <div className="post-desc-div">
                 <p id='post-description'>Wow this food is so lovely rro woooooooooooooooooooo i 32uhe2ueh 3eh2ieu32eh32 3iuhuihe32u  32e23eu32e2h3ei32u e32heiu23he32iuh e32he3iu2eh23ih</p>
                 </div>
-                <div className="interactions">
-                    <div className="vote interact-box">vote</div>
-                    <div className="comment interact-box">comment</div>
-                </div>
+                <Interactions/>
                 </div>
                 <div className="pd-br">
                     <img className='food-primary-img' src="/images/1.jpg" alt="img" />
