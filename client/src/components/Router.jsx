@@ -26,7 +26,7 @@ const Router = () => {
         recipe_description: recipe_description,
         recipe_instructions: recipe_instructions
       })
-      await fetch("http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com:5000/recipes/addrecipe/", {
+      await fetch("http://localhost:5000/recipes/addrecipe/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,7 +42,7 @@ const Router = () => {
 
   async function getCuisines() {
     try {
-      const response = await fetch("http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com:5000/cuisines/getuserpreferences", {
+      const response = await fetch("http://localhost:5000/cuisines/getuserpreferences", {
         method: "GET",
         headers: { token: localStorage.getItem("token") }
       });
@@ -61,7 +61,7 @@ const Router = () => {
 
   async function getCuisineName(cuisine_id) {
     try {
-      const response = await fetch("http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com:5000/cuisines/getcuisine/" + cuisine_id, {
+      const response = await fetch("http://localhost:5000/cuisines/getcuisine/" + cuisine_id, {
         method: "GET",
         headers: { token: localStorage.getItem("token") }
       });

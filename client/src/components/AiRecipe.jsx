@@ -9,7 +9,7 @@ const AiRecipe = ({setAuth, cuisinePreferences, addRecipe}) => {
   const [ingredients, setIngredients] = useState(["potatoes", "cheese", "garlic"]);
   const [isLoading, setLoading] = useState(false);
 
-  const url = 'http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com:5000/chat/foods?ingredients=' + ingredients.join(',');
+  const url = 'http://localhost:5000/chat/foods?ingredients=' + ingredients.join(',');
 
   useEffect(() => {
     verifyAuthentication();
@@ -81,7 +81,7 @@ const recipes = recommendations.recipes.map(recipeData => ({
 
     async function verifyAuthentication() {
         try {
-        const response = await fetch("http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com:5000/users/is-verify", {
+        const response = await fetch("http://localhost:5000/users/is-verify", {
           method: "GET",
           headers: {token: localStorage.getItem("token")}
         });

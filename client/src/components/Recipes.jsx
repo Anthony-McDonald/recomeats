@@ -72,7 +72,7 @@ const Recipes = () => {
         recipe_description: recipe_description,
         recipe_instructions: recipe_instructions,
       })
-      await fetch("http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com:5000/recipes/addrecipe/", {
+      await fetch("http://localhost:5000/recipes/addrecipe/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -94,7 +94,7 @@ const Recipes = () => {
   async function getRecipes() {
     setIsLoading(true);
     try {
-      const response = await fetch("http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com:5000/recipes/getrecipes/", {
+      const response = await fetch("http://localhost:5000/recipes/getrecipes/", {
         method: "GET",
         headers: { token: localStorage.getItem("token") }
       });
@@ -111,7 +111,7 @@ const Recipes = () => {
 
   async function getIngredients(recipe_id) {
     try {
-      const response = await fetch("http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com:5000/recipes/getingredients/" + recipe_id, {
+      const response = await fetch("http://localhost:5000/recipes/getingredients/" + recipe_id, {
         method: "GET",
         headers: { token: localStorage.getItem("token") }
       });
@@ -133,7 +133,7 @@ const Recipes = () => {
         recipe_description: recipe_description,
         recipe_instructions: recipe_instructions,
       })
-      await fetch("http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com:5000/recipes/changerecipe/" + recipe_id, {
+      await fetch("http://localhost:5000/recipes/changerecipe/" + recipe_id, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -187,7 +187,7 @@ const Recipes = () => {
   
   async function deleteRecipe(recipeId) {
     try {
-       await fetch(`http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com:5000/recipes/deleterecipe/${recipeId}`, {
+       await fetch(`http://localhost:5000/recipes/deleterecipe/${recipeId}`, {
         method: "DELETE",
         headers: { token: localStorage.getItem("token") }
       });

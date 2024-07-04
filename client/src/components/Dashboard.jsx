@@ -7,6 +7,7 @@ import Profile from './Profile';
 import Recipes from './Recipes';
 import Help from './Help';
 import Dropdown from './Dropdown';
+import Privacy from './Privacy';
 
 
 const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
@@ -36,7 +37,7 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
 
   async function getName() {
     try {
-      const response = await fetch("http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com:5000/users/dashboard/", {
+      const response = await fetch("http://localhost:5000/users/dashboard/", {
         method: "POST",
         headers: { token: localStorage.getItem("token") }
       });
@@ -64,6 +65,7 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
         <div className="bottom-elements">
         <SidebarSeperator/>
         <SidebarElement svgImage={"help"} text={"FAQ / Help"} onClick={() => mainChange("help")}/>
+        <SidebarElement svgImage={"help"} text={"Privacy Policy"} onClick={() => mainChange("privacy")}/>
         </div>
 
       </div>  
@@ -81,6 +83,7 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
           {!showDropdown && selectedElement === "profile" && <Profile userCuisines={userCuisines} getCuisines={getCuisines} />}
           {!showDropdown && selectedElement === "recipes" && <Recipes/>}
           {!showDropdown && selectedElement === "help" && <Help />}
+          {!showDropdown && selectedElement === "privacy" && <Privacy />}
       </div>
       </div>
 
