@@ -17,3 +17,9 @@
     margin-bottom: 0.25rem;
     margin-top: 0.25rem;
 }
+
+.bottom-elements {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

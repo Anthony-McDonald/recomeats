@@ -17,12 +17,13 @@ const Dropdown = ({ mainChange }) => {
         <SidebarSeperator/>
         <button className="btn btn-primary dropdown-btn">
         {/* <SidebarElement svgImage={"help"} text={"Forum"} onClick={() => mainChange("help")}/> */}
-        <a href="/forum">      <button className='btn btn-primary ai-btn'> Forum </button></a>
+        <a href="/forum">      <button className='btn btn-primary ai-btn side-el-right'> Forum </button></a>
         </button>
         <SidebarSeperator/>
         <button className="btn btn-primary dropdown-btn">
         <SidebarElement svgImage={"help"} text={"FAQ / Help"} onClick={() => mainChange("help")}/>
         </button>
+        <button className="btn btn-primary dropdown-btn">        <SidebarElement svgImage={"help"} text={"Privacy Policy"} onClick={() => mainChange("privacy")}/></button>
 
         </div>
         </div>
