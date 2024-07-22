@@ -65,7 +65,6 @@ const EditInfoModal = ({ updateUserProfileInfo, firstNameResult, lastNameResult,
                                     <label htmlFor="firstName" className="form-label">First Name</label>
                                     <input value={firstName} onChange={onChange} type="text" className="form-control" id="firstName" aria-describedby="fnameHelp" />
                                 </div>
-                                <h1>fnr: {firstNameResult}</h1>
                                 <div className="mb-3">
                                     <label htmlFor="lastName" className="form-label">Last Name</label>
                                     <input value={lastName} onChange={onChange} type="text" className="form-control" id="lastName" aria-describedby="lnameHelp" />
