@@ -85,7 +85,7 @@ const EditInfoModal = ({ updateUserProfileInfo, firstNameResult, lastNameResult,
                                     </div>
                                 </div>
                                 <div className="submit-register">
-                                    <button type="submit" className="header-button btn btn-primary">Submit Changes</button>
+                                    <button data-bs-dismiss="modal" type="submit" className="header-button btn btn-primary">Submit Changes</button>
                                 </div>
                             </form>
                         </div>

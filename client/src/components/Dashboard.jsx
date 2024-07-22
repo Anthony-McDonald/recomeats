@@ -61,7 +61,7 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
         <div className="top-elements">
         <SidebarElement svgImage={"profile"} text={"My Profile"} onClick={() => mainChange("profile")}/>
         <SidebarElement svgImage={"recipes"} text={"My Recipes"} onClick={() => mainChange("recipes")}/>
-        <SidebarElement svgImage={"recipes"} text={"Forum"} onClick={() => goTo("/forum")}/>
+        <SidebarElement svgImage={"forum"} text={"Forum"} onClick={() => goTo("/forum")}/>
         </div>
         <div className="bottom-elements">
         <SidebarSeperator/>

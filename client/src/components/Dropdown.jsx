@@ -5,6 +5,9 @@ import "../css/dropdown.css"
 
 const Dropdown = ({ mainChange }) => {
 
+    const pathTo = (path) => {
+        window.location = path
+    };
 
     return (
         <div className="dropdown-div">
@@ -16,8 +19,7 @@ const Dropdown = ({ mainChange }) => {
         <div className="bottom-elements">
         <SidebarSeperator/>
         <button className="btn btn-primary dropdown-btn">
-        {/* <SidebarElement svgImage={"help"} text={"Forum"} onClick={() => mainChange("help")}/> */}
-        <a href="/forum">      <button className='btn btn-primary ai-btn side-el-right'> Forum </button></a>
+        <SidebarElement svgImage={"forum"} text={"Forum"} onClick={() => pathTo("forum")}/>
         </button>
         <SidebarSeperator/>
         <button className="btn btn-primary dropdown-btn">
