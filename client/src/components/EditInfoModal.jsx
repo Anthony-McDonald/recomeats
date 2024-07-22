@@ -1,19 +1,44 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-
-const EditInfoModal = ({ updateUserProfileInfo }) => {
+import '../css/edit-info-modal.css'
+const EditInfoModal = ({ updateUserProfileInfo, firstNameResult, lastNameResult, profileImageResult}) => {
     const [inputs, setInputs] = useState({
         firstName: "",
         lastName: "",
-        profileImage: "1"
+        profileImage: "1",
     });
 
     const { firstName, lastName, profileImage } = inputs;
 
+    useEffect(() => {
+        setInputs({
+            firstName: firstNameResult,
+            lastName: lastNameResult,
+            profileImage: profileImageResult
+        });
+    }, [firstNameResult, lastNameResult, profileImageResult]);
+
+    const closePress = () => {
+        setTimeout(() => {
+            setInputs({
+                firstName: firstNameResult,
+                lastName: lastNameResult,
+                profileImage: profileImageResult
+            });
+        }, 1000);
+    };
+
+    const imageOptions = [0,1,2,3,4,5,6,7,8,9,10,11]; // Add your image options here
+
     const onChange = (e) => {
         const updatedInputs = { ...inputs, [e.target.id]: e.target.value };
         setInputs(updatedInputs);
+    };
+
+    const onImageSelect = (image) => {
+        setInputs({ ...inputs, profileImage: image });
+
     };
 
     const onSubmitForm = async (e) => {
@@ -38,15 +63,27 @@ const EditInfoModal = ({ updateUserProfileInfo }) => {
                             <form onSubmit={onSubmitForm}>
                                 <div className="mb-3">
                                     <label htmlFor="firstName" className="form-label">First Name</label>
-                                    <input onChange={onChange} type="text" className="form-control" id="firstName" aria-describedby="fnameHelp" />
+                                    <input value={firstName} onChange={onChange} type="text" className="form-control" id="firstName" aria-describedby="fnameHelp" />
                                 </div>
+                                <h1>fnr: {firstNameResult}</h1>
                                 <div className="mb-3">
                                     <label htmlFor="lastName" className="form-label">Last Name</label>
-                                    <input onChange={onChange} type="text" className="form-control" id="lastName" aria-describedby="lnameHelp" />
+                                    <input value={lastName} onChange={onChange} type="text" className="form-control" id="lastName" aria-describedby="lnameHelp" />
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="profileImage" className="form-label">Profile Image</label>
-                                    <input onChange={onChange} type="text" className="form-control" id="profileImage" aria-describedby="profImageHelp" />
+                                    <label className="form-label">Profile Image</label>
+                                    <div className="image-selector">
+                                        {imageOptions.map(image => (
+                                            <img
+                                                key={image}
+                                                src={`./images/profile-images/${image}.png`}
+                                                alt={`Profile ${image}`}
+                                                className={`profile-img ${profileImage == image ? 'selected' : ''}`}
+                                                onClick={() => onImageSelect(image)}
+                                                style={{ cursor: 'pointer', width: '100px', height: '100px', margin: '5px' }}
+                                            />
+                                        ))}
+                                    </div>
                                 </div>
                                 <div className="submit-register">
                                     <button type="submit" className="header-button btn btn-primary">Submit Changes</button>
@@ -54,7 +91,7 @@ const EditInfoModal = ({ updateUserProfileInfo }) => {
                             </form>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" id="closeBtn" className="header-button btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button onClick={() => closePress()} type="button" id="closeBtn" className="header-button btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>

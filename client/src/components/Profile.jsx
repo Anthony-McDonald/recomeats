@@ -67,7 +67,7 @@ const Profile = ({userCuisines, getCuisines}) => {
         <div className="info-bottom">
         <Cuisines userCuisines={userCuisines} getCuisines={getCuisines}/>
         </div>
-        <EditInfoModal updateUserProfileInfo={updateUserProfileInfo}/>
+        <EditInfoModal updateUserProfileInfo={updateUserProfileInfo} firstNameResult={firstName} lastNameResult={lastName} profileImageResult={profileImage}/>
     </div>
 
 

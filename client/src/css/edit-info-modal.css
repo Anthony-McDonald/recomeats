@@ -1,0 +1,6 @@
+
+.profile-img.selected {
+    background-color: lightgray;
+    border-radius: 1rem;
+    padding: 0.1rem;
+}
