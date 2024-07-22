@@ -59,7 +59,6 @@ const Profile = ({userCuisines, getCuisines}) => {
     <div id="profile">
   <div className="profile-info">
     <img className='prof-img' src={fullProfileUrl} alt="prof-img" />
-    <button type='button' className="btn btn-danger btn-sm edit-recipe-button" onClick={() => updateUserProfileInfo(firstName, lastName, 5)}>Update Image</button>
     <h3 className="mb-4">{fullName}</h3>
     <h5 className="text-muted">Date of Birth: {dateOfBirth}</h5>
   </div>
