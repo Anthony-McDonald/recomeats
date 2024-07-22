@@ -128,6 +128,48 @@ router.delete("/deleteuser", authorisation, asyncHandler(async(req, res, next) =
 
         res.send();
 }));
+// admin delete user
+router.delete("/deleteuserasadmin", asyncHandler(async(req, res, next) => {
+    const {user_id} = req.body;
+
+        // Delete the user's profile from the UserProfiles table
+        await pool.query(
+            "DELETE FROM UserProfiles WHERE user_id = $1",
+            [user_id]
+        );
+
+        // Delete the user's permission info from the UserPermissions table
+        await pool.query(
+            "DELETE FROM UserPermissions WHERE user_id = $1",
+            [user_id]
+        );
+
+        // Delete all info regarding that particular user's food preferences
+        await pool.query(
+            "DELETE FROM UserCuisinePreferences WHERE user_id = $1",
+            [user_id]
+        );
+
+        // Delete records from recipeingredients table related to the user's recipes
+        await pool.query(
+            "DELETE FROM recipeingredients WHERE recipe_id IN (SELECT recipe_id FROM recipes WHERE user_id = $1)",
+            [user_id]
+        );
+
+        // Delete all info regarding that particular user's recipes
+        await pool.query(
+            "DELETE FROM recipes WHERE user_id = $1",
+            [user_id]
+        );
+
+        // Delete the user from the Users table
+        await pool.query(
+            "DELETE FROM Users WHERE user_id = $1",
+            [user_id]
+        );
+
+        res.send();
+}));
 
 // Change User Information
 
@@ -143,7 +185,7 @@ router.post("/edituser", authorisation, asyncHandler(async(req, res, next) => {
 
     // Update UserProfiles table
     const updateUserProfile = await pool.query(
-        "UPDATE UserProfiles SET first_name = $1, last_name = $2, date_of_birth = $3 WHERE user_id = $4 RETURNING *",
+        "UPDATE UserProfiles SET first_name = $1, last_name = $2, date_of_birth = $3, profile_image = 5 WHERE user_id = $4 RETURNING *",
         [first_name, last_name, date_of_birth, user_id]
     );
 
@@ -165,7 +207,7 @@ router.post("/edituser", authorisation, asyncHandler(async(req, res, next) => {
 // Change User Profile Information
 
 router.post("/edituserprofile", authorisation, asyncHandler(async(req, res, next) => {
-    const { user_name, first_name, last_name, profile_image } = req.body;
+    const {first_name, last_name, profile_image } = req.body;
     const user_id = req.user.id;
 
     // Update UserProfiles table
