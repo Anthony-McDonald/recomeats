@@ -3,7 +3,7 @@ import '../css/profile.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import Cuisines from './Cuisines';
 import EditInfoModal from './EditInfoModal';
-
+import CookieConsent, { Cookies } from "react-cookie-consent";
 
 const Profile = ({userCuisines, getCuisines}) => {
   const [firstName, setFirstName] = useState("");
@@ -58,11 +58,23 @@ const Profile = ({userCuisines, getCuisines}) => {
 
   return (
     <div id="profile">
-                {/* <CookieBanner
-        enableManagement
-        managementButtonText='manage cookie preferences'
-        cookieCategories={['analytics', 'advertisement']}
-    /> */}
+            <CookieConsent
+        enableDeclineButton
+        onDecline={() => {
+          console.log("Cookies declined");
+        }}
+          buttonText="I accept to your use of cookies"
+          cookieName="CookieConsent"
+          style={{ background: "#93785B" }}
+          buttonStyle={{ background: "#865D36", fontSize: "13px" , color: "#ffffff", borderRadius: "1rem"}}
+          declineButtonStyle={{ background: "#3E362E", fontSize: "13px" , color: "#ffffff", borderRadius: "1rem"}}
+          expires={150}
+        // Additional props and styles
+      >
+  This website uses cookies to enhance the user experience.{" "}
+  <span style={{ fontSize: "10px" }}>By clicking accept, you agree to our use of cookies. If you are interested in how we use this data, click on the Privacy Policy section of the webpage</span>
+        {/* Cookie consent message */}
+      </CookieConsent>
   <div className="profile-info">
     <img className='prof-img' src={fullProfileUrl} alt="prof-img" />
     <h3 className="mb-4">{fullName}</h3>
@@ -73,7 +85,10 @@ const Profile = ({userCuisines, getCuisines}) => {
         <Cuisines userCuisines={userCuisines} getCuisines={getCuisines}/>
         </div>
         <EditInfoModal updateUserProfileInfo={updateUserProfileInfo} firstNameResult={firstName} lastNameResult={lastName} profileImageResult={profileImage}/>
+
     </div>
+
+    
 
 
   );
