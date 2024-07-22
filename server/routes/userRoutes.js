@@ -162,6 +162,24 @@ router.post("/edituser", authorisation, asyncHandler(async(req, res, next) => {
     res.json(response);
 }));
 
+// Change User Profile Information
+
+router.post("/edituserprofile", authorisation, asyncHandler(async(req, res, next) => {
+    const { user_name, first_name, last_name, profile_image } = req.body;
+    const user_id = req.user.id;
+
+    // Update UserProfiles table
+    const updateUserProfile = await pool.query(
+        "UPDATE UserProfiles SET first_name = $1, last_name = $2, profile_image = $3 WHERE user_id = $4 RETURNING *",
+        [first_name, last_name, profile_image, user_id]
+    );
+
+    const response = {
+        profile: updateUserProfile.rows[0]
+    };
+
+    res.json(response);
+}));
 
 
 // Get User Information
