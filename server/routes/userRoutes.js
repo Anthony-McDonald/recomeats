@@ -39,8 +39,8 @@ const newUser = await pool.query(
 );``
 const user_id = newUser.rows[0].user_id;
 const newUserProfile = await pool.query(
-    "INSERT INTO UserProfiles (user_id, first_name, last_name, date_of_birth) VALUES ($1, $2, $3, $4) RETURNING *",
-    [user_id, first_name, last_name, date_of_birth]
+    "INSERT INTO UserProfiles (user_id, first_name, last_name, date_of_birth, profile_image) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+    [user_id, first_name, last_name, date_of_birth, "1"]
 );
 const newUserPermission = await pool.query(
     "INSERT INTO UserPermissions (user_id, permission_level) VALUES ($1, $2) RETURNING *",
@@ -134,7 +134,7 @@ const updateUserPermission = async (user_id, permission_level) => {
 };
 
 // Change User Information
-router.post("/edituser", authorisation, asyncHandler(async (req, res, next) => {
+router.put("/edituser", authorisation, asyncHandler(async (req, res, next) => {
     const { user_name, first_name, last_name, date_of_birth, email_address, password_hash, permission_level } = req.body;
     const user_id = req.user.id;
 
@@ -152,7 +152,7 @@ router.post("/edituser", authorisation, asyncHandler(async (req, res, next) => {
 }));
 
 // Change User Profile Information
-router.post("/edituserprofile", authorisation, asyncHandler(async (req, res, next) => {
+router.put("/edituserprofile", authorisation, asyncHandler(async (req, res, next) => {
     const { first_name, last_name, profile_image } = req.body;
     const user_id = req.user.id;
     const result = await pool.query("SELECT date_of_birth FROM userprofiles WHERE user_id = $1", [user_id]);

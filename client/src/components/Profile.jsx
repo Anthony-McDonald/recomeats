@@ -35,12 +35,29 @@ const Profile = ({userCuisines, getCuisines}) => {
     }
   }
 
+  async function updateUserProfileInfo(first_name, last_name, profile_image) {
+    try {
+      const body = {first_name, last_name, profile_image}
+      await fetch("http://localhost:5000/users/edituserprofile", {
+          method: "PUT",
+          headers: { token: localStorage.getItem("token"),"Content-Type": "application/json" },
+          body: JSON.stringify(body)
+      });
+      getUserInfo()
+
+
+  } catch(err) {
+      console.error(err.message);
+  }
+  }
+
   
 
   return (
     <div id="profile">
   <div className="profile-info">
     <img className='prof-img' src={fullProfileUrl} alt="prof-img" />
+    <button type='button' className="btn btn-danger btn-sm edit-recipe-button" onClick={() => updateUserProfileInfo(firstName, lastName, 5)}>Update Image</button>
     <h3 className="mb-4">{fullName}</h3>
     <h5 className="text-muted">Date of Birth: {dateOfBirth}</h5>
   </div>
