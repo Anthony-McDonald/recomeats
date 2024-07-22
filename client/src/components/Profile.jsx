@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Cuisines from './Cuisines';
 import EditInfoModal from './EditInfoModal';
 
+
 const Profile = ({userCuisines, getCuisines}) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -57,6 +58,11 @@ const Profile = ({userCuisines, getCuisines}) => {
 
   return (
     <div id="profile">
+                {/* <CookieBanner
+        enableManagement
+        managementButtonText='manage cookie preferences'
+        cookieCategories={['analytics', 'advertisement']}
+    /> */}
   <div className="profile-info">
     <img className='prof-img' src={fullProfileUrl} alt="prof-img" />
     <h3 className="mb-4">{fullName}</h3>
