@@ -168,13 +168,14 @@ router.post("/edituser", authorisation, asyncHandler(async(req, res, next) => {
 
 router.get("/getuser/profile", authorisation, asyncHandler(async(req, res, next) => {
     const user_id = req.user.id;
-    const result = await pool.query("SELECT first_name, last_name, date_of_birth FROM userprofiles WHERE user_id = $1", [user_id]);
+    const result = await pool.query("SELECT first_name, last_name, date_of_birth, profile_image FROM userprofiles WHERE user_id = $1", [user_id]);
     const userProfile = result.rows[0];
 
     const response = {
         first_name: userProfile.first_name,
         last_name: userProfile.last_name,
         date_of_birth: DateTime.fromJSDate(userProfile.date_of_birth).toLocaleString(DateTime.DATE_SHORT),
+        profile_image: userProfile.profile_image,
     };
 
     res.json(response);

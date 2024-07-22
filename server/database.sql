@@ -12,6 +12,7 @@ CREATE TABLE UserProfiles (
     first_name VARCHAR(20),
     last_name VARCHAR(20),
     date_of_birth DATE,
+    profile_image INT,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 

@@ -7,7 +7,9 @@ const Profile = ({userCuisines, getCuisines}) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
+  const [profileImage, setProfileImage] = useState("")
   const fullName = firstName + " " + lastName;
+  const fullProfileUrl = "./images/profile-images/" + profileImage + ".png"
 
 
   useEffect(() => {
@@ -27,6 +29,7 @@ const Profile = ({userCuisines, getCuisines}) => {
       setFirstName(parseRes.first_name);
       setLastName(parseRes.last_name);
       setDateOfBirth(parseRes.date_of_birth);
+      setProfileImage(parseRes.profile_image)
     } catch (error) {
       console.error("Error fetching data:", error)
     }
@@ -37,6 +40,7 @@ const Profile = ({userCuisines, getCuisines}) => {
   return (
     <div id="profile">
   <div className="profile-info">
+    <img className='prof-img' src={fullProfileUrl} alt="prof-img" />
     <h3 className="mb-4">{fullName}</h3>
     <h5 className="text-muted">Date of Birth: {dateOfBirth}</h5>
   </div>
