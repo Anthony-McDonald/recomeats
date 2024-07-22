@@ -85,139 +85,82 @@ router.get("/is-verify", authorisation, asyncHandler(async (req, res) => {
     res.json(true);
 }))
 
-// Delete User
+const deleteUserFromDatabase = async (user_id) => {
+    const queries = [
+        "DELETE FROM UserProfiles WHERE user_id = $1",
+        "DELETE FROM UserPermissions WHERE user_id = $1",
+        "DELETE FROM UserCuisinePreferences WHERE user_id = $1",
+        "DELETE FROM recipeingredients WHERE recipe_id IN (SELECT recipe_id FROM recipes WHERE user_id = $1)",
+        "DELETE FROM recipes WHERE user_id = $1",
+        "DELETE FROM Users WHERE user_id = $1"
+    ];
 
-router.delete("/deleteuser", authorisation, asyncHandler(async(req, res, next) => {
+    for (const query of queries) {
+        await pool.query(query, [user_id]);
+    }
+};
+
+router.delete("/deleteuser", authorisation, asyncHandler(async (req, res, next) => {
     const user_id = req.user.id;
-
-        // Delete the user's profile from the UserProfiles table
-        await pool.query(
-            "DELETE FROM UserProfiles WHERE user_id = $1",
-            [user_id]
-        );
-
-        // Delete the user's permission info from the UserPermissions table
-        await pool.query(
-            "DELETE FROM UserPermissions WHERE user_id = $1",
-            [user_id]
-        );
-
-        // Delete all info regarding that particular user's food preferences
-        await pool.query(
-            "DELETE FROM UserCuisinePreferences WHERE user_id = $1",
-            [user_id]
-        );
-
-        // Delete records from recipeingredients table related to the user's recipes
-        await pool.query(
-            "DELETE FROM recipeingredients WHERE recipe_id IN (SELECT recipe_id FROM recipes WHERE user_id = $1)",
-            [user_id]
-        );
-
-        // Delete all info regarding that particular user's recipes
-        await pool.query(
-            "DELETE FROM recipes WHERE user_id = $1",
-            [user_id]
-        );
-
-        // Delete the user from the Users table
-        await pool.query(
-            "DELETE FROM Users WHERE user_id = $1",
-            [user_id]
-        );
-
-        res.send();
-}));
-// admin delete user
-router.delete("/deleteuserasadmin", asyncHandler(async(req, res, next) => {
-    const {user_id} = req.body;
-
-        // Delete the user's profile from the UserProfiles table
-        await pool.query(
-            "DELETE FROM UserProfiles WHERE user_id = $1",
-            [user_id]
-        );
-
-        // Delete the user's permission info from the UserPermissions table
-        await pool.query(
-            "DELETE FROM UserPermissions WHERE user_id = $1",
-            [user_id]
-        );
-
-        // Delete all info regarding that particular user's food preferences
-        await pool.query(
-            "DELETE FROM UserCuisinePreferences WHERE user_id = $1",
-            [user_id]
-        );
-
-        // Delete records from recipeingredients table related to the user's recipes
-        await pool.query(
-            "DELETE FROM recipeingredients WHERE recipe_id IN (SELECT recipe_id FROM recipes WHERE user_id = $1)",
-            [user_id]
-        );
-
-        // Delete all info regarding that particular user's recipes
-        await pool.query(
-            "DELETE FROM recipes WHERE user_id = $1",
-            [user_id]
-        );
-
-        // Delete the user from the Users table
-        await pool.query(
-            "DELETE FROM Users WHERE user_id = $1",
-            [user_id]
-        );
-
-        res.send();
+    await deleteUserFromDatabase(user_id);
+    res.send();
 }));
 
-// Change User Information
+router.delete("/deleteuserasadmin", asyncHandler(async (req, res, next) => {
+    const { user_id } = req.body;
+    await deleteUserFromDatabase(user_id);
+    res.send();
+}));
 
-router.post("/edituser", authorisation, asyncHandler(async(req, res, next) => {
-    const { user_name, first_name, last_name, date_of_birth, email_address, password_hash, permission_level } = req.body;
-    const user_id = req.user.id;
-
-    // Update Users table
-    const updateUser = await pool.query(
+const updateUser = async (user_id, user_name, email_address, password_hash) => {
+    return pool.query(
         "UPDATE Users SET user_name = $1, email_address = $2, password_hash = $3 WHERE user_id = $4 RETURNING *",
         [user_name, email_address, password_hash, user_id]
     );
+};
 
-    // Update UserProfiles table
-    const updateUserProfile = await pool.query(
-        "UPDATE UserProfiles SET first_name = $1, last_name = $2, date_of_birth = $3, profile_image = 5 WHERE user_id = $4 RETURNING *",
-        [first_name, last_name, date_of_birth, user_id]
+const updateUserProfile = async (user_id, first_name, last_name, date_of_birth, profile_image) => {
+    return pool.query(
+        "UPDATE UserProfiles SET first_name = $1, last_name = $2, date_of_birth = $3, profile_image = $4 WHERE user_id = $5 RETURNING *",
+        [first_name, last_name, date_of_birth, profile_image, user_id]
     );
+};
 
-    // Update UserPermissions table
-    const updateUserPermission = await pool.query(
+const updateUserPermission = async (user_id, permission_level) => {
+    return pool.query(
         "UPDATE UserPermissions SET permission_level = $1 WHERE user_id = $2 RETURNING *",
         [permission_level, user_id]
     );
+};
+
+// Change User Information
+router.post("/edituser", authorisation, asyncHandler(async (req, res, next) => {
+    const { user_name, first_name, last_name, date_of_birth, email_address, password_hash, permission_level } = req.body;
+    const user_id = req.user.id;
+
+    const updateUserCall = await updateUser(user_id, user_name, email_address, password_hash);
+    const updateUserProfileCall = await updateUserProfile(user_id, first_name, last_name, date_of_birth, 5);
+    const updateUserPermissionCall= await updateUserPermission(user_id, permission_level);
 
     const response = {
-        user: updateUser.rows[0],
-        profile: updateUserProfile.rows[0],
-        permission: updateUserPermission.rows[0]
+        user: updateUserCall.rows[0],
+        profile: updateUserProfileCall.rows[0],
+        permission: updateUserPermissionCall.rows[0]
     };
 
     res.json(response);
 }));
 
 // Change User Profile Information
-
-router.post("/edituserprofile", authorisation, asyncHandler(async(req, res, next) => {
-    const {first_name, last_name, profile_image } = req.body;
+router.post("/edituserprofile", authorisation, asyncHandler(async (req, res, next) => {
+    const { first_name, last_name, profile_image } = req.body;
     const user_id = req.user.id;
-
-    // Update UserProfiles table
-    const updateUserProfile = await pool.query(
-        "UPDATE UserProfiles SET first_name = $1, last_name = $2, profile_image = $3 WHERE user_id = $4 RETURNING *",
-        [first_name, last_name, profile_image, user_id]
-    );
+    const result = await pool.query("SELECT date_of_birth FROM userprofiles WHERE user_id = $1", [user_id]);
+    const userProfile = result.rows[0];
+    const updateUserProfileCall = await updateUserProfile(user_id, first_name, last_name, userProfile.date_of_birth, profile_image);
 
     const response = {
-        profile: updateUserProfile.rows[0]
+        profile: updateUserProfileCall.rows[0]
     };
 
     res.json(response);
