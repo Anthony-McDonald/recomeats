@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import '../css/profile.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import Cuisines from './Cuisines';
+import EditInfoModal from './EditInfoModal';
 
 const Profile = ({userCuisines, getCuisines}) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [profileImage, setProfileImage] = useState("")
+
   const fullName = firstName + " " + lastName;
   const fullProfileUrl = "./images/profile-images/" + profileImage + ".png"
 
@@ -65,6 +67,7 @@ const Profile = ({userCuisines, getCuisines}) => {
         <div className="info-bottom">
         <Cuisines userCuisines={userCuisines} getCuisines={getCuisines}/>
         </div>
+        <EditInfoModal updateUserProfileInfo={updateUserProfileInfo}/>
     </div>
 
 
