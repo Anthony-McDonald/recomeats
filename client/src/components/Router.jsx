@@ -93,7 +93,7 @@ const Router = () => {
       errorElement: <ErrorPage />,
     },
     {
-      path:"/thread",
+      path:"/forum/thread",
       element: isAuthenticated ? <Thread setAuth={authenticateSwitch} /> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
       errorElement: <ErrorPage />,
     },

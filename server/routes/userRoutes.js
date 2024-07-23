@@ -12,7 +12,7 @@ const bcrypt = require("bcrypt");
 
 // Dash 
 
-router.post("/dashboard", authorisation, asyncHandler(async (req, res) => {
+router.get("/dashboard", authorisation, asyncHandler(async (req, res) => {
     const userId = req.user.id;
 
     const user = await pool.query(
