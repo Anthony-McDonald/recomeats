@@ -18,10 +18,10 @@ const Forum = ({setAuth}) => {
         <ForumHeader/>
         <div className="forum-sort-post">
             <div className="sortbox">
-            <button type="button" class="btn btn-primary">Sort By</button>
+            <button type="button" className="btn btn-primary">Sort By</button>
             </div>
             <div className="postbox">
-            <button type="button" class="btn btn-primary">Post</button>
+            <button type="button" className="btn btn-primary">Post</button>
             </div>
         </div>
         {/* currentComments.map((recipe, index) => (

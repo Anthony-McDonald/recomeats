@@ -10,8 +10,9 @@ const RegisterModal = ({ setAuth }) => {
         date_of_birth: "",
         email_address: "",
         password: "",
+        permission_level: "0",
     })
-    const {user_name, first_name, last_name, date_of_birth, email_address, password} = inputs;
+    const {user_name, first_name, last_name, date_of_birth, email_address, password, permission_level} = inputs;
     
     const onChange = (e) => {
         const updatedInputs = { ...inputs, [e.target.id]: e.target.value };
@@ -24,7 +25,7 @@ const RegisterModal = ({ setAuth }) => {
         e.preventDefault();
 
         try {
-            const body = {user_name, first_name, last_name, date_of_birth, email_address, password}
+            const body = {user_name, first_name, last_name, date_of_birth, email_address, password, permission_level}
             const response = await fetch("http://localhost:5000/users/register", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},

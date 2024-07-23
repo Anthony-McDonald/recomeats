@@ -8,7 +8,7 @@ const ForumHeader = () => {
     return (
         <div id="forum-header">
             <div className="logo">
-            <img class="reco-logo" id="forum-reco-logo" src="/images/recomeats.png" alt="reco-logo"></img>
+            <img className="reco-logo" id="forum-reco-logo" src="/images/recomeats.png" alt="reco-logo"></img>
             <h5 className='reco-logo-subtext'>forums</h5>
             </div>
                 <ForumHeadUser/>
