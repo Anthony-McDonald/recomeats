@@ -13,11 +13,11 @@ const bcrypt = require("bcrypt");
 // Dash 
 
 router.get("/dashboard", authorisation, asyncHandler(async (req, res) => {
-    const userId = req.user.id;
+    const user_id = req.user.id;
 
     const user = await pool.query(
         "SELECT user_name FROM users WHERE user_id = $1",
-        [userId]
+        [user_id]
     );
 
     res.json(user.rows[0]);
@@ -109,7 +109,8 @@ router.delete("/deleteuser", authorisation, asyncHandler(async (req, res, next) 
 router.delete("/deleteuserasadmin", asyncHandler(async (req, res, next) => {
     const { user_id } = req.body;
     await deleteUserFromDatabase(user_id);
-    res.send();
+    const toSend = "deleted user with id" + user_id
+    res.send(toSend);
 }));
 
 const updateUser = async (user_id, user_name, email_address, password_hash) => {
