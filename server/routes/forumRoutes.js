@@ -71,25 +71,99 @@ router.get("/threadlist", authorisation, asyncHandler(async (req, res) => {
 // Create new comment
 
 router.post("/newcomment", authorisation, asyncHandler(async (req, res) => {
-    const { cuisine_name } = req.body;
+    const { post_id, body } = req.body;
+    const user_id = req.user.id;
 
-    const newCuisine = await pool.query("INSERT INTO CuisinePreferences (preference_name) VALUES ($1) RETURNING *",
-    [cuisine_name]);
+    const newComment = await pool.query("INSERT INTO Comments (user_id, post_id, body) VALUES ($1,$2,$3) RETURNING *",
+    [user_id, post_id, body]);
 
-    res.json(newCuisine);
+
+    const response = {
+        newComment: newComment.rows[0]
+    };
+
+    res.json(response);
 }));
+
+// Delete comment
+
+router.delete("/deletecomment", authorisation, asyncHandler(async (req, res) => {
+    const user_id = req.user.id;
+    const { comment_id } = req.body;
+    const row_to_delete = await pool.query("SELECT user_id FROM Comments WHERE comment_id = $1",[comment_id])
+    
+    const rtd_user_id = row_to_delete.rows[0].user_id
+
+    if (user_id === rtd_user_id) {
+        await pool.query("DELETE FROM Comments WHERE comment_id = $1",[comment_id])
+    }
+    res.send()
+}));
+
+// Get Comments
+
+router.get("/commentlist", authorisation, asyncHandler(async (req, res) => {
+    const { post_id } = req.body;
+    const replies = await pool.query("SELECT * FROM Comments WHERE post_id = $1",[post_id])
+    const response = replies.rows.map(reply => ({
+        user_id: reply.user_id,
+        body: reply.body,
+        upvotes: reply.upvotes,
+        created_at: DateTime.fromJSDate(reply.created_at).toLocaleString(DateTime.DATETIME_SHORT_WITH_SECONDS),
+    }));
+
+    // Send the response
+    res.json(response);
+}));
+
 
 // Create new reply
 
 router.post("/newreply", authorisation, asyncHandler(async (req, res) => {
-    const { cuisine_name } = req.body;
+    const { comment_id, body } = req.body;
+    const user_id = req.user.id;
 
-    const newCuisine = await pool.query("INSERT INTO CuisinePreferences (preference_name) VALUES ($1) RETURNING *",
-    [cuisine_name]);
+    const newReply = await pool.query("INSERT INTO Replies (comment_id, user_id, body) VALUES ($1,$2,$3) RETURNING *",
+    [comment_id, user_id, body]);
 
-    res.json(newCuisine);
+
+    const response = {
+        newReply: newReply.rows[0]
+    };
+
+    res.json(response);
 }));
 
+// Delete reply
+
+router.delete("/deletereply", authorisation, asyncHandler(async (req, res) => {
+    const user_id = req.user.id;
+    const { reply_id } = req.body;
+    const row_to_delete = await pool.query("SELECT user_id FROM Replies WHERE reply_id = $1",[reply_id])
+    
+    const rtd_user_id = row_to_delete.rows[0].user_id
+
+    if (user_id === rtd_user_id) {
+        await pool.query("DELETE FROM Replies WHERE reply_id = $1",[reply_id])
+    }
+    res.send()
+}));
+
+// Get Replies
+
+router.get("/replylist", authorisation, asyncHandler(async (req, res) => {
+    const { comment_id } = req.body;
+    const comments = await pool.query("SELECT * FROM Replies WHERE comment_id = $1",[comment_id])
+    const response = comments.rows.map(comment => ({
+        user_id: comment.user_id,
+        body: comment.body,
+        upvotes: comment.upvotes,
+        created_at: DateTime.fromJSDate(comment.created_at).toLocaleString(DateTime.DATETIME_SHORT_WITH_SECONDS),
+    }));
+
+    // Send the response
+    res.json(response);
+}));
 
 
 // Other user-related routes...
