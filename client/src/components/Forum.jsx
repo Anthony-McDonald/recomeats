@@ -142,6 +142,7 @@ const Forum = ({ setAuth }) => {
                   firstName={user.first_name || 'Anonymous'}
                   lastName={user.last_name || ''}
                   userPic={user.profile_image || 'default-image.jpg'}
+                  postTime={post.created_at}
                   postTitle={post.title}
                   postBody={post.body}
                   postPic={"space"}
