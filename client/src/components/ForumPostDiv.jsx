@@ -16,6 +16,7 @@ const ForumPostDiv = ({firstName, lastName, userPic, postTitle, postBody, postPi
             </div>
             <div className="pd-bot">
                 <div className="pd-bl">
+                    
                 <h4 className='pd-title'>{postTitle}</h4>
                 <div className="post-desc-div">
                 <p id='post-description'>{postBody}</p>

@@ -139,7 +139,7 @@ const Forum = ({ setAuth }) => {
                 key={index}
                 firstName={userInfo[post.user]?.first_name || 'Anonymous'}
                 lastName={userInfo[post.user]?.last_name || ''}
-                userPic={userInfo[post.user]?.profile_image || "defaultImage.png"}
+                userPic={userInfo[post.user].profile_image}
                 postTitle={post.title}
                 postBody={post.body}
                 postPic={"space"}
