@@ -12,7 +12,6 @@ const ForumPostDiv = ({firstName, lastName, userPic, postTitle, postBody, postPi
             <div className="pd-top">
             <img className='usr-img-post' src={userPicSequenced} alt="usr-prof-img" />
             <h5 className='pdtop-user'>{fullName}</h5>
-            <h5 className='upvote-counter'>{upvotes} upvotes</h5>
             </div>
             <div className="pd-bot">
                 <div className="pd-bl">

@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ForumHeader from './ForumHeader';
 import ForumPostDiv from './ForumPostDiv';
 import TrendingRecipeBox from './TrendingRecipeBox';
+import PostModal from './PostModal';
 
 const Forum = ({ setAuth }) => {
   const [posts, setPosts] = useState([]);
@@ -124,7 +125,7 @@ const Forum = ({ setAuth }) => {
           <button type="button" className="btn btn-primary">Sort By</button>
         </div>
         <div className="postbox">
-          <button type="button" className="btn btn-primary">Post</button>
+          <PostModal/>
         </div>
       </div>
       <div id="forum-main">

@@ -68,7 +68,7 @@ const Interactions = ({type, id, getUpvotes, upvotes}) => {
             alt="Upvote"
           />
   {upvotes}</button></div>
-<button className='vote interact-box' >comments</button></div>
+<button className='vote interact-box'>comments</button></div>
 
   );
 };
