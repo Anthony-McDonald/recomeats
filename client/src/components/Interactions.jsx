@@ -1,12 +1,39 @@
 
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../css/header.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import '../css/forum-post-div.css'
+import '../css/interaction.css'
+import { useState } from 'react';
 
-const Interactions = ({type, id, getUpvotes}) => {
+const Interactions = ({type, id, getUpvotes, upvotes}) => {
+  const [isUpvoted, setIsUpvoted] = useState(false);
 
+  useEffect(() => {
+    getUpvoteStatus(id)
+  }, []);
+  
+  const getUpvoteStatus = async (id) => {
+    let parseRes;
+    try {
+      const url = new URL("http://localhost:5000/forum/hasupvoted");
+      url.searchParams.append("type_upvoted", "post");
+      url.searchParams.append("upvoted_id", id);
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          token: localStorage.getItem("token")
+        }
+      });
+
+      parseRes = await response.json();
+      setIsUpvoted(parseRes)
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   async function upvote(type, id) {
   try {
@@ -23,6 +50,7 @@ const Interactions = ({type, id, getUpvotes}) => {
       body: requestBody
     });
     getUpvotes()
+    getUpvoteStatus(id)
 
   } catch (error) {
     console.error("Error upvoting:", error)
@@ -32,10 +60,16 @@ const Interactions = ({type, id, getUpvotes}) => {
 
   return (
 <div className="interactions">
-<div className="vote interact-box">
-<button onClick={() => upvote(type, id)}>vote</button></div>
-<div className="comment interact-box">comments</div>
-</div>
+<div>
+<button className='vote interact-box' onClick={() => upvote(type, id)}>
+<img
+            className='upvote-arrow'
+            src={isUpvoted ? "/images/svgs/up-arrow-filled.svg" : "/images/svgs/up-arrow.svg"}
+            alt="Upvote"
+          />
+  {upvotes}</button></div>
+<button className='vote interact-box' >comments</button></div>
+
   );
 };
 

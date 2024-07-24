@@ -21,7 +21,7 @@ const ForumPostDiv = ({firstName, lastName, userPic, postTitle, postBody, postPi
                 <div className="post-desc-div">
                 <p id='post-description'>{postBody}</p>
                 </div>
-                <Interactions type={"post"} id={post_id} getUpvotes={getUpvotes}/>
+                <Interactions type={"post"} id={post_id} upvotes={upvotes} getUpvotes={getUpvotes}/>
                 </div>
                 <div className="pd-br">
                     <img className='food-primary-img' src={postPicSequenced} alt="img" />

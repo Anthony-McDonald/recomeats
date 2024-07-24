@@ -31,21 +31,6 @@
     overflow: hidden;  
 }
 
-.interact-box {
-    padding: 0.5rem;
-    height: 1.5rem;
-    margin-right: 1rem;
-    margin-bottom: 0.5rem;
-    background-color: #865D36;
-    border-radius: 1rem;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: -1rem;
-    font-size: 0.8rem;
-}
-
 .interactions {
     display: flex;
     justify-content: start;

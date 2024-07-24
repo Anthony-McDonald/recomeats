@@ -62,7 +62,6 @@ const Forum = ({ setAuth }) => {
   };
 
   const getUserInfo = async (id) => {
-    let parseRes;
     try {
       const url = new URL("http://localhost:5000/users/getuser/profile");
       url.searchParams.append("user_id", id);
@@ -75,7 +74,7 @@ const Forum = ({ setAuth }) => {
         }
       });
 
-      parseRes = await response.json();
+      const parseRes = await response.json();
       return parseRes;
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -83,7 +82,6 @@ const Forum = ({ setAuth }) => {
   };
 
   const getUpvoteInfo = async (id) => {
-    let parseRes;
     try {
       const url = new URL("http://localhost:5000/forum/upvotecount");
       url.searchParams.append("type_upvoted", "post");
@@ -97,7 +95,7 @@ const Forum = ({ setAuth }) => {
         }
       });
 
-      parseRes = await response.json();
+      const parseRes = await response.json();
       return parseRes;
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -134,20 +132,24 @@ const Forum = ({ setAuth }) => {
           {isLoading ? (
             <p>Loading...</p>
           ) : (
-            posts.map((post, index) => (
-              <ForumPostDiv
-                key={index}
-                firstName={userInfo[post.user]?.first_name || 'Anonymous'}
-                lastName={userInfo[post.user]?.last_name || ''}
-                userPic={userInfo[post.user].profile_image}
-                postTitle={post.title}
-                postBody={post.body}
-                postPic={"space"}
-                upvotes={upvoteInfo[post.post_id]?.count || 0}
-                post_id={post.post_id}
-                getUpvotes={fetchUpvotes}
-              />
-            ))
+            posts.map((post, index) => {
+              const user = userInfo[post.user] || {};
+              const upvote = upvoteInfo[post.post_id] || {};
+              return (
+                <ForumPostDiv
+                  key={index}
+                  firstName={user.first_name || 'Anonymous'}
+                  lastName={user.last_name || ''}
+                  userPic={user.profile_image || 'default-image.jpg'}
+                  postTitle={post.title}
+                  postBody={post.body}
+                  postPic={"space"}
+                  upvotes={upvote.count || 0}
+                  post_id={post.post_id}
+                  getUpvotes={fetchUpvotes}
+                />
+              );
+            })
           )}
         </div>
         <div id="trending-recipes">

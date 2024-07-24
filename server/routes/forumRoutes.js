@@ -45,6 +45,7 @@ router.delete("/deletethread", authorisation, asyncHandler(async (req, res) => {
     const rtd_user_id = row_to_delete.rows[0].user_id
 
     if (user_id === rtd_user_id) {
+        await pool.query("DELETE FROM Upvotes WHERE item_id = $1 AND item_type = 'post'",[post_id])
         await pool.query("DELETE FROM Posts WHERE post_id = $1",[post_id])
         await pool.query("DELETE FROM Images WHERE image_id = $1",[rtd_image_id])
     }
@@ -203,7 +204,7 @@ const response = {
 res.json(response);
 }));
 
-
+// Number of upvotes
 
 router.get("/upvotecount", authorisation, asyncHandler(async (req, res) => {
     const {type_upvoted, upvoted_id} = req.query
@@ -213,5 +214,19 @@ router.get("/upvotecount", authorisation, asyncHandler(async (req, res) => {
     res.json(totalUpvotes.rows[0])
 })); 
 
+// Has upvoted
+
+router.get("/hasupvoted", authorisation, asyncHandler(async (req, res) => {
+    user_id = req.user.id
+    const {type_upvoted, upvoted_id} = req.query
+    
+    const upvoteRows = await pool.query("SELECT * FROM Upvotes WHERE item_id = $1 AND item_type = $2 AND user_id = $3",[upvoted_id, type_upvoted, user_id])
+
+    if (upvoteRows.rowCount > 0) {
+        res.json(true)
+    } else {
+        res.json(false)
+    }
+})); 
 
 module.exports = router;
