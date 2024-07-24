@@ -85,11 +85,11 @@ CREATE TABLE Comments (
 
 CREATE TABLE Replies (
     reply_id SERIAL PRIMARY KEY,
-    comment_id INT NOT NULL,
+    parent_id INT NOT NULL,
+    parent_type VARCHAR(10) NOT NULL CHECK (parent_type IN ('comment', 'reply')),
     user_id INT NOT NULL,
     body VARCHAR(250) NOT NULL,
     upvotes INT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (comment_id) REFERENCES Comments(comment_id),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );

@@ -104,12 +104,12 @@ router.delete("/deletecomment", authorisation, asyncHandler(async (req, res) => 
 
 router.get("/commentlist", authorisation, asyncHandler(async (req, res) => {
     const { post_id } = req.body;
-    const replies = await pool.query("SELECT * FROM Comments WHERE post_id = $1",[post_id])
-    const response = replies.rows.map(reply => ({
-        user_id: reply.user_id,
-        body: reply.body,
-        upvotes: reply.upvotes,
-        created_at: DateTime.fromJSDate(reply.created_at).toLocaleString(DateTime.DATETIME_SHORT_WITH_SECONDS),
+    const comments = await pool.query("SELECT * FROM Comments WHERE post_id = $1",[post_id])
+    const response = comments.rows.map(comment => ({
+        user_id: comment.user_id,
+        body: comment.body,
+        upvotes: comment.upvotes,
+        created_at: DateTime.fromJSDate(comment.created_at).toLocaleString(DateTime.DATETIME_SHORT_WITH_SECONDS),
     }));
 
     // Send the response
@@ -120,18 +120,23 @@ router.get("/commentlist", authorisation, asyncHandler(async (req, res) => {
 // Create new reply
 
 router.post("/newreply", authorisation, asyncHandler(async (req, res) => {
-    const { comment_id, body } = req.body;
+    const { parent_id, parent_type, body } = req.body;
     const user_id = req.user.id;
 
-    const newReply = await pool.query("INSERT INTO Replies (comment_id, user_id, body) VALUES ($1,$2,$3) RETURNING *",
-    [comment_id, user_id, body]);
+    if (parent_type === "comment" || parent_type === "reply") {
+        const newReply = await pool.query("INSERT INTO Replies (parent_id, parent_type, user_id, body) VALUES ($1,$2,$3,$4) RETURNING *",
+            [parent_id, parent_type, user_id, body]);
+        
+            const response = {
+                newReply: newReply.rows[0]
+            };
+        
+            res.json(response);
+    } else {
+        res.json("incorrect parent type")
+    }
 
 
-    const response = {
-        newReply: newReply.rows[0]
-    };
-
-    res.json(response);
 }));
 
 // Delete reply
@@ -152,13 +157,13 @@ router.delete("/deletereply", authorisation, asyncHandler(async (req, res) => {
 // Get Replies
 
 router.get("/replylist", authorisation, asyncHandler(async (req, res) => {
-    const { comment_id } = req.body;
-    const comments = await pool.query("SELECT * FROM Replies WHERE comment_id = $1",[comment_id])
-    const response = comments.rows.map(comment => ({
-        user_id: comment.user_id,
-        body: comment.body,
-        upvotes: comment.upvotes,
-        created_at: DateTime.fromJSDate(comment.created_at).toLocaleString(DateTime.DATETIME_SHORT_WITH_SECONDS),
+    const { parent_id } = req.body;
+    const replies = await pool.query("SELECT * FROM Replies WHERE parent_id = $1",[parent_id])
+    const response = replies.rows.map(reply => ({
+        user_id: reply.user_id,
+        body: reply.body,
+        upvotes: reply.upvotes,
+        created_at: DateTime.fromJSDate(reply.created_at).toLocaleString(DateTime.DATETIME_SHORT_WITH_SECONDS),
     }));
 
     // Send the response
