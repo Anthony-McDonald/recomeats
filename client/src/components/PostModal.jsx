@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '../css/edit-info-modal.css';
 
-const PostModal = () => {
+const PostModal = ({ getPosts }) => {
     const [inputs, setInputs] = useState({
         title: "",
         body: "",
@@ -11,6 +11,8 @@ const PostModal = () => {
         image: null,
     });
     const [recipes, setRecipes] = useState([]);
+    const [error, setError] = useState(""); // State to manage error message
+    const fileInputRef = useRef(null);
 
     useEffect(() => {
         getRecipes();
@@ -38,16 +40,52 @@ const PostModal = () => {
 
             const parseRes = await response.json();
             setRecipes(parseRes);
-            console.log(parseRes)
         } catch (error) {
             console.error("Error fetching data:", error);
         }
     }
 
+    async function createPost(title, body, recipe_id, image_store) {
+        try {
+            const requestBody = JSON.stringify({
+                title: title,
+                body: body,
+                recipe_id: recipe_id,
+                image_store: image_store
+            });
+            await fetch("http://localhost:5000/forum/newthread", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "token": localStorage.getItem("token")
+                },
+                body: requestBody
+            });
+            getPosts();
+        } catch (error) {
+            console.error("Error creating post:", error);
+        }
+    }
+
+    function resetForm() {
+        const resetInputs = {
+            title: "",
+            body: "",
+            recipe_selected: "",
+            image: null,
+        };
+        setInputs(resetInputs);
+        setError(""); // Reset error message
+    }
+
     const onSubmitForm = async (e) => {
         e.preventDefault();
-        // ex for now
-        console.log('Submitted Data:', { title, body, recipe_selected, image });
+        if (!title.trim()) {
+            setError("Title is required.");
+            return;
+        }
+        createPost(title, body, recipe_selected, image);
+        resetForm();
     };
 
     return (
@@ -68,6 +106,7 @@ const PostModal = () => {
                                 <div className="mb-3">
                                     <label htmlFor="title" className="form-label">Title</label>
                                     <input value={title} onChange={onChange} type="text" className="form-control" id="title" aria-describedby="titleHelp" />
+                                    {error && <div className="text-danger">{error}</div>}
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="body" className="form-label">Body</label>
@@ -78,7 +117,7 @@ const PostModal = () => {
                                     <select value={recipe_selected} onChange={onChange} id="recipe_selected" className="form-select">
                                         <option value="">Choose a recipe</option>
                                         {recipes.map(recipe => (
-                                            <option key={recipe.id} value={recipe.id}>
+                                            <option key={recipe.recipe_id} value={recipe.recipe_id}>
                                                 {recipe.recipe_name}
                                             </option>
                                         ))}
@@ -86,7 +125,7 @@ const PostModal = () => {
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="image" className="form-label">Upload Image</label>
-                                    <input type="file" className="form-control" id="image" accept="image/*" onChange={onImageChange} />
+                                    <input type="file" className="form-control" id="image" accept="image/*" onChange={onImageChange} ref={fileInputRef} />
                                 </div>
                                 <div className="submit-register">
                                     <button data-bs-dismiss="modal" type="submit" className="header-button btn btn-primary">Submit</button>

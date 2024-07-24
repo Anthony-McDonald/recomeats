@@ -125,7 +125,7 @@ const Forum = ({ setAuth }) => {
           <button type="button" className="btn btn-primary">Sort By</button>
         </div>
         <div className="postbox">
-          <PostModal/>
+          <PostModal getPosts={getPosts}/>
         </div>
       </div>
       <div id="forum-main">
