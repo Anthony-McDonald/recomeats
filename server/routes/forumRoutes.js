@@ -106,7 +106,7 @@ router.delete("/deletecomment", authorisation, asyncHandler(async (req, res) => 
 // Get Comments
 
 router.get("/commentlist", authorisation, asyncHandler(async (req, res) => {
-    const { post_id } = req.body;
+    const { post_id } = req.query;
     const comments = await pool.query("SELECT * FROM Comments WHERE post_id = $1",[post_id])
     const response = comments.rows.map(comment => ({
         user_id: comment.user_id,
@@ -163,7 +163,7 @@ router.delete("/deletereply", authorisation, asyncHandler(async (req, res) => {
 // Get Replies
 
 router.get("/replylist", authorisation, asyncHandler(async (req, res) => {
-    const { comment_id } = req.body; // Assuming comment_id is passed as a query parameter
+    const { comment_id } = req.query; 
 
     const { rows: replies } = await pool.query("SELECT * FROM Replies");
 
@@ -205,7 +205,7 @@ res.json(response);
 
 
 router.get("/upvotecount", authorisation, asyncHandler(async (req, res) => {
-    const {type_upvoted, upvoted_id} = req.body
+    const {type_upvoted, upvoted_id} = req.query
     
     const totalUpvotes = await pool.query("SELECT COUNT(*) FROM Upvotes WHERE item_id = $1 AND item_type = $2",[upvoted_id, type_upvoted])
 
