@@ -5,7 +5,7 @@ import Interactions from './Interactions'
 
 const ForumPostDiv = ({firstName, lastName, userPic, postTime, postTitle, postBody, postPic, upvotes, post_id, getUpvotes}) => {
     const userPicSequenced = "/images/profile-images/" + userPic + ".png"
-    const postPicSequenced = "http://localhost:5000/uploads/" + postPic + ".png"
+    const postPicSequenced = "http://localhost:5000/uploads/" + postPic
     const fullName = firstName + " " + lastName;
     return (
         <div className='post-div'>

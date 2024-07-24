@@ -229,4 +229,20 @@ router.get("/hasupvoted", authorisation, asyncHandler(async (req, res) => {
     }
 })); 
 
+// get image
+
+router.get("/getimage", authorisation, asyncHandler(async (req, res) => {
+    const { image_id } = req.query;
+    const posts = await pool.query("SELECT * FROM Images WHERE image_id = $1",[image_id]);
+    const response = {
+        imageUrl: posts.rows[0].image_store
+    };
+
+    // Send the response
+    
+    res.json(response);
+}));
+
+module.exports = router;
+
 module.exports = router;

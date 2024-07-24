@@ -10,6 +10,7 @@ const Forum = ({ setAuth }) => {
   const [posts, setPosts] = useState([]);
   const [userInfo, setUserInfo] = useState({});
   const [upvoteInfo, setUpvoteInfo] = useState({});
+  const [imageInfo, setImageInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -24,6 +25,7 @@ const Forum = ({ setAuth }) => {
     if (posts.length > 0) {
       fetchUserInfo();
       fetchUpvotes();
+      fetchImageInfo(); 
     }
   }, [posts]);
 
@@ -45,6 +47,18 @@ const Forum = ({ setAuth }) => {
     });
     await Promise.all(upvotePromises);
     setUpvoteInfo(newUpvoteInfo);
+  };
+
+  const fetchImageInfo = async () => {
+    const newImageInfo = {};
+    const imagePromises = posts
+      .filter(post => post.image_id) 
+      .map(async post => {
+        const imageUrl = await getImageName(post.image_id);
+        newImageInfo[post.image_id] = imageUrl;
+      });
+    await Promise.all(imagePromises);
+    setImageInfo(newImageInfo);
     setIsLoading(false);
   };
 
@@ -117,6 +131,29 @@ const Forum = ({ setAuth }) => {
     }
   };
 
+  const getImageName = async (id) => {
+    if (id === null) {
+      return;
+    }
+    try {
+      const url = new URL("http://localhost:5000/forum/getimage");
+      url.searchParams.append("image_id", id);
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          token: localStorage.getItem("token")
+        }
+      });
+
+      const parseRes = await response.json();
+      return parseRes.imageUrl;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   return (
     <div id='forum-div'>
       <ForumHeader/>
@@ -136,6 +173,8 @@ const Forum = ({ setAuth }) => {
             posts.map((post, index) => {
               const user = userInfo[post.user] || {};
               const upvote = upvoteInfo[post.post_id] || {};
+              const postImage = post.image_id ? imageInfo[post.image_id] || 'default-image.jpg' : 'default-image.jpg';
+
               return (
                 <ForumPostDiv
                   key={index}
@@ -145,7 +184,7 @@ const Forum = ({ setAuth }) => {
                   postTime={post.created_at}
                   postTitle={post.title}
                   postBody={post.body}
-                  postPic={"space"}
+                  postPic={postImage}
                   upvotes={upvote.count || 0}
                   post_id={post.post_id}
                   getUpvotes={fetchUpvotes}

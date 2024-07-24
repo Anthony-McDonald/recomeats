@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '../css/edit-info-modal.css';
@@ -12,7 +12,6 @@ const PostModal = ({ getPosts }) => {
     });
     const [recipes, setRecipes] = useState([]);
     const [error, setError] = useState(""); // State to manage error message
-    const fileInputRef = useRef(null);
 
     useEffect(() => {
         getRecipes();
@@ -67,6 +66,27 @@ const PostModal = ({ getPosts }) => {
         }
     }
 
+    async function imageUpload(file) {
+        try {
+            const formData = new FormData();
+            console.log(file)
+            formData.append('image', file);
+            const uploadedImage = await fetch("http://localhost:5000/uploads", {
+                method: "POST",
+                headers: {
+                    "token": localStorage.getItem("token")
+                },
+                body: formData
+            });
+            const response = await uploadedImage.json()
+
+            return response
+
+        } catch (error) {
+            console.error("Error creating post:", error);
+        }
+    }
+
     function resetForm() {
         const resetInputs = {
             title: "",
@@ -84,7 +104,8 @@ const PostModal = ({ getPosts }) => {
             setError("Title is required.");
             return;
         }
-        createPost(title, body, recipe_selected, image);
+        const imageName = await imageUpload(image)
+        createPost(title, body, recipe_selected, imageName.imageUrl);
         resetForm();
     };
 
@@ -125,7 +146,7 @@ const PostModal = ({ getPosts }) => {
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="image" className="form-label">Upload Image</label>
-                                    <input type="file" className="form-control" id="image" accept="image/*" onChange={onImageChange} ref={fileInputRef} />
+                                    <input type="file" className="form-control" id="image" accept="image/*" onChange={onImageChange}  />
                                 </div>
                                 <div className="submit-register">
                                     <button data-bs-dismiss="modal" type="submit" className="header-button btn btn-primary">Submit</button>

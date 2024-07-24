@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const authorisation = require("../middleware/authorise");
 
 const router = express.Router();
 
@@ -19,7 +20,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Upload img
-router.post('/', upload.single('image'), (req, res) => {
+router.post('/', authorisation, upload.single('image'), (req, res) => {
     const image = req.file;
 
     if (!image) {
@@ -28,7 +29,7 @@ router.post('/', upload.single('image'), (req, res) => {
 
     res.json({
         message: 'File uploaded successfully',
-        imageUrl: `/uploads/${image.filename}`
+        imageUrl: `${image.filename}`
     });
 });
 
