@@ -157,18 +157,26 @@ router.delete("/deletereply", authorisation, asyncHandler(async (req, res) => {
 // Get Replies
 
 router.get("/replylist", authorisation, asyncHandler(async (req, res) => {
-    const { parent_id } = req.body;
-    const replies = await pool.query("SELECT * FROM Replies WHERE parent_id = $1",[parent_id])
-    const response = replies.rows.map(reply => ({
-        user_id: reply.user_id,
-        body: reply.body,
-        upvotes: reply.upvotes,
-        created_at: DateTime.fromJSDate(reply.created_at).toLocaleString(DateTime.DATETIME_SHORT_WITH_SECONDS),
-    }));
+    const { comment_id } = req.body; // Assuming comment_id is passed as a query parameter
 
-    // Send the response
-    res.json(response);
+    const { rows: replies } = await pool.query("SELECT * FROM Replies");
+
+    const nestedReplies = (replies, parentId) => {
+        return replies
+            .filter(reply => reply.parent_id === parentId)
+            .map(reply => ({
+                ...reply,
+                replies: nestedReplies(replies, reply.reply_id),
+            }));
+    };
+
+    const nestedRepliesOut = nestedReplies(replies, parseInt(comment_id, 10));
+
+    res.json(nestedRepliesOut);
+    // res.json(replies)
 }));
+
+
 
 
 // Other user-related routes...
