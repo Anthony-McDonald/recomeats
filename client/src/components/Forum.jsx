@@ -99,7 +99,8 @@ const Forum = ({ setAuth }) => {
             posts.map((post, index) => (
               <ForumPostDiv 
                 key={index} 
-                userName={post.title} 
+                firstName={userInfo[post.user].first_name}
+                lastName={userInfo[post.user].last_name} 
                 userPic={userInfo[post.user]?.profile_image || "defaultImage.png"} 
                 postTitle={post.title} 
                 postBody={post.body} 
