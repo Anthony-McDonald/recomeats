@@ -67,6 +67,10 @@
     justify-content:start
 }
 
+.upvote-counter {
+    margin-left: 1rem;
+}
+
 .pdtop-user {
     font-size: 1rem;
 }

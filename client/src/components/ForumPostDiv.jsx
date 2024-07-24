@@ -3,24 +3,27 @@ import '../css/forum-post-div.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import Interactions from './Interactions'
 
-const ForumPostDiv = () => {
-
+const ForumPostDiv = ({firstName, lastName, userPic, postTitle, postBody, postPic, upvotes}) => {
+    const userPicSequenced = "/images/profile-images/" + userPic + ".png"
+    const postPicSequenced = "http://localhost:5000/uploads/" + postPic + ".png"
+    const fullName = firstName + " " + lastName;
     return (
         <div className='post-div'>
             <div className="pd-top">
-            <img className='usr-img-post' src="/images/1.jpg" alt="usr-prof-img" />
-            <h5 className='pdtop-user'>pdtoptext</h5>
+            <img className='usr-img-post' src={userPicSequenced} alt="usr-prof-img" />
+            <h5 className='pdtop-user'>{fullName}</h5>
+            <h5 className='upvote-counter'>{upvotes} upvotes</h5>
             </div>
             <div className="pd-bot">
                 <div className="pd-bl">
-                <h4 className='pd-title'>Succulent Tomato Carbonara</h4>
+                <h4 className='pd-title'>{postTitle}</h4>
                 <div className="post-desc-div">
-                <p id='post-description'>Wow this food is so lovely rro woooooooooooooooooooo i 32uhe2ueh 3eh2ieu32eh32 3iuhuihe32u  32e23eu32e2h3ei32u e32heiu23he32iuh e32he3iu2eh23ih</p>
+                <p id='post-description'>{postBody}</p>
                 </div>
                 <Interactions/>
                 </div>
                 <div className="pd-br">
-                    <img className='food-primary-img' src="/images/1.jpg" alt="img" />
+                    <img className='food-primary-img' src={postPicSequenced} alt="img" />
                 </div>
             </div>
         </div>

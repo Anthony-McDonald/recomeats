@@ -57,6 +57,8 @@ router.delete("/deletethread", authorisation, asyncHandler(async (req, res) => {
 router.get("/threadlist", authorisation, asyncHandler(async (req, res) => {
     const posts = await pool.query("SELECT * FROM posts")
     const response = posts.rows.map(post => ({
+        post_id: post.post_id,
+        user: post.user_id,
         title: post.title,
         body: post.body,
         image_id: post.image_id,

@@ -25,11 +25,10 @@ const Thread = ({setAuth}) => {
             <RecipeThreadDiv/>
             <div id="interaction-div">
             <Interactions id="thread-interaction"/>
-            <button type="button" class="btn btn-primary">Comment</button>
+            <button type="button" className="btn btn-primary">Comment</button>
             <Comment/>
             <Comment/>
             <Comment/>
-
             </div>
             </div>
             <div id="thr-r">
@@ -53,7 +52,6 @@ const Thread = ({setAuth}) => {
     });
 
     const parseRes = await response.json();
-    console.log(parseRes);
 
     parseRes === true ? setAuth(true) : setAuth(false)
 

@@ -171,7 +171,13 @@ router.put("/edituserprofile", authorisation, asyncHandler(async (req, res, next
 // Get User Information
 
 router.get("/getuser/profile", authorisation, asyncHandler(async(req, res, next) => {
-    const user_id = req.user.id;
+    let user_id;
+
+    if (!req.query.user_id) {
+        user_id = req.user.id;
+    } else {
+        user_id = req.query.user_id;
+    }
     const result = await pool.query("SELECT first_name, last_name, date_of_birth, profile_image FROM userprofiles WHERE user_id = $1", [user_id]);
     const userProfile = result.rows[0];
 
