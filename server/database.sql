@@ -65,7 +65,6 @@ CREATE TABLE Posts (
     title VARCHAR(50) NOT NULL,
     body VARCHAR(500),
     image_id INT,
-    upvotes INT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id),
     FOREIGN KEY (image_id) REFERENCES Images(image_id),
@@ -91,5 +90,13 @@ CREATE TABLE Replies (
     body VARCHAR(250) NOT NULL,
     upvotes INT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+
+CREATE TABLE Upvotes (
+    user_id INT NOT NULL,
+    item_id INT NOT NULL,
+    item_type VARCHAR(10) NOT NULL CHECK (item_type IN ('post', 'comment', 'reply')),
+    PRIMARY KEY (user_id, item_id, item_type),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );

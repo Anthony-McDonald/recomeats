@@ -95,7 +95,10 @@ router.delete("/deletecomment", authorisation, asyncHandler(async (req, res) => 
     const rtd_user_id = row_to_delete.rows[0].user_id
 
     if (user_id === rtd_user_id) {
+        await pool.query("DELETE FROM Upvotes WHERE item_type = 'comment' AND item_id = $1", [comment_id])
         await pool.query("DELETE FROM Comments WHERE comment_id = $1",[comment_id])
+    } else {
+        res.send("incorrect user to delete this reply")
     }
     res.send()
 }));
@@ -149,7 +152,10 @@ router.delete("/deletereply", authorisation, asyncHandler(async (req, res) => {
     const rtd_user_id = row_to_delete.rows[0].user_id
 
     if (user_id === rtd_user_id) {
+        await pool.query("DELETE FROM Upvotes WHERE item_type = 'reply' AND item_id = $1", [reply_id])
         await pool.query("DELETE FROM Replies WHERE reply_id = $1",[reply_id])
+    } else {
+        res.send("incorrect user to delete this reply")
     }
     res.send()
 }));
@@ -173,12 +179,38 @@ router.get("/replylist", authorisation, asyncHandler(async (req, res) => {
     const nestedRepliesOut = nestedReplies(replies, parseInt(comment_id, 10));
 
     res.json(nestedRepliesOut);
-    // res.json(replies)
+}));
+
+// upvote
+
+router.put("/upvote", authorisation, asyncHandler(async (req, res) => {
+const user_id = req.user.id;
+const {type_upvoted, upvoted_id} = req.body
+let deleteUpvote, giveUpvote
+
+const userUpvote = await pool.query("SELECT * FROM Upvotes WHERE user_id = $1 AND item_id = $2 AND item_type = $3",[user_id, upvoted_id, type_upvoted])
+
+if (userUpvote.rowCount > 0) {
+     deleteUpvote = await pool.query("DELETE FROM Upvotes WHERE user_id = $1 AND item_id = $2 AND item_type = $3",[user_id, upvoted_id, type_upvoted])
+} else {
+   giveUpvote = await pool.query("INSERT INTO Upvotes (user_id, item_id, item_type) VALUES ($1, $2, $3)",[user_id, upvoted_id, type_upvoted])
+}
+const response = {
+    upvoteDeleted: deleteUpvote,
+    upvoteGiven: giveUpvote,
+};
+res.json(response);
 }));
 
 
 
+router.get("/upvotecount", authorisation, asyncHandler(async (req, res) => {
+    const {type_upvoted, upvoted_id} = req.body
+    
+    const totalUpvotes = await pool.query("SELECT COUNT(*) FROM Upvotes WHERE item_id = $1 AND item_type = $2",[upvoted_id, type_upvoted])
 
-// Other user-related routes...
+    res.json(totalUpvotes.rows[0])
+})); 
+
 
 module.exports = router;
