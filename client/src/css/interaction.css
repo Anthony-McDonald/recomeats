@@ -17,8 +17,8 @@
     align-items: center;
     margin-top: -1rem;
     font-size: 0.8rem;
-    border: 2px solid transparent; /* Default border */
-    transition: border 0.2s ease; /* Smooth transition */
+    border: 2px solid transparent; 
+    transition: border 0.2s ease; 
 }
 
 .interact-box:hover {
@@ -26,16 +26,12 @@
 }
 
 .interact-box:focus {
-    outline: none; /* Remove default focus outline */
+    outline: none; 
 }
 
 .interact-box:active {
-    border: 2px solid #ff6347; /* Border color when clicked */
-    background-color: #7a4b2b; /* Optionally change background color when clicked */
-}
-
-.voted {
-    filter: invert(100%) sepia(66%) saturate(175%) hue-rotate(267deg) brightness(108%) contrast(101%);
+    border: 2px solid #865d36; 
+    background-color: #7a4b2b; 
 }
 
 .upvote-arrow {
