@@ -3,7 +3,7 @@ import '../css/forum-post-div.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import Interactions from './Interactions'
 
-const ForumPostDiv = ({firstName, lastName, userPic, postTitle, postBody, postPic, upvotes}) => {
+const ForumPostDiv = ({firstName, lastName, userPic, postTitle, postBody, postPic, upvotes, post_id}) => {
     const userPicSequenced = "/images/profile-images/" + userPic + ".png"
     const postPicSequenced = "http://localhost:5000/uploads/" + postPic + ".png"
     const fullName = firstName + " " + lastName;
@@ -20,7 +20,7 @@ const ForumPostDiv = ({firstName, lastName, userPic, postTitle, postBody, postPi
                 <div className="post-desc-div">
                 <p id='post-description'>{postBody}</p>
                 </div>
-                <Interactions/>
+                <Interactions type={"post"} id={post_id}/>
                 </div>
                 <div className="pd-br">
                     <img className='food-primary-img' src={postPicSequenced} alt="img" />

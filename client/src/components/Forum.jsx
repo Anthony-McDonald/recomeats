@@ -8,6 +8,7 @@ import TrendingRecipeBox from './TrendingRecipeBox';
 const Forum = ({ setAuth }) => {
   const [posts, setPosts] = useState([]);
   const [userInfo, setUserInfo] = useState({});
+  const [upvoteInfo, setUpvoteInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true); // Add isLoading state
 
   useEffect(() => {
@@ -27,11 +28,15 @@ const Forum = ({ setAuth }) => {
 
   async function fetchUserInfo() {
     const newUserInfo = {};
+    const newUpvoteInfo = {};
     for (const post of posts) {
       const info = await getUserInfo(post.user);
       newUserInfo[post.user] = info;
+      const upvote = await getUpvoteInfo(post.post_id)
+      newUpvoteInfo[post.post_id] = upvote
     }
     setUserInfo(newUserInfo);
+    setUpvoteInfo(newUpvoteInfo)
     setIsLoading(false); // Set isLoading to false when data is fetched
   }
 
@@ -56,6 +61,23 @@ const Forum = ({ setAuth }) => {
         method: "GET",
         headers: { token: localStorage.getItem("token"),
         params: {user_id: id},
+         }
+      });
+
+      parseRes = await response.json();
+      return parseRes
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+
+  async function getUpvoteInfo(id) {
+    let parseRes
+    try {
+      const response = await fetch("http://localhost:5000/forum/upvotecount", {
+        method: "GET",
+        headers: { token: localStorage.getItem("token"),
+        params: {type_upvoted: "post", upvoted_id: id},
          }
       });
 
@@ -105,7 +127,8 @@ const Forum = ({ setAuth }) => {
                 postTitle={post.title} 
                 postBody={post.body} 
                 postPic={"space"} 
-                upvotes={"572"}
+                upvotes={upvoteInfo[post.post_id].count}
+                post_id={post.post_id}
               />
             ))
           )}
