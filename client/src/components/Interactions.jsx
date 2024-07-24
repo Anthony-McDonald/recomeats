@@ -5,27 +5,29 @@ import '../css/header.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import '../css/forum-post-div.css'
 
-const Interactions = ({type, id}) => {
+const Interactions = ({type, id, getUpvotes}) => {
+
 
   async function upvote(type, id) {
-    try {
-      const requestBody = JSON.stringify({
-        type_upvoted: type,
-        upvoted_id: id,
-      })
-      await fetch("http://localhost:5000/forum/upvote", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "token": localStorage.getItem("token")
-        },
-        body: requestBody
-      });
-  
-    } catch (error) {
-      console.error("Error upvoting:", error)
-    }
+  try {
+    const requestBody = JSON.stringify({
+      type_upvoted: type,
+      upvoted_id: id,
+    })
+    await fetch("http://localhost:5000/forum/upvote", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "token": localStorage.getItem("token")
+      },
+      body: requestBody
+    });
+    getUpvotes()
+
+  } catch (error) {
+    console.error("Error upvoting:", error)
   }
+}
 
 
   return (

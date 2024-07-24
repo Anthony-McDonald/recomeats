@@ -189,8 +189,6 @@ router.put("/upvote", authorisation, asyncHandler(async (req, res) => {
 const user_id = req.user.id;
 const {type_upvoted, upvoted_id} = req.body
 let deleteUpvote, giveUpvote
-console.log(req.body)
-
 const userUpvote = await pool.query("SELECT * FROM Upvotes WHERE user_id = $1 AND item_id = $2 AND item_type = $3",[user_id, upvoted_id, type_upvoted])
 
 if (userUpvote.rowCount > 0) {
