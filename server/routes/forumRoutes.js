@@ -71,6 +71,24 @@ router.get("/threadlist", authorisation, asyncHandler(async (req, res) => {
     res.json(response);
 }));
 
+router.get("/thread/:thread_id", authorisation, asyncHandler(async (req, res) => {
+    const thread_id = parseInt(req.params.thread_id);
+    
+    const thread = await pool.query("SELECT * FROM Posts WHERE post_id = $1", [thread_id]);
+
+    let response = thread.rows[0]
+    response = {
+        user_id: response.user_id,
+        recipe_id: response.recipe_id,
+        title: response.title,
+        body: response.body,
+        image: response.image_id,
+        created_at: response.created_at
+    }
+
+    res.json(response);
+}))
+
 // Create new comment
 
 router.post("/newcomment", authorisation, asyncHandler(async (req, res) => {
