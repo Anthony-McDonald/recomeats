@@ -10,10 +10,29 @@ import SimilarRecipe from './SimilarRecipe';
 
 const Thread = ({setAuth, getUserInfo, getImageName}) => {
 
+  const [ingredients, setIngredients] = useState(null);
+
   const { id } = useParams();
     useEffect(() => {
         verifyAuthentication();
       }, []);
+
+
+      async function getIngredients(recipe_id) {
+        try {
+          const response = await fetch("http://localhost:5000/recipes/getingredients/" + recipe_id, {
+            method: "GET",
+            headers: { token: localStorage.getItem("token") }
+          });
+    
+          const parseRes = await response.json();
+    
+    
+          setIngredients(parseRes);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
 
   return (
     <div id='thread-div'>   
@@ -22,7 +41,7 @@ const Thread = ({setAuth, getUserInfo, getImageName}) => {
         <div id="left-sidebar-div">
                 </div>
             <div id="thr-l">
-            <RecipeThreadDiv post_id={id} getUserInfo={getUserInfo} getImageName={getImageName}/>
+            <RecipeThreadDiv post_id={id} getUserInfo={getUserInfo} getImageName={getImageName} getIngredients={getIngredients} ingredients={ingredients}/>
             <div id="interaction-div">
             <Interactions id="thread-interaction" post_id={id}/>
             <button type="button" className="btn btn-primary">Comment</button>
@@ -34,7 +53,7 @@ const Thread = ({setAuth, getUserInfo, getImageName}) => {
         <h4 className="related-title">
             Similar Recipes
         </h4>
-        <SimilarRecipe/>
+        <SimilarRecipe ingredients={ingredients}/>
     </div>
             </div>
         </div>

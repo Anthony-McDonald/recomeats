@@ -2,9 +2,8 @@ import React from 'react';
 import '../css/header.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import '../css/similar-recipe.css'
-import Interactions from './Interactions';
 
-const SimilarRecipe = () => {
+const SimilarRecipe = ({ingredients}) => {
 
   return (
     <div id="similar-recipe-div">
@@ -17,6 +16,7 @@ const SimilarRecipe = () => {
             <div id='ingredient' className="ingred-div">tomato</div>
             <div id='ingredient' className="ingred-div">tomato</div>
             <div id='ingredient' className="ingred-div">tomato</div>
+            {ingredients[0]}
         </div>
     </div>
   );
