@@ -13,10 +13,9 @@ const SimilarRecipe = ({ingredients}) => {
         Shared Ingredients:
       </div>
       <div id="ingredients">
-            <div id='ingredient' className="ingred-div">tomato</div>
-            <div id='ingredient' className="ingred-div">tomato</div>
-            <div id='ingredient' className="ingred-div">tomato</div>
-            {ingredients[0]}
+            <div id='ingredient' className="ingred-div">{ingredients[0]}</div>
+            <div id='ingredient' className="ingred-div">{ingredients[1]}</div>
+            <div id='ingredient' className="ingred-div">{ingredients[2]}</div>
         </div>
     </div>
   );

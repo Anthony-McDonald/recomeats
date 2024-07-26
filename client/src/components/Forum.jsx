@@ -6,7 +6,7 @@ import ForumPostDiv from './ForumPostDiv';
 import TrendingRecipeBox from './TrendingRecipeBox';
 import PostModal from './PostModal';
 
-const Forum = ({ setAuth, getUserInfo, getImageName}) => {
+const Forum = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo}) => {
   const [posts, setPosts] = useState([]);
   const [userInfo, setUserInfo] = useState({});
   const [upvoteInfo, setUpvoteInfo] = useState({});
@@ -76,27 +76,6 @@ const Forum = ({ setAuth, getUserInfo, getImageName}) => {
     }
   };
 
-
-  const getUpvoteInfo = async (id) => {
-    try {
-      const url = new URL("http://localhost:5000/forum/upvotecount");
-      url.searchParams.append("type_upvoted", "post");
-      url.searchParams.append("upvoted_id", id);
-
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          'Content-Type': 'application/json',
-          token: localStorage.getItem("token")
-        }
-      });
-
-      const parseRes = await response.json();
-      return parseRes;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
 
   const verifyAuthentication = async () => {
     try {

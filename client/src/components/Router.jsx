@@ -115,6 +115,28 @@ const Router = () => {
     }
   };
 
+  const getUpvoteInfo = async (id) => {
+    try {
+      const url = new URL("http://localhost:5000/forum/upvotecount");
+      url.searchParams.append("type_upvoted", "post");
+      url.searchParams.append("upvoted_id", id);
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          token: localStorage.getItem("token")
+        }
+      });
+
+      const parseRes = await response.json();
+      return parseRes;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+
   const authenticateSwitch = (input) => {
     setIsAuthenticated(input);
   };
@@ -132,12 +154,12 @@ const Router = () => {
     },
     {
       path:"/forum",
-      element: isAuthenticated ? <Forum setAuth={authenticateSwitch} getUserInfo={getUserInfo} getImageName={getImageName}/> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
+      element: isAuthenticated ? <Forum setAuth={authenticateSwitch} getUserInfo={getUserInfo} getImageName={getImageName} getUpvoteInfo={getUpvoteInfo}/> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
       errorElement: <ErrorPage />,
     },
     {
       path:"/forum/thread/:id",
-      element: isAuthenticated ? <Thread setAuth={authenticateSwitch} getUserInfo={getUserInfo} getImageName={getImageName} /> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
+      element: isAuthenticated ? <Thread setAuth={authenticateSwitch} getUserInfo={getUserInfo} getImageName={getImageName} getUpvoteInfo={getUpvoteInfo} /> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
       errorElement: <ErrorPage />,
     },
   ]);

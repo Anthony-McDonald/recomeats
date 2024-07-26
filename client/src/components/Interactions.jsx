@@ -9,6 +9,8 @@ import { useState } from 'react';
 const Interactions = ({type, post_id, getUpvotes, upvotes}) => {
   const [isUpvoted, setIsUpvoted] = useState(false);
 
+  console.log("upvotes prop:" + upvotes)
+
   useEffect(() => {
     getUpvoteStatus(post_id)
   }, []);
@@ -43,6 +45,7 @@ const Interactions = ({type, post_id, getUpvotes, upvotes}) => {
 
   async function upvote(type, id) {
   try {
+    console.log(type, id)
     const requestBody = JSON.stringify({
       type_upvoted: type,
       upvoted_id: id,
@@ -64,19 +67,22 @@ const Interactions = ({type, post_id, getUpvotes, upvotes}) => {
 }
 
 
-  return (
-<div className="interactions">
-<div>
-<button className='vote interact-box' onClick={() => upvote(type, post_id)}>
-<img
-            className='upvote-arrow'
-            src={isUpvoted ? "/images/svgs/up-arrow-filled.svg" : "/images/svgs/up-arrow.svg"}
-            alt="Upvote"
-          />
-  {upvotes}</button></div>
-<button className='vote interact-box' onClick={() => goToThread(post_id)}>comments</button></div>
+return (
+  <div className="interactions">
+    <div>
+      <button className='vote interact-box' onClick={() => upvote(type, post_id)}>
+        <img
+          className='upvote-arrow'
+          src={isUpvoted ? "/images/svgs/up-arrow-filled.svg" : "/images/svgs/up-arrow.svg"}
+          alt="Upvote"
+        />
+        {typeof upvotes === 'object' && upvotes.count !== undefined ? upvotes.count : upvotes}
+      </button>
+    </div>
+    <button className='vote interact-box' onClick={() => goToThread(post_id)}>comments</button>
+  </div>
+);
 
-  );
 };
 
 export default Interactions;

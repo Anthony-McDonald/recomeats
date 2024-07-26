@@ -8,13 +8,15 @@ import Interactions from './Interactions';
 import Comment from './Comment'
 import SimilarRecipe from './SimilarRecipe';
 
-const Thread = ({setAuth, getUserInfo, getImageName}) => {
+const Thread = ({setAuth, getUserInfo, getImageName, getUpvoteInfo}) => {
 
-  const [ingredients, setIngredients] = useState(null);
+  const [ingredients, setIngredients] = useState([]);
+  const [upvotes, setUpvotes] = useState(0);
 
   const { id } = useParams();
     useEffect(() => {
         verifyAuthentication();
+        getUpvotes()
       }, []);
 
 
@@ -34,6 +36,12 @@ const Thread = ({setAuth, getUserInfo, getImageName}) => {
         }
       }
 
+      const getUpvotes = async () => {
+          const upvoteNumber = await getUpvoteInfo(id);
+          setUpvotes(upvoteNumber.count);
+
+      };
+
   return (
     <div id='thread-div'>   
         <ForumHeader/>
@@ -43,9 +51,11 @@ const Thread = ({setAuth, getUserInfo, getImageName}) => {
             <div id="thr-l">
             <RecipeThreadDiv post_id={id} getUserInfo={getUserInfo} getImageName={getImageName} getIngredients={getIngredients} ingredients={ingredients}/>
             <div id="interaction-div">
-            <Interactions id="thread-interaction" post_id={id}/>
+            <Interactions type={"post"} post_id={id} upvotes={upvotes} getUpvotes={getUpvotes}/>
             <button type="button" className="btn btn-primary">Comment</button>
-            {/* <Comment comment_id={1}/> */}
+            {/* <Comment comment_id={1}/>
+            <Comment comment_id={1}/>
+            <Comment comment_id={1}/> */}
             </div>
             </div>
             <div id="thr-r">
