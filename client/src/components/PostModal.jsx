@@ -69,7 +69,6 @@ const PostModal = ({ getPosts }) => {
     async function imageUpload(file) {
         try {
             const formData = new FormData();
-            console.log(file)
             formData.append('image', file);
             const uploadedImage = await fetch("http://localhost:5000/uploads", {
                 method: "POST",

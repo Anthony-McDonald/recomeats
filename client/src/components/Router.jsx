@@ -72,6 +72,49 @@ const Router = () => {
     }
   }
 
+  const getUserInfo = async (id) => {
+    try {
+      const url = new URL("http://localhost:5000/users/getuser/profile");
+      url.searchParams.append("user_id", id);
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          token: localStorage.getItem("token")
+        }
+      });
+
+      const parseRes = await response.json();
+      return parseRes;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const getImageName = async (id) => {
+    if (id === null) {
+      return;
+    }
+    try {
+      const url = new URL("http://localhost:5000/forum/getimage");
+      url.searchParams.append("image_id", id);
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          token: localStorage.getItem("token")
+        }
+      });
+
+      const parseRes = await response.json();
+      return parseRes.imageUrl;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   const authenticateSwitch = (input) => {
     setIsAuthenticated(input);
   };
@@ -89,12 +132,12 @@ const Router = () => {
     },
     {
       path:"/forum",
-      element: isAuthenticated ? <Forum setAuth={authenticateSwitch} /> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
+      element: isAuthenticated ? <Forum setAuth={authenticateSwitch} getUserInfo={getUserInfo} getImageName={getImageName}/> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
       errorElement: <ErrorPage />,
     },
     {
-      path:"/forum/thread",
-      element: isAuthenticated ? <Thread setAuth={authenticateSwitch} /> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
+      path:"/forum/thread/:id",
+      element: isAuthenticated ? <Thread setAuth={authenticateSwitch} getUserInfo={getUserInfo} getImageName={getImageName} /> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
       errorElement: <ErrorPage />,
     },
   ]);

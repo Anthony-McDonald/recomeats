@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/forum.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import ForumHeader from './ForumHeader';
 import RecipeThreadDiv from './RecipeThreadDiv';
 import Interactions from './Interactions';
 import Comment from './Comment'
 import SimilarRecipe from './SimilarRecipe';
 
-const Thread = ({setAuth}) => {
+const Thread = ({setAuth, getUserInfo, getImageName}) => {
 
+  const { id } = useParams();
     useEffect(() => {
         verifyAuthentication();
       }, []);
-  
 
   return (
     <div id='thread-div'>   
@@ -22,13 +22,11 @@ const Thread = ({setAuth}) => {
         <div id="left-sidebar-div">
                 </div>
             <div id="thr-l">
-            <RecipeThreadDiv/>
+            <RecipeThreadDiv post_id={id} getUserInfo={getUserInfo} getImageName={getImageName}/>
             <div id="interaction-div">
-            <Interactions id="thread-interaction"/>
+            <Interactions id="thread-interaction" post_id={id}/>
             <button type="button" className="btn btn-primary">Comment</button>
-            <Comment/>
-            <Comment/>
-            <Comment/>
+            {/* <Comment comment_id={1}/> */}
             </div>
             </div>
             <div id="thr-r">

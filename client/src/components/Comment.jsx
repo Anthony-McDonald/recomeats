@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/comment-box.css'
 import Interactions from './Interactions';
 
-const Comment = () => {
+const Comment = ({comment_id}) => {
 
   return (
     <div id="comment-box">

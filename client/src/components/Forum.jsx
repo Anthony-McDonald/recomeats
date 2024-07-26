@@ -6,7 +6,7 @@ import ForumPostDiv from './ForumPostDiv';
 import TrendingRecipeBox from './TrendingRecipeBox';
 import PostModal from './PostModal';
 
-const Forum = ({ setAuth }) => {
+const Forum = ({ setAuth, getUserInfo, getImageName}) => {
   const [posts, setPosts] = useState([]);
   const [userInfo, setUserInfo] = useState({});
   const [upvoteInfo, setUpvoteInfo] = useState({});
@@ -76,25 +76,6 @@ const Forum = ({ setAuth }) => {
     }
   };
 
-  const getUserInfo = async (id) => {
-    try {
-      const url = new URL("http://localhost:5000/users/getuser/profile");
-      url.searchParams.append("user_id", id);
-
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          'Content-Type': 'application/json',
-          token: localStorage.getItem("token")
-        }
-      });
-
-      const parseRes = await response.json();
-      return parseRes;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
 
   const getUpvoteInfo = async (id) => {
     try {
@@ -128,29 +109,6 @@ const Forum = ({ setAuth }) => {
       setAuth(parseRes === true);
     } catch (err) {
       console.error(err.message);
-    }
-  };
-
-  const getImageName = async (id) => {
-    if (id === null) {
-      return;
-    }
-    try {
-      const url = new URL("http://localhost:5000/forum/getimage");
-      url.searchParams.append("image_id", id);
-
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          'Content-Type': 'application/json',
-          token: localStorage.getItem("token")
-        }
-      });
-
-      const parseRes = await response.json();
-      return parseRes.imageUrl;
-    } catch (error) {
-      console.error("Error fetching data:", error);
     }
   };
 

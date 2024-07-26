@@ -16,7 +16,6 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const mainChange = (e) => {
-    console.log("dropdown is setting the shown page to ", e)
     setSelectedElement(e);
     setShowDropdown(false);
   }
