@@ -9,7 +9,6 @@ import { useState } from 'react';
 const Interactions = ({type, post_id, getUpvotes, upvotes}) => {
   const [isUpvoted, setIsUpvoted] = useState(false);
 
-  console.log("upvotes prop:" + upvotes)
 
   useEffect(() => {
     getUpvoteStatus(post_id)
@@ -24,8 +23,7 @@ const Interactions = ({type, post_id, getUpvotes, upvotes}) => {
     let parseRes;
     try {
       const url = new URL("http://localhost:5000/forum/hasupvoted");
-      url.searchParams.append("type_upvoted", "post");
-      console.log(post_id)
+      url.searchParams.append("type_upvoted", type);
       url.searchParams.append("upvoted_id", post_id);
 
       const response = await fetch(url, {
@@ -45,7 +43,6 @@ const Interactions = ({type, post_id, getUpvotes, upvotes}) => {
 
   async function upvote(type, id) {
   try {
-    console.log(type, id)
     const requestBody = JSON.stringify({
       type_upvoted: type,
       upvoted_id: id,

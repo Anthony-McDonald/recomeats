@@ -42,7 +42,7 @@ const Forum = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo}) => {
   const fetchUpvotes = async () => {
     const newUpvoteInfo = {};
     const upvotePromises = posts.map(async post => {
-      const upvote = await getUpvoteInfo(post.post_id);
+      const upvote = await getUpvoteInfo(post.post_id, "post");
       newUpvoteInfo[post.post_id] = upvote;
     });
     await Promise.all(upvotePromises);

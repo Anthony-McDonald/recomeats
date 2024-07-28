@@ -94,6 +94,7 @@ router.get("/thread/:thread_id", authorisation, asyncHandler(async (req, res) =>
 router.post("/newcomment", authorisation, asyncHandler(async (req, res) => {
     const { post_id, body } = req.body;
     const user_id = req.user.id;
+    console.log("potato:", post_id, body)
 
     const newComment = await pool.query("INSERT INTO Comments (user_id, post_id, body) VALUES ($1,$2,$3) RETURNING *",
     [user_id, post_id, body]);
@@ -130,6 +131,7 @@ router.get("/commentlist", authorisation, asyncHandler(async (req, res) => {
     const { post_id } = req.query;
     const comments = await pool.query("SELECT * FROM Comments WHERE post_id = $1",[post_id])
     const response = comments.rows.map(comment => ({
+        comment_id: comment.comment_id,
         user_id: comment.user_id,
         body: comment.body,
         upvotes: comment.upvotes,
@@ -139,7 +141,6 @@ router.get("/commentlist", authorisation, asyncHandler(async (req, res) => {
     // Send the response
     res.json(response);
 }));
-
 
 // Create new reply
 

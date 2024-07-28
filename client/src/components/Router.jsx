@@ -115,10 +115,10 @@ const Router = () => {
     }
   };
 
-  const getUpvoteInfo = async (id) => {
+  const getUpvoteInfo = async (id, type) => {
     try {
       const url = new URL("http://localhost:5000/forum/upvotecount");
-      url.searchParams.append("type_upvoted", "post");
+      url.searchParams.append("type_upvoted", type);
       url.searchParams.append("upvoted_id", id);
 
       const response = await fetch(url, {
