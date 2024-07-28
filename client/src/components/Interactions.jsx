@@ -5,13 +5,25 @@ import '../css/header.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import '../css/interaction.css'
 import { useState } from 'react';
+import CommentModal from './CommentModal';
 
-const Interactions = ({type, post_id, getUpvotes, upvotes}) => {
+const Interactions = ({type, post_id, getUpvotes, upvotes, commentBodyResult, registerComment, postReply}) => {
   const [isUpvoted, setIsUpvoted] = useState(false);
-
+  const [nextStage, setNextStage] = useState("");
 
   useEffect(() => {
     getUpvoteStatus(post_id)
+      switch (type) {
+    case "post":
+      setNextStage("comment");
+      break;
+    case "comment":
+      setNextStage("reply");
+      break;
+    case "reply":
+      setNextStage("reply");
+      break;
+  }
   }, []);
 
   const goToThread = (path) => {
@@ -76,7 +88,8 @@ return (
         {typeof upvotes === 'object' && upvotes.count !== undefined ? upvotes.count : upvotes}
       </button>
     </div>
-    <button className='vote interact-box' onClick={() => goToThread(post_id)}>comments</button>
+    {type === "post" ? (    <button className='vote interact-box' onClick={() => goToThread(post_id)}>comments</button>) :
+     (<CommentModal postReply={postReply} modalId={post_id} parent_id={post_id} type={nextStage} commentBodyResult={commentBodyResult} registerComment={registerComment}/>)}
   </div>
 );
 

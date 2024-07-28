@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/comment-box.css';
 import Interactions from './Interactions';
 
-const Comment = ({ comment, getUpvoteInfo, level = 0 }) => {
+const Comment = ({ comment, getUpvoteInfo, level = 0, postReply }) => {
   const [username, setUsername] = useState("");
   const [upvotes, setUpvotes] = useState(0);
   const [type, setType] = useState("");
@@ -30,9 +30,7 @@ const Comment = ({ comment, getUpvoteInfo, level = 0 }) => {
   }, [type, idPassed]);
 
   const getUpvotes = async () => {
-    console.log("Fetching upvotes for", type, "with ID", idPassed);
     const upvoteNumber = await getUpvoteInfo(idPassed, type);
-    console.log("Returned upvotes:", upvoteNumber.count);
     setUpvotes(upvoteNumber.count);
   };
 
@@ -54,7 +52,7 @@ const Comment = ({ comment, getUpvoteInfo, level = 0 }) => {
   };
 
   return (
-    <div style={{ marginLeft: level * 10 + 'px' }}>
+    <div style={{ marginLeft: level * 15 + 'px' }}>
       <div id="comment-box">
         <div id="msg-info">
           <img src="/images/1.jpg" className="usr-img" alt="usr" />
@@ -64,14 +62,14 @@ const Comment = ({ comment, getUpvoteInfo, level = 0 }) => {
         <div id="msg-text">{comment.body}</div>
         <div id="interactions">
           {type && idPassed !== null ? (
-            <Interactions type={type} post_id={idPassed} upvotes={upvotes} getUpvotes={getUpvotes} />
+            <Interactions type={type} post_id={idPassed} upvotes={upvotes} getUpvotes={getUpvotes} postReply={postReply} />
           ) : (
             <p>Loading interactions...</p>
           )}
         </div>
       </div>
       {comment.replies.map((reply, index) => (
-        <Comment key={index} comment={reply} getUpvoteInfo={getUpvoteInfo} level={level + 1} />
+        <Comment key={index} comment={reply} getUpvoteInfo={getUpvoteInfo} level={level + 1} postReply={postReply} />
       ))}
     </div>
   );

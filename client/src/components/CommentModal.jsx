@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '../css/edit-info-modal.css';
 
-const CommentModal = ({ commentBodyResult, registerComment }) => {
+const CommentModal = ({ parent_id, type, commentBodyResult, registerComment, modalId, postReply }) => {
     const [inputs, setInputs] = useState({
         commentBody: ''
     });
@@ -17,6 +17,8 @@ const CommentModal = ({ commentBodyResult, registerComment }) => {
     }, [commentBodyResult]);
 
     const closePress = () => {
+        console.log("type is", type);
+        console.log(parent_id);
         setTimeout(() => {
             setInputs({
                 commentBody: commentBodyResult
@@ -31,20 +33,24 @@ const CommentModal = ({ commentBodyResult, registerComment }) => {
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
-        registerComment(commentBody);
+        if (type === "post") {
+            registerComment(commentBody);
+        } else {
+            postReply(parent_id, type, commentBody);
+        }
     };
 
     return (
         <>
-            <button type="button" className="header-button btn btn-primary log-button" data-bs-toggle="modal" data-bs-target="#Modal">
+            <button type="button" className="header-button btn btn-primary log-button" data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
                 Add a comment
             </button>
 
-            <div className="modal fade modal-cover" id="Modal" tabIndex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div className="modal fade modal-cover" id={modalId} tabIndex="-1" aria-labelledby={`${modalId}Label`} aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="ModalLabel">Add your comment</h5>
+                            <h5 className="modal-title" id={`${modalId}Label`}>Add your comment</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
@@ -56,7 +62,7 @@ const CommentModal = ({ commentBodyResult, registerComment }) => {
                                         onChange={onChange}
                                         type="text"
                                         className="form-control"
-                                        id="commentBody"  // Updated id to match the state property
+                                        id="commentBody" // Updated id to match the state property
                                         aria-describedby="commentHelp"
                                     />
                                 </div>

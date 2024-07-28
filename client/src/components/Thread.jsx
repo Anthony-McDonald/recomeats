@@ -48,6 +48,10 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo }) => {
     }
   }
 
+  function reload() {
+    fetchCommentsAndReplies(id);
+  }
+
   async function getIngredients(recipe_id) {
     try {
       const response = await fetch("http://localhost:5000/recipes/getingredients/" + recipe_id, {
@@ -95,6 +99,27 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo }) => {
     setIsLoading(false);
   };
 
+  async function postReply(parent_id, parent_type, commentBody) {
+    try {
+      const requestBody = JSON.stringify({
+        parent_id: parent_id,
+        parent_type: parent_type,
+        body: commentBody,
+      });
+      await fetch("http://localhost:5000/forum/newreply", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'token': localStorage.getItem("token"),
+        },
+        body: requestBody,
+      });
+      reload()
+    } catch (error) {
+      console.error("Error posting comment:", error);
+    }
+  }
+
   const fetchReplies = async (comment_id) => {
     try {
       const url = new URL("http://localhost:5000/forum/replylist");
@@ -123,13 +148,13 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo }) => {
         <div id="thr-l">
           <RecipeThreadDiv post_id={id} getUserInfo={getUserInfo} getImageName={getImageName} getIngredients={getIngredients} ingredients={ingredients} />
           <div id="interaction-div">
-            <Interactions type={"post"} post_id={id} upvotes={upvotes} getUpvotes={getUpvotes} />
-            <CommentModal commentBodyResult={newComment} registerComment={registerComment} />
+            <Interactions type={"post"} post_id={id} upvotes={upvotes} getUpvotes={getUpvotes} commentBodyResult={newComment} registerComment={registerComment} postId={id} />
+            <CommentModal modalId={1} type={"post"} commentBodyResult={newComment} registerComment={registerComment} postReply={postReply} />
             {isLoading ? (
               <p>Loading...</p>
             ) : (
               comments.map((comment, index) => (
-                <Comment key={index} comment={comment} getUpvoteInfo={getUpvoteInfo} />
+                <Comment key={index} comment={comment} getUpvoteInfo={getUpvoteInfo} postReply={postReply} />
               ))
             )}
           </div>
