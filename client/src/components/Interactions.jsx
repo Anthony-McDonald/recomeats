@@ -19,7 +19,7 @@ const Interactions = ({type, post_id, getUpvotes, upvotes}) => {
       window.location = "/forum/thread/" + path
   }
   
-  const getUpvoteStatus = async (id) => {
+  const getUpvoteStatus = async () => {
     let parseRes;
     try {
       const url = new URL("http://localhost:5000/forum/hasupvoted");
