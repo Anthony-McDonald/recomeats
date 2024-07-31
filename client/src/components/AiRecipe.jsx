@@ -120,7 +120,7 @@ const recipes = recommendations.recipes.map(recipeData => ({
 
             <div className="mb-3 ingredient-input-area">
                 <label htmlFor="ingredientInputBox" className="form-label">Ingredients:</label>
-                <input className="ingredient-input" type="text" value={ingredientInputValue} onChange={handleIngredientInputValue} onKeyDown={enterPressed} placeholder='Type your ingredient and press enter!' className="form-control" id="ingredientInputBox" />
+                <input className="ingredient-input form-control" type="text" value={ingredientInputValue} onChange={handleIngredientInputValue} onKeyDown={enterPressed} placeholder='Type your ingredient and press enter!' id="ingredientInputBox" />
                 <ul className="group-wrap mt-2">
                     {ingredients.map((ingredient, index) => (
                         <li key={index} className="d-flex align-items-center ingred-entry">
