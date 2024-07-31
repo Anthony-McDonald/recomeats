@@ -8,6 +8,7 @@ const userRoutes = require("./routes/userRoutes");
 const cuisineRoutes = require("./routes/cuisineRoutes");
 const recipeRoutes = require("./routes/recipeRoutes");
 const chatRoute = require("./routes/chatRoute");
+const visorRoute = require("./routes/visorRoute")
 const forumRoute = require("./routes/forumRoutes");
 const uploadRoutes = require("./routes/uploadRoutes"); // Import the new upload route
 
@@ -18,6 +19,7 @@ app.use("/users", userRoutes);
 app.use("/cuisines", cuisineRoutes);
 app.use("/recipes", recipeRoutes);
 app.use("/chat", chatRoute);
+app.use("/recog", visorRoute )
 app.use("/forum", forumRoute);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/uploads', uploadRoutes); // Use the new upload route

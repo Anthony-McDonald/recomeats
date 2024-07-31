@@ -105,8 +105,32 @@ const PostModal = ({ getPosts }) => {
         }
         const imageName = await imageUpload(image)
         createPost(title, body, recipe_selected, imageName.imageUrl);
+        const imgInfo = gatherStats(imageName.imageUrl);
+        alert("from postmodal: " + imgInfo);
         resetForm();
     };
+
+    const gatherStats = async (prepath) => {
+        const imgPath = "./uploads/" + prepath;
+        let parseRes;
+        try {
+          const url = new URL("http://localhost:5000/recog/visor");
+          url.searchParams.append("imagePath", imgPath);
+    
+          const response = await fetch(url, {
+            method: "GET",
+            headers: {
+              'Content-Type': 'application/json',
+              token: localStorage.getItem("token")
+            }
+          });
+    
+          parseRes = await response.json();
+          alert(parseRes + " from parseres in postmodal");
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
 
     return (
         <>
