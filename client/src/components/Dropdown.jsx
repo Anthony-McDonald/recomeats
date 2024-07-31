@@ -25,7 +25,12 @@ const Dropdown = ({ mainChange }) => {
         <button className="btn btn-primary dropdown-btn">
         <SidebarElement svgImage={"help"} text={"FAQ / Help"} onClick={() => mainChange("help")}/>
         </button>
-        <button className="btn btn-primary dropdown-btn">        <SidebarElement svgImage={"help"} text={"Privacy Policy"} onClick={() => mainChange("privacy")}/></button>
+        <button className="btn btn-primary dropdown-btn">        
+        <SidebarElement svgImage={"help"} text={"Privacy Policy"} onClick={() => mainChange("privacy")}/>
+        </button>
+        <button className="btn btn-primary dropdown-btn">
+        <SidebarElement svgImage={"user-delete"} text={"Delete Account"} onClick={() => mainChange("deleteaccount")}/>
+        </button>
 
         </div>
         </div>

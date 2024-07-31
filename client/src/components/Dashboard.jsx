@@ -8,6 +8,7 @@ import Recipes from './Recipes';
 import Help from './Help';
 import Dropdown from './Dropdown';
 import Privacy from './Privacy';
+import DeleteAccount from './DeleteAccount';
 
 
 const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
@@ -21,10 +22,10 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
   }
 
   const logout = (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     localStorage.removeItem("token");
     setAuth(false);
-  }
+}
 
   const handleDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -66,6 +67,7 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
         <SidebarSeperator/>
         <SidebarElement svgImage={"help"} text={"FAQ / Help"} onClick={() => mainChange("help")}/>
         <SidebarElement svgImage={"privacy"} text={"Privacy Policy"} onClick={() => mainChange("privacy")}/>
+        <SidebarElement svgImage={"user-delete"} text={"Delete Account"} onClick={() => mainChange("deleteaccount")}/>
         </div>
 
       </div>  
@@ -84,6 +86,7 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
           {!showDropdown && selectedElement === "recipes" && <Recipes/>}
           {!showDropdown && selectedElement === "help" && <Help />}
           {!showDropdown && selectedElement === "privacy" && <Privacy />}
+          {!showDropdown && selectedElement === "deleteaccount" && <DeleteAccount logout={logout}/>}
       </div>
       </div>
 
