@@ -3387,15 +3387,69 @@ router.get("/visor", authorisation, asyncHandler(async (req, res, next) => {
         ]
     }
 
-    const response = {
-        scopes: imgInfo.scopes,
-        // items: imgInfo.items[0].food
-        // item0food0: imgInfo.items[0].food[0].food_info,
-        // item0food1: imgInfo.items[0].food[1].food_info,
-        item1food0: imgInfo.items[1].food[0].food_info,
-    }
-    res.json(response);
+    res.json(aggregateNutritionalInfo(imgInfo));
 }));
+
+function aggregateNutritionalInfo(imgInfo) {
+    const nutriInfo = {
+        alcohol_100g: 0,
+        calcium_100g: 0,
+        calories_100g: 0,
+        carbs_100g: 0,
+        cholesterol_100g: 0,
+        copper_100g: 0,
+        fat_100g: 0,
+        fibers_100g: 0,
+        glycemic_index: 0,
+        insat_fat_100g: 0,
+        iodine_100g: 0,
+        iron_100g: 0,
+        magnesium_100g: 0,
+        manganese_100g: 0,
+        mono_fat_100g: 0,
+        omega_3_100g: 0,
+        omega_6_100g: 0,
+        phosphorus_100g: 0,
+        poly_fat_100g: 0,
+        potassium_100g: 0,
+        proteins_100g: 0,
+        salt_100g: 0,
+        sat_fat_100g: 0,
+        selenium_100g: 0,
+        sodium_100g: 0,
+        sugars_100g: 0,
+        veg_percent: 0,
+        vitamin_a_beta_k_100g: 0,
+        vitamin_a_retinol_100g: 0,
+        vitamin_b12_100g: 0,
+        vitamin_b1_100g: 0,
+        vitamin_b2_100g: 0,
+        vitamin_b3_100g: 0,
+        vitamin_b5_100g: 0,
+        vitamin_b6_100g: 0,
+        vitamin_b9_100g: 0,
+        vitamin_c_100g: 0,
+        vitamin_d_100g: 0,
+        vitamin_e_100g: 0,
+        vitamin_k1_100g: 0,
+        water_100g: 0,
+        zinc_100g: 0
+    };
+
+    imgInfo.items.forEach(item => {
+
+        const food = item.food[0];
+        const nutrition = food.food_info.nutrition;
+
+        for (const nutri in nutriInfo) {
+            nutriInfo[nutri] += nutrition[nutri];
+        }
+    });
+
+    console.log(nutriInfo);
+
+    return nutriInfo;
+}
 
 
 
