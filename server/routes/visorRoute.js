@@ -6,10 +6,27 @@ const pool = require("../db");
 const callVisor = require("../middleware/foodvisor");
 
 
-// call visor api
+// get info
+router.get("/info", authorisation, asyncHandler(async (req,res,next) => {
+    const {recipe_id} = req.query
+    console.log(recipe_id)
 
-router.get("/visor", authorisation, asyncHandler(async (req, res, next) => {
-    const { imagePath } = req.query;
+    const info = await pool.query("SELECT * FROM NutriInfo WHERE recipe_id = $1", [recipe_id]);
+    console.log(info)
+    const infoRes = info.rows[0]
+
+    const response = {
+        nutriDict: infoRes.nutrient_dictionary
+    }
+
+    res.json(response);
+}))
+
+
+// call visor api and add nutrient info to db
+router.post("/visor", authorisation, asyncHandler(async (req, res, next) => {
+    const { imagePath, recipe_id } = req.body;
+    const user_id = req.user.id;
 
     // const imgInfo = await callVisor(imagePath);
     const imgInfo = {
@@ -3387,10 +3404,12 @@ router.get("/visor", authorisation, asyncHandler(async (req, res, next) => {
         ]
     }
 
-    res.json(aggregateNutritionalInfo(imgInfo));
+    
+
+    res.json(aggregateNutritionalInfo(imgInfo, recipe_id, user_id));
 }));
 
-function aggregateNutritionalInfo(imgInfo) {
+function aggregateNutritionalInfo(imgInfo, recipe_id, user_id) {
     const nutriInfo = {
         alcohol_100g: 0,
         calcium_100g: 0,
@@ -3446,10 +3465,16 @@ function aggregateNutritionalInfo(imgInfo) {
         }
     });
 
-    console.log(nutriInfo);
-
+    addFoodInfoToDatabase(user_id, recipe_id, nutriInfo);
     return nutriInfo;
 }
+
+const addFoodInfoToDatabase = async (user_id, recipe_id, nutriInfo) => {
+    const foodAdded = await pool.query(
+        "INSERT INTO NutriInfo (user_id, recipe_id, nutrient_dictionary) VALUES ($1, $2, $3) RETURNING *",
+        [user_id, recipe_id, nutriInfo]
+    );
+};
 
 
 

@@ -105,32 +105,33 @@ const PostModal = ({ getPosts }) => {
         }
         const imageName = await imageUpload(image)
         createPost(title, body, recipe_selected, imageName.imageUrl);
-        const imgInfo = gatherStats(imageName.imageUrl);
+        const imgInfo = gatherStats(imageName.imageUrl, recipe_selected );
         alert("from postmodal: " + imgInfo);
         resetForm();
     };
 
-    const gatherStats = async (prepath) => {
+    const gatherStats = async (prepath, recipe_id) => {
         const imgPath = "./uploads/" + prepath;
         let parseRes;
         try {
-          const url = new URL("http://localhost:5000/recog/visor");
-          url.searchParams.append("imagePath", imgPath);
+            const url = new URL("http://localhost:5000/recog/visor");
+            
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    token: localStorage.getItem("token")
+                },
+                body: JSON.stringify({ imagePath: imgPath, recipe_id: recipe_id }) // Pass the imagePath in the body
+            });
     
-          const response = await fetch(url, {
-            method: "GET",
-            headers: {
-              'Content-Type': 'application/json',
-              token: localStorage.getItem("token")
-            }
-          });
-    
-          parseRes = await response.json();
-          alert(parseRes + " from parseres in postmodal");
+            parseRes = await response.json();
+            alert(parseRes + " from parseres in postmodal");
         } catch (error) {
-          console.error("Error fetching data:", error);
+            console.error("Error fetching data:", error);
         }
-      };
+    };
+    
 
     return (
         <>

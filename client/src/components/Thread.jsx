@@ -6,7 +6,7 @@ import ForumHeader from './ForumHeader';
 import RecipeThreadDiv from './RecipeThreadDiv';
 import Interactions from './Interactions';
 import Comment from './Comment';
-import SimilarRecipe from './SimilarRecipe';
+import NutrientInfo from './NutrientInfo';
 import CommentModal from './CommentModal';
 
 const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo }) => {
@@ -162,7 +162,7 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo }) => {
         <div id="thr-r">
           <div id="related-threads">
             <h4 className="related-title">Similar Recipes</h4>
-            <SimilarRecipe ingredients={ingredients} />
+            <NutrientInfo/>
           </div>
         </div>
       </div>

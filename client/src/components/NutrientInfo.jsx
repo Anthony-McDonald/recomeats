@@ -3,7 +3,7 @@ import '../css/header.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import '../css/similar-recipe.css'
 
-const SimilarRecipe = ({ingredients}) => {
+const NutrientInfo = () => {
 
   return (
     <div id="similar-recipe-div">
@@ -12,13 +12,8 @@ const SimilarRecipe = ({ingredients}) => {
       <div id="shared-ingreds">
         Shared Ingredients:
       </div>
-      <div id="ingredients">
-            <div id='ingredient' className="ingred-div">{ingredients[0]}</div>
-            <div id='ingredient' className="ingred-div">{ingredients[1]}</div>
-            <div id='ingredient' className="ingred-div">{ingredients[2]}</div>
-        </div>
     </div>
   );
 };
 
-export default SimilarRecipe;
+export default NutrientInfo;

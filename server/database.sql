@@ -45,6 +45,13 @@ CREATE TABLE Recipes (
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
+CREATE TABLE NutriInfo (
+    nutriinfo_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    recipe_id INT NOT NULL,
+    nutrient_dictionary VARCHAR NOT NULL
+)
+
 CREATE TABLE RecipeIngredients (
     ingredient_id SERIAL PRIMARY KEY,
     recipe_id INT NOT NULL,
