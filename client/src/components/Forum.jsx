@@ -110,7 +110,7 @@ const Forum = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo}) => {
             posts.map((post, index) => {
               const user = userInfo[post.user] || {};
               const upvote = upvoteInfo[post.post_id] || {};
-              const postImage = post.image_id ? imageInfo[post.image_id] || 'default-image.jpg' : 'default-image.jpg';
+              const postImage = post.image_id ? imageInfo[post.image_id] : 'default-image.jpg';
 
               return (
                 <ForumPostDiv
@@ -131,7 +131,7 @@ const Forum = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo}) => {
           )}
         </div>
         <div id="trending-recipes">
-          <TrendingRecipeBox/>
+          <TrendingRecipeBox posts={posts}/>
         </div>
       </div>
     </div>
