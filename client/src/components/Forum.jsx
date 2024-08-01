@@ -131,7 +131,7 @@ const Forum = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo}) => {
           )}
         </div>
         <div id="trending-recipes">
-          <TrendingRecipeBox posts={posts}/>
+          <TrendingRecipeBox posts={posts} imageInfo={imageInfo}/>
         </div>
       </div>
     </div>
