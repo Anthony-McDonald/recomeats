@@ -95,6 +95,7 @@ const deleteUserFromDatabase = async (user_id) => {
         "DELETE FROM Comments WHERE user_id = $1",
         "DELETE FROM Posts WHERE user_id = $1",
         "DELETE FROM RecipeIngredients WHERE recipe_id IN (SELECT recipe_id FROM recipes WHERE user_id = $1)",
+        "DELETE FROM NutriInfo WHERE user_id = $1",
         "DELETE FROM Recipes WHERE user_id = $1",
         "DELETE FROM Users WHERE user_id = $1"
     ];
