@@ -2,11 +2,12 @@ const express = require("express");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const sharp = require("sharp"); // Add sharp for image processing
 const authorisation = require("../middleware/authorise");
 
 const router = express.Router();
 
-// store
+// Store
 const uploadsDir = path.join(__dirname, '../uploads');
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -19,18 +20,32 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Upload img
-router.post('/', authorisation, upload.single('image'), (req, res) => {
+
+const newWidth = 800;  
+const newHeight = 600; 
+
+
+router.post('/', authorisation, upload.single('image'), async (req, res) => {
     const image = req.file;
 
     if (!image) {
         return res.status(400).json({ error: 'Image is required' });
     }
 
-    res.json({
-        message: 'File uploaded successfully',
-        imageUrl: `${image.filename}`
-    });
+    try {
+        await sharp(image.path)
+            .resize(desiredWidth, desiredHeight) 
+            .toFile(path.join(uploadsDir, 'resized-' + image.filename));
+
+        fs.unlinkSync(image.path);
+
+        res.json({
+            imageUrl: `resized-${image.filename}`
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to process image' });
+    }
 });
 
 module.exports = router;
