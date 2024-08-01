@@ -105,7 +105,7 @@ const Forum = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo}) => {
       <div id="forum-main">
         <div className="post-divs">
           {isLoading ? (
-            <p>Loading...</p>
+            <p>No posts currently, add one yourself!</p>
           ) : (
             posts.map((post, index) => {
               const user = userInfo[post.user] || {};
