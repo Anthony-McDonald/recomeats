@@ -15,12 +15,14 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [newComment, setNewComment] = useState("");
+  const [recipe_id, setRecipeId] = useState(0);
   const { id } = useParams();
 
   useEffect(() => {
     verifyAuthentication();
     getUpvotes();
     fetchCommentsAndReplies(id);
+    fetchRecipeId(id);
   }, []);
 
   const registerComment = (comment) => {
@@ -140,6 +142,25 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo }) => {
     }
   };
 
+  const fetchRecipeId = async (post_id) => {
+    try {
+      const url = new URL("http://localhost:5000/forum/thread/" + post_id);
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          token: localStorage.getItem("token")
+        }
+      });
+
+      const parseRes = await response.json();
+      setRecipeId(parseRes.recipe_id);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   return (
     <div id='thread-div'>   
       <ForumHeader />
@@ -161,8 +182,7 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo }) => {
         </div>
         <div id="thr-r">
           <div id="related-threads">
-            <h4 className="related-title">Similar Recipes</h4>
-            <NutrientInfo/>
+            <NutrientInfo rec_id={recipe_id}/>
           </div>
         </div>
       </div>
