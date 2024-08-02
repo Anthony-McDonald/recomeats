@@ -17,8 +17,6 @@ const CommentModal = ({ parent_id, type, commentBodyResult, registerComment, mod
     }, [commentBodyResult]);
 
     const closePress = () => {
-        console.log("type is", type);
-        console.log(parent_id);
         setTimeout(() => {
             setInputs({
                 commentBody: commentBodyResult
@@ -40,10 +38,18 @@ const CommentModal = ({ parent_id, type, commentBodyResult, registerComment, mod
         }
     };
 
+    const buttonText = type === "post" ? "Add a comment" : "Reply";
+    const buttonClass = type === "post" ? "header-button btn btn-primary log-button" : "header-button btn btn-success reply-button";
+
     return (
         <>
-            <button type="button" className="header-button btn btn-primary log-button" data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
-                Add a comment
+            <button
+                type="button"
+                className={buttonClass}
+                data-bs-toggle="modal"
+                data-bs-target={`#${modalId}`}
+            >
+                {buttonText}
             </button>
 
             <div className="modal fade modal-cover" id={modalId} tabIndex="-1" aria-labelledby={`${modalId}Label`} aria-hidden="true">
@@ -62,7 +68,7 @@ const CommentModal = ({ parent_id, type, commentBodyResult, registerComment, mod
                                         onChange={onChange}
                                         type="text"
                                         className="form-control"
-                                        id="commentBody" // Updated id to match the state property
+                                        id="commentBody"
                                         aria-describedby="commentHelp"
                                     />
                                 </div>

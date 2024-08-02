@@ -34,6 +34,11 @@ const Comment = ({ comment, getUpvoteInfo, level = 0, postReply }) => {
     setUpvotes(upvoteNumber.count);
   };
 
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleString();
+  };
+
   const fetchUsername = async (user_id) => {
     try {
       const url = new URL("http://localhost:5000/users/getuser/username");
@@ -52,12 +57,12 @@ const Comment = ({ comment, getUpvoteInfo, level = 0, postReply }) => {
   };
 
   return (
-    <div style={{ marginLeft: level * 15 + 'px' }}>
+    <div style={{ marginLeft: level * 1.2 + 'rem' }}>
       <div id="comment-box">
         <div id="msg-info">
           <img src="/images/1.jpg" className="usr-img" alt="usr" />
           <h5 className="txt-usr-name">{username}</h5>
-          <p id="timestamp">{comment.created_at}</p>
+          <p id="timestamp">{formatDate(comment.created_at)}</p>
         </div>
         <div id="msg-text">{comment.body}</div>
         <div id="interactions">

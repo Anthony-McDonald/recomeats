@@ -112,7 +112,7 @@ flex-shrink: 0;
 #ingredients {
     display: flex;
     justify-content: start;
-    margin-left: 1rem;
+    margin-left: 0.2rem;
 }
 
 #ingredient {
