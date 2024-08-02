@@ -34,7 +34,7 @@ router.post('/', authorisation, upload.single('image'), async (req, res) => {
 
     try {
         await sharp(image.path)
-            .resize(desiredWidth, desiredHeight) 
+            .resize(newWidth, newHeight) 
             .toFile(path.join(uploadsDir, 'resized-' + image.filename));
 
         fs.unlinkSync(image.path);
