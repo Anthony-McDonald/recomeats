@@ -9,6 +9,7 @@ import Help from './Help';
 import Dropdown from './Dropdown';
 import Privacy from './Privacy';
 import DeleteAccount from './DeleteAccount';
+import NotificationsModal from './NotificationsModal';
 
 
 const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
@@ -78,6 +79,7 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
       <img className='show-more-svg' src={"/images/svgs/show-more.svg"} alt="Show dropdown" />
     </button>
       <h1 className='welcome-msg'>Welcome, {name}</h1>
+      <NotificationsModal/>
       <button className="dash-logout btn btn-danger" onClick={logout}>Log out</button>
       </div>
       <div className="dash-main-bottom">
