@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../css/header.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import '../css/recipe-image-box.css';
@@ -28,7 +28,7 @@ const RecipeImageBox = ({ getImageName, image_id }) => {
       {imageUrl ? (
         <img className="thread-img" src={postPicSequenced} alt="Recipe" />
       ) : (
-        <p>Loading image...</p>
+        <p></p>
       )}
     </div>
   );

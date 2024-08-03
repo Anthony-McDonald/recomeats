@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../css/forum.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ForumHeader from './ForumHeader';
 import ForumPostDiv from './ForumPostDiv';
 import TrendingRecipeBox from './TrendingRecipeBox';
-import PostModal from './PostModal';
 
 const Forum = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif}) => {
   const [posts, setPosts] = useState([]);
@@ -93,15 +92,10 @@ const Forum = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif}) =
 
   return (
     <div id='forum-div'>
-      <ForumHeader getUserInfo={getUserInfo}/>
-      <div className="forum-sort-post">
-        <div className="sortbox">
-          <button type="button" className="btn btn-primary">Sort By</button>
-        </div>
-        <div className="postbox">
-          <PostModal getPosts={getPosts}/>
-        </div>
-      </div>
+      <ForumHeader getUserInfo={getUserInfo} getPosts={getPosts}/>
+      {/* <div className="forum-sort-post">
+          <button type="button" className="btn btn-primary">Sort</button>
+      </div> */}
       <div id="forum-main">
         <div className="post-divs">
           {isLoading ? (

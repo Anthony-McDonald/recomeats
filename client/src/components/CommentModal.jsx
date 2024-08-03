@@ -41,7 +41,7 @@ const CommentModal = ({ parent_id, type, commentBodyResult, registerComment, mod
     };
 
     const buttonText = type === "post" ? "Add a comment" : "Reply";
-    const buttonClass = type === "post" ? "header-button btn btn-primary log-button" : "header-button btn btn-success reply-button";
+    const buttonClass = type === "post" ? "header-button btn btn-primary add-comment-button" : "header-button btn btn-success reply-button";
 
     return (
         <>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState, useEffect } from 'react';
 import '../css/nutrient-info.css';
 
@@ -35,7 +34,7 @@ const NutrientInfo = ({ rec_id }) => {
     if (!nutriInfo) return null;
 
     return Object.entries(nutriInfo)
-      .filter(([_, value]) => value !== 0) // Filter out zero values
+      .filter(([_, value]) => value !== 0) 
       .map(([key, value]) => (
         <div key={key} className="nutrient-bar">
           <div className="nutrient-label"> {key.replace(/_100g/g, '').replace(/_/g, ' ')}:</div>
@@ -52,7 +51,7 @@ const NutrientInfo = ({ rec_id }) => {
 
   return (
     <div className="nutrient-info">
-      <h3>Nutrient Information per 100g</h3>
+      <h3 className="nutrient-heading">Nutrient Information per 100g</h3>
       {renderNutrientBars()}
     </div>
   );

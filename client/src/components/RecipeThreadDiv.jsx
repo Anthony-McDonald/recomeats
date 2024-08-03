@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../css/header.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import '../css/thread.css'
@@ -47,7 +47,7 @@ const RecipeThreadDiv = ({ post_id, getUserInfo, getImageName, getIngredients, i
         {madeUserImage ? (
           <img className='usr-img' src={madeUserImage} alt="usr-img" />
         ) : (
-          <p>Loading image...</p>
+          <p></p>
         )}
         <h2 className='user-text'>{userData ? `${userData.first_name} ${userData.last_name}` : 'Loading...'}</h2>
         <p id="timestamp">5 hours ago</p>

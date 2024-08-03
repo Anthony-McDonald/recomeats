@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../css/forum.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import { useParams } from 'react-router-dom';
@@ -167,7 +167,6 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif })
     <div id='thread-div'>   
       <ForumHeader getUserInfo={getUserInfo} />
       <div id="thread-wrapper">
-        <div id="left-sidebar-div"></div>
         <div id="thr-l">
           <RecipeThreadDiv post_id={id} getUserInfo={getUserInfo} getImageName={getImageName} getIngredients={getIngredients} ingredients={ingredients} />
           <div id="interaction-div">
@@ -183,7 +182,7 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif })
           </div>
         </div>
         <div id="thr-r">
-          <div id="related-threads">
+          <div className="nutrient-info-wrapper">
             <NutrientInfo rec_id={recipe_id}/>
           </div>
         </div>

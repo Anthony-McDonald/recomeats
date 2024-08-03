@@ -6,6 +6,7 @@
     }
     #post-description {
         -webkit-line-clamp: 4 !important; 
+        line-clamp: 4 !important;
     }
 }
 
@@ -25,8 +26,10 @@
     margin-top: -0.5rem;
     font-size: 0.9rem;
     line-height: 1rem;
+    padding-bottom: 1rem;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;  
 }
@@ -49,7 +52,19 @@
 
 .pd-top {
     display: flex;
-    justify-content:start
+    justify-content:start;
+    width: 50%;
+}
+
+.pd-l {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.pd-user-info {
+    display: flex;
+    align-items: center;
 }
 
 .upvote-counter {
@@ -58,17 +73,33 @@
 
 .pdtop-user {
     font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.bullet {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    margin-left: 0.5rem;
+    margin-right: -0.5rem;
 }
 
 .pd-title {
     font-weight: bolder;
-    font-size: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.posted-time {
+    color: #3E362E;
+    font-size: 0.85rem;
 }
 
 .post-div {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding-right: 1rem;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .pd-bot {
@@ -87,10 +118,16 @@
     justify-content: center;
     align-items: start;
     width: 20%;
+    margin-right: 3rem;
     
 }
 
 .food-primary-img {
-    height: 3rem;
-    width: 6rem;
+    height: 6rem;
+    width: auto;
+}
+
+.post-div:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }

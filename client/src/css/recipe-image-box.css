@@ -1,6 +1,6 @@
 @media (min-width: 1200px) {
     .thread-img {
-       max-width: 800px !important;
+       max-width: 600px !important;
     }
 }
 
@@ -17,7 +17,7 @@
 }
 
 .thread-img {
-    max-width: 100%; 
+    max-width: 100%;
     height: auto; 
     display: block; 
     margin-left: -0.45rem;

@@ -69,11 +69,9 @@ const Profile = ({userCuisines, getCuisines}) => {
           buttonStyle={{ background: "#865D36", fontSize: "13px" , color: "#ffffff", borderRadius: "1rem"}}
           declineButtonStyle={{ background: "#3E362E", fontSize: "13px" , color: "#ffffff", borderRadius: "1rem"}}
           expires={150}
-        // Additional props and styles
       >
   This website uses cookies to enhance the user experience.{" "}
   <span style={{ fontSize: "10px" }}>By clicking accept, you agree to our use of cookies. If you are interested in how we use this data, click on the Privacy Policy section of the webpage</span>
-        {/* Cookie consent message */}
       </CookieConsent>
   <div className="profile-info">
     <img className='prof-img' src={fullProfileUrl} alt="prof-img" />

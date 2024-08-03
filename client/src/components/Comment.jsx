@@ -46,6 +46,37 @@ const Comment = ({ comment, getUpvoteInfo, level = 0, postReply, getUserInfo, ad
     const date = new Date(timestamp);
     return date.toLocaleString();
   };
+  function timeBefore(postTime) {
+    const postTimeDate = new Date(postTime);
+    const now = new Date();
+    
+    const secondsBefore = Math.floor((now - postTimeDate) / 1000);
+
+    const minutesBefore = Math.floor(secondsBefore / 60);
+    const hoursBefore = Math.floor(minutesBefore / 60);
+    const daysBefore = Math.floor(hoursBefore / 24);
+    const weeksBefore = Math.floor(daysBefore / 7);
+    const monthsBefore = Math.floor(daysBefore / 30); 
+    const yearsBefore = Math.floor(daysBefore / 365); 
+
+    if (secondsBefore < 60) {
+        return `${secondsBefore} seconds ago`;
+    } else if (minutesBefore < 60) {
+        return `${minutesBefore} minutes ago`;
+    } else if (hoursBefore < 24) {
+        return `${hoursBefore} hours ago`;
+    } else if (daysBefore == 1) {
+        return `${daysBefore} day ago`;
+    } else if (daysBefore < 7 && daysBefore > 1) {
+        return `${daysBefore} days ago`;
+    } else if (weeksBefore < 5) {
+        return `${weeksBefore} weeks ago`;
+    } else if (monthsBefore < 12) {
+        return `${monthsBefore} months ago`;
+    } else {
+        return `${yearsBefore} years ago`;
+    }
+}
 
   const fetchUsername = async (user_id) => {
     try {
@@ -73,7 +104,7 @@ const Comment = ({ comment, getUpvoteInfo, level = 0, postReply, getUserInfo, ad
             <img src={madeUserImage} className="usr-img" alt="usr" />
           )}
           <h5 className="txt-usr-name">{username}</h5>
-          <p id="timestamp">{formatDate(comment.created_at)}</p>
+          <p id="timestamp">{timeBefore(formatDate(comment.created_at))}</p>
         </div>
         <div id="msg-text">{comment.body}</div>
         <div id="interactions">

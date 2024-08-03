@@ -26,7 +26,7 @@ const DeleteAccount = ({logout}) => {
     return (
         <div id='privacy-div'>
             <h1>Deleting Your Account</h1>
-            <p>Please note that after clicking this button, your account will be removed COMPLETELY from our systems.
+            <p>Please note that after clicking this button, your account will be removed <strong>COMPLETELY</strong> from our systems.
                 This means that your data will be irrecoverable should you change your mind and want to reinstate your account in the future.
             </p>
             <br />

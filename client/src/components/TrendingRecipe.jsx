@@ -22,11 +22,11 @@ const TrendingRecipe = ({ postTitle, postBody, postPic, postId }) => {
       onClick={() => goTo(`/forum/thread/` + postId)}
     >
       {postPicSequenced && (
-        <img className='trending-recipe-img' src={postPicSequenced} alt={postTitle || "Recipe image"} />
+        <img className='trending-recipe-img' src={postPicSequenced} alt='' />
       )}
       <div id="tr-layout">
         <h5 className='tr-title'>{postTitle}</h5>
-        <p>{postBody}</p>
+        <p className='tr-desc'>{postBody}</p>
       </div>
     </div>
   );

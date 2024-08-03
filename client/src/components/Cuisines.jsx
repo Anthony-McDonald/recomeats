@@ -131,9 +131,7 @@ const Cuisines = ({userCuisines, getCuisines}) => {
   return (
     <div id="cuisines">
       <h3 className='cuisine-header'>Your current cuisines are:</h3>
-      {/* if true */}
       {isCuisineAdding?
-      // first component
       <>
         <div className="btn-group" role="group" aria-label="Basic checkbox toggle button group">
           <label className={`btn btn-outline-primary ${isChecked.chinese ? 'active' : ''}`}>
@@ -203,7 +201,6 @@ const Cuisines = ({userCuisines, getCuisines}) => {
         <button className="btn btn-primary mr-left confirm-btn" onClick={confirmHandler}>Confirm Cuisines</button>
         </>
         : 
-        // second component, if false
         <div className='cuisine-button-formatter'>
         <ul className='mt-2 list-group list-group-horizontal cuisines'>
         {userCuisines.length === 0 ? (
@@ -225,13 +222,6 @@ const Cuisines = ({userCuisines, getCuisines}) => {
           ) : <button className="btn btn-primary mr-left add-cuisine-btn"onClick={addCuisineSwitch}>Add Cuisine</button>}
       </div>
       }
-
-    {/* {isCuisineAdding ? (
-            null
-          ) : <button className="btn btn-primary mr-left add-cuisine-btn"onClick={addCuisineSwitch}>Add Cuisine</button>} */}
-
-
-
     </div>
   );
 };

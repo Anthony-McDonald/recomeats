@@ -1,41 +1,64 @@
 .nutrient-info {
-    width: 90%;
-    margin: auto;
-    font-family: Arial, sans-serif;
-  }
+  padding: 1rem;
+  background-color: #f4f1ea;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  min-width: 15rem;
+  max-width: 30rem;
+  width: 100%;
+  box-sizing: border-box;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+
+.nutrient-heading {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #865D36;
+  text-align: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #AC8968;
+}
   
-  .nutrient-bar {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-  }
+.nutrient-bar {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
   
-  .nutrient-label {
-    width: 30%;
-    text-transform: capitalize;
-    font-weight: bold;
-    color: white;
-  }
+.nutrient-label {
+  flex: 1;
+  font-weight: 500;
+  color: #3e362e;
+}
   
-  .bar-container {
-    width: 70%;
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
+.bar-container {
+  flex: 3;
+  background-color: #A69080;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  margin-left: 0.5rem;
+  position: relative;
+}
+
+.bar {
+  height: 20px;
+  background-color: #865D36;
+  border-radius: 5px;
+  transition: width 0.5s ease;
+}
   
-  .bar {
-    height: 20px;
-    background-color: #4CAF50;
-    border-radius: 5px;
-    transition: width 0.5s ease;
-  }
-  
-  .bar-value {
-    position: absolute;
-    right: 10px;
-    color: white;
-    font-weight: bold;
-    font-size: 0.9em;
-  }
+.bar-value {
+  position: absolute;
+  top: 60%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 0.9em;
+  pointer-events: none;
+}
   
