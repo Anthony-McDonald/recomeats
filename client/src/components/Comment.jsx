@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/comment-box.css';
 import Interactions from './Interactions';
 
-const Comment = ({ comment, getUpvoteInfo, level = 0, postReply, getUserInfo }) => {
+const Comment = ({ comment, getUpvoteInfo, level = 0, postReply, getUserInfo, addNotif, original_post_id}) => {
   const [username, setUsername] = useState("");
   const [upvotes, setUpvotes] = useState(0);
   const [type, setType] = useState("");
@@ -78,14 +78,14 @@ const Comment = ({ comment, getUpvoteInfo, level = 0, postReply, getUserInfo }) 
         <div id="msg-text">{comment.body}</div>
         <div id="interactions">
           {type && idPassed !== null ? (
-            <Interactions type={type} post_id={idPassed} upvotes={upvotes} getUpvotes={getUpvotes} postReply={postReply} />
+            <Interactions type={type} post_id={idPassed} upvotes={upvotes} getUpvotes={getUpvotes} postReply={postReply} addNotif={addNotif} original_post_id={original_post_id}/>
           ) : (
             <p>Loading interactions...</p>
           )}
         </div>
       </div>
       {comment.replies.map((reply, index) => (
-        <Comment key={index} comment={reply} getUpvoteInfo={getUpvoteInfo} level={level + 1} postReply={postReply} getUserInfo={getUserInfo} />
+        <Comment key={index} comment={reply} getUpvoteInfo={getUpvoteInfo} level={level + 1} postReply={postReply} getUserInfo={getUserInfo} addNotif={addNotif} original_post_id={original_post_id} />
       ))}
     </div>
   );

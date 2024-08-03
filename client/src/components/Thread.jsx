@@ -9,7 +9,7 @@ import Comment from './Comment';
 import NutrientInfo from './NutrientInfo';
 import CommentModal from './CommentModal';
 
-const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo }) => {
+const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif }) => {
   const [ingredients, setIngredients] = useState([]);
   const [upvotes, setUpvotes] = useState(0);
   const [comments, setComments] = useState([]);
@@ -45,6 +45,7 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo }) => {
         body: requestBody,
       });
       fetchCommentsAndReplies(id);
+      addNotif(14,id, "comment")
     } catch (error) {
       console.error("Error posting comment:", error);
     }
@@ -117,6 +118,7 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo }) => {
         body: requestBody,
       });
       reload()
+      addNotif(14, id, "reply")
     } catch (error) {
       console.error("Error posting comment:", error);
     }
@@ -169,13 +171,13 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo }) => {
         <div id="thr-l">
           <RecipeThreadDiv post_id={id} getUserInfo={getUserInfo} getImageName={getImageName} getIngredients={getIngredients} ingredients={ingredients} />
           <div id="interaction-div">
-            <Interactions type={"post"} post_id={id} upvotes={upvotes} getUpvotes={getUpvotes} commentBodyResult={newComment} registerComment={registerComment} postId={id} />
+            <Interactions type={"post"} post_id={id} upvotes={upvotes} getUpvotes={getUpvotes} commentBodyResult={newComment} registerComment={registerComment} postId={id} addNotif={addNotif} original_post_id={id}/>
             <CommentModal modalId={1} type={"post"} commentBodyResult={newComment} registerComment={registerComment} postReply={postReply} />
             {isLoading ? (
               <p>Loading...</p>
             ) : (
               comments.map((comment, index) => (
-                <Comment key={index} comment={comment} getUpvoteInfo={getUpvoteInfo} getUserInfo={getUserInfo} postReply={postReply} />
+                <Comment key={index} comment={comment} getUpvoteInfo={getUpvoteInfo} getUserInfo={getUserInfo} postReply={postReply} addNotif={addNotif} original_post_id={id} />
               ))
             )}
           </div>

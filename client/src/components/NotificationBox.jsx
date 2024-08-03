@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import '../css/notification-box.css';
 
-const NotificationBox = ({ user_sent_id, notif_id, post_id, notif_type, getNotifs }) => {
+const NotificationBox = ({notif_id, post_id, notif_type, getNotifs }) => {
     const [message, setMessage] = useState("");
 
     useEffect(() => {
@@ -14,7 +14,7 @@ const NotificationBox = ({ user_sent_id, notif_id, post_id, notif_type, getNotif
                 notificationMessage = "replied to your comment";
                 break;
             case "upvote":
-                notificationMessage = "upvoted your post";
+                notificationMessage = "upvoted your post/comment";
                 break;
             default:
                 notificationMessage = "interacted with your post";

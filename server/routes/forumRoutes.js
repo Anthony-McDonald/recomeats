@@ -93,7 +93,6 @@ router.get("/thread/:thread_id", authorisation, asyncHandler(async (req, res) =>
 router.post("/newcomment", authorisation, asyncHandler(async (req, res) => {
     const { post_id, body } = req.body;
     const user_id = req.user.id;
-    console.log("potato:", post_id, body)
 
     const newComment = await pool.query("INSERT INTO Comments (user_id, post_id, body) VALUES ($1,$2,$3) RETURNING *",
     [user_id, post_id, body]);
@@ -265,6 +264,7 @@ router.post("/newnotif", authorisation, asyncHandler(async (req, res) => {
     const { user_notifying_id, post_id, notif_type } = req.body;
     const user_id = req.user.id;
 
+    console.log(user_notifying_id, post_id, notif_type)
     const newNotif = await pool.query("INSERT INTO Notifications (user_notifying_id, user_sent_id, post_id, notif_type) VALUES ($1,$2,$3,$4) RETURNING *",
         [user_notifying_id, user_id, post_id, notif_type]);
     

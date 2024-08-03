@@ -45,7 +45,6 @@ const NotificationsModal = () => {
                                 notifications.map((notification) => (
                                     <div key={notification.notif_id} className="notification">
                                         <NotificationBox 
-                                            user_sent_id={notification.user_sent_id} 
                                             notif_id={notification.notif_id} 
                                             post_id={notification.post_id} 
                                             notif_type={notification.notif_type} 

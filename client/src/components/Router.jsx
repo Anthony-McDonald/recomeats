@@ -40,6 +40,26 @@ const Router = () => {
     }
   }
 
+  async function addNotif(user_notifying_id, post_id, notif_type) {
+    alert("addnotif called")
+    try {
+      const body = {user_notifying_id, post_id, notif_type};
+      const requestBody = JSON.stringify(body);
+      const response = await fetch("http://localhost:5000/forum/newnotif/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "token": localStorage.getItem("token")
+        },
+        body: requestBody
+      });
+      alert(response);
+
+    } catch (error) {
+      console.error("Error posting manual recipe:", error)
+    }
+  }
+
   async function getCuisines() {
     try {
       const response = await fetch("http://localhost:5000/cuisines/getuserpreferences", {
@@ -138,6 +158,8 @@ const Router = () => {
   };
 
 
+
+
   const authenticateSwitch = (input) => {
     setIsAuthenticated(input);
   };
@@ -155,12 +177,12 @@ const Router = () => {
     },
     {
       path:"/forum",
-      element: isAuthenticated ? <Forum setAuth={authenticateSwitch} getUserInfo={getUserInfo} getImageName={getImageName} getUpvoteInfo={getUpvoteInfo}/> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
+      element: isAuthenticated ? <Forum setAuth={authenticateSwitch} getUserInfo={getUserInfo} getImageName={getImageName} getUpvoteInfo={getUpvoteInfo} addNotif={addNotif}/> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
       errorElement: <ErrorPage />,
     },
     {
       path:"/forum/thread/:id",
-      element: isAuthenticated ? <Thread setAuth={authenticateSwitch} getUserInfo={getUserInfo} getImageName={getImageName} getUpvoteInfo={getUpvoteInfo} /> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
+      element: isAuthenticated ? <Thread setAuth={authenticateSwitch} getUserInfo={getUserInfo} getImageName={getImageName} getUpvoteInfo={getUpvoteInfo} addNotif={addNotif} /> : <RedirectComponent setAuth={authenticateSwitch} isAuth={isAuthenticated}/>,
       errorElement: <ErrorPage />,
     },
   ]);

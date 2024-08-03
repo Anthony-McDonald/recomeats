@@ -7,7 +7,7 @@ import '../css/interaction.css'
 import { useState } from 'react';
 import CommentModal from './CommentModal';
 
-const Interactions = ({type, post_id, getUpvotes, upvotes, commentBodyResult, registerComment, postReply}) => {
+const Interactions = ({type, post_id, getUpvotes, upvotes, commentBodyResult, registerComment, postReply, addNotif, original_post_id}) => {
   const [isUpvoted, setIsUpvoted] = useState(false);
   const [nextStage, setNextStage] = useState("");
 
@@ -69,6 +69,10 @@ const Interactions = ({type, post_id, getUpvotes, upvotes, commentBodyResult, re
     });
     getUpvotes()
     getUpvoteStatus(id)
+    if (!isUpvoted) {
+      addNotif(14, original_post_id, "upvote");
+    }
+
 
   } catch (error) {
     console.error("Error upvoting:", error)
