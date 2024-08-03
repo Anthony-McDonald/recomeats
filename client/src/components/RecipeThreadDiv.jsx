@@ -7,11 +7,11 @@ import RecipeImageBox from './RecipeImageBox';
 const RecipeThreadDiv = ({ post_id, getUserInfo, getImageName, getIngredients, ingredients }) => {
   const [dataToLoad, setDataToLoad] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [madeUserImage, setMadeUserImage] = useState("");
 
   useEffect(() => {
     fetchData();
   }, []);
-
 
   const fetchData = async () => {
     try {
@@ -27,21 +27,28 @@ const RecipeThreadDiv = ({ post_id, getUserInfo, getImageName, getIngredients, i
 
       const parseRes = await response.json();
       const userInfo = await getUserInfo(parseRes.user_id);
-      await getIngredients(parseRes.recipe_id)
+      await getIngredients(parseRes.recipe_id);
+
       setUserData(userInfo);
       setDataToLoad(parseRes);
+
+      // Set the user image after fetching user data
+      if (userInfo && userInfo.profile_image) {
+        setMadeUserImage(`/images/profile-images/${userInfo.profile_image}.png`);
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-
-
-
   return (
     <div id="recipe-thread-div">
       <div id="user-box">
-        <img className='usr-img' src="/images/1.jpg" alt="usr-img" />
+        {madeUserImage ? (
+          <img className='usr-img' src={madeUserImage} alt="usr-img" />
+        ) : (
+          <p>Loading image...</p>
+        )}
         <h2 className='user-text'>{userData ? `${userData.first_name} ${userData.last_name}` : 'Loading...'}</h2>
         <p id="timestamp">5 hours ago</p>
       </div>
