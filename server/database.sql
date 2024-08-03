@@ -107,3 +107,10 @@ CREATE TABLE Upvotes (
     PRIMARY KEY (user_id, item_id, item_type),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
+
+CREATE TABLE Notifications (
+    notif_id INT NOT NULL,
+    user_notifying_id INT NOT NULL,
+    user_sent_id INT NOT NULL,
+    notif_type VARCHAR(10) NOT NULL CHECK (notif_type IN ('comment','reply','upvote'))
+);
