@@ -67,7 +67,6 @@ router.get("/threadlist", authorisation, asyncHandler(async (req, res) => {
         created_at: DateTime.fromJSDate(post.created_at).toLocaleString(DateTime.DATETIME_SHORT_WITH_SECONDS),
     }));
 
-    // Send the response
     res.json(response);
 }));
 
@@ -138,7 +137,6 @@ router.get("/commentlist", authorisation, asyncHandler(async (req, res) => {
         created_at: DateTime.fromJSDate(comment.created_at).toLocaleString(DateTime.DATETIME_SHORT_WITH_SECONDS),
     }));
 
-    // Send the response
     res.json(response);
 }));
 
@@ -256,8 +254,6 @@ router.get("/getimage", authorisation, asyncHandler(async (req, res) => {
     const response = {
         imageUrl: posts.rows[0].image_store
     };
-
-    // Send the response
     
     res.json(response);
 }));
@@ -277,8 +273,6 @@ router.post("/newnotif", authorisation, asyncHandler(async (req, res) => {
         };
     
         res.json(response);
-
-
 }));
 
 
@@ -297,9 +291,8 @@ router.get("/getusernotifs", authorisation, asyncHandler(async (req, res) => {
     const user_id = req.user.id;
     const posts = await pool.query("SELECT * FROM Notifications WHERE user_notifying_id = $1",[user_id]);
     const response = posts.rows
-
-    // Send the response
     
     res.json(response);
 }));
+
 module.exports = router;
