@@ -33,7 +33,7 @@ const NotificationsModal = () => {
                 View Notifications [{notificationCount}]
             </button>
 
-            <div className="modal fade modal-cover" id="Modal" tabIndex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div className="modal fade modal-cover" id="NotifModal" tabIndex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">
