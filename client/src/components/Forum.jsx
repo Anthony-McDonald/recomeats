@@ -93,7 +93,7 @@ const Forum = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo}) => {
 
   return (
     <div id='forum-div'>
-      <ForumHeader/>
+      <ForumHeader getUserInfo={getUserInfo}/>
       <div className="forum-sort-post">
         <div className="sortbox">
           <button type="button" className="btn btn-primary">Sort By</button>

@@ -5,21 +5,21 @@ import '../css/edit-info-modal.css';
 
 const CommentModal = ({ parent_id, type, commentBodyResult, registerComment, modalId, postReply }) => {
     const [inputs, setInputs] = useState({
-        commentBody: commentBodyResult || '' // Initialize with commentBodyResult or fallback to an empty string
+        commentBody: commentBodyResult || ''
     });
 
     const { commentBody } = inputs;
 
     useEffect(() => {
         setInputs({
-            commentBody: commentBodyResult || '' // Ensure fallback to empty string if commentBodyResult is undefined
+            commentBody: commentBodyResult || '' 
         });
     }, [commentBodyResult]);
 
     const closePress = () => {
         setTimeout(() => {
             setInputs({
-                commentBody: commentBodyResult || '' // Ensure fallback when resetting after closing
+                commentBody: commentBodyResult || '' 
             });
         }, 1000);
     };

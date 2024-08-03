@@ -75,8 +75,9 @@ const Router = () => {
   const getUserInfo = async (id) => {
     try {
       const url = new URL("http://localhost:5000/users/getuser/profile");
-      url.searchParams.append("user_id", id);
-
+      if (id != null) {
+        url.searchParams.append("user_id", id);
+      }
       const response = await fetch(url, {
         method: "GET",
         headers: {
