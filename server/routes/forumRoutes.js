@@ -262,4 +262,44 @@ router.get("/getimage", authorisation, asyncHandler(async (req, res) => {
     res.json(response);
 }));
 
+
+// add a notification
+
+router.post("/newnotif", authorisation, asyncHandler(async (req, res) => {
+    const { user_notifying_id, notif_type } = req.body;
+    const user_id = req.user.id;
+
+    const newNotif = await pool.query("INSERT INTO Notifications (user_notifying_id, user_sent_id, notif_type) VALUES ($1,$2,$3) RETURNING *",
+        [user_notifying_id, user_id, notif_type]);
+    
+        const response = {
+            newNotif: newNotif.rows[0]
+        };
+    
+        res.json(response);
+
+
+}));
+
+
+// delete a notification
+
+router.delete("/deletenotif", authorisation, asyncHandler(async (req, res) => {
+    const { notif_id } = req.body;
+    await pool.query("DELETE FROM Notifications WHERE notif_id = $1", [notif_id])
+    
+    res.send();
+}));
+
+// get a user's current notifications
+
+router.get("/getusernotifs", authorisation, asyncHandler(async (req, res) => {
+    const user_id = req.user.id;
+    const posts = await pool.query("SELECT * FROM Notifications WHERE user_notifying_id = $1",[user_id]);
+    const response = posts.rows
+
+    // Send the response
+    
+    res.json(response);
+}));
 module.exports = router;
