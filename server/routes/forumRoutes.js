@@ -281,7 +281,6 @@ router.post("/newnotif", authorisation, asyncHandler(async (req, res) => {
 router.delete("/deletenotif", authorisation, asyncHandler(async (req, res) => {
     const { notif_id } = req.body;
     await pool.query("DELETE FROM Notifications WHERE notif_id = $1", [notif_id])
-    
     res.send();
 }));
 

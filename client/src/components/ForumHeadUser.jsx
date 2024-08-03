@@ -10,10 +10,8 @@ const ForumHeadUser = ({getUserInfo}) => {
         const fetchData = async () => {
             try {
                 const imageNum = await getUserInfo(); // Wait for the async function to resolve
-                console.log(imageNum.profile_image);
                 const fullUrlToBe = "./images/profile-images/" + imageNum.profile_image + ".png"
                 setFullProfileUrl(fullUrlToBe)
-                console.log(fullProfileUrl)
             } catch (error) {
                 console.error("Error fetching user info:", error);
             }

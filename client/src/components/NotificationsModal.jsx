@@ -1,26 +1,31 @@
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import '../css/edit-info-modal.css'
+import '../css/edit-info-modal.css';
 import NotificationBox from './NotificationBox';
-const NotificationsModal = ({ updateUserProfileInfo, firstNameResult, lastNameResult, profileImageResult}) => {
-    const [notifications, setNotifications] = useState([
-        {
-            "notif_id": 2,
-            "user_notifying_id": 14,
-            "user_sent_id": 14,
-            "post_id": 54,
-            "notif_type": "comment"
-        },
-        {
-            "notif_id": 2,
-            "user_notifying_id": 14,
-            "user_sent_id": 14,
-            "post_id": 54,
-            "notif_type": "upvote"
-        },
-    ]);
-    const notificationCount = notifications.length
+
+const NotificationsModal = () => {
+    const [notifications, setNotifications] = useState(null);
+
+    useEffect(() => {
+        getNotifs();
+    }, []);
+
+    async function getNotifs() {
+        try {
+            const response = await fetch("http://localhost:5000/forum/getusernotifs/", {
+                method: "GET",
+                headers: { token: localStorage.getItem("token") }
+            });
+
+            const parseRes = await response.json();
+            setNotifications(parseRes);
+        } catch (error) {
+            console.log("issues in notification retrieval", error);
+        }
+    }
+
+    const notificationCount = notifications ? notifications.length : 0;
 
     return (
         <>
@@ -36,14 +41,21 @@ const NotificationsModal = ({ updateUserProfileInfo, firstNameResult, lastNameRe
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                        {notifications.map((notification) => (
-                <div key={notification.notif_id} className="notification">
-                    {/* <p>Notification ID: {notification.notif_id}</p>
-                    <p>User Notifying ID: {notification.user_notifying_id}</p>
-                    <p>Notification Type: {notification.notif_type}</p> */}
-                    <NotificationBox user_sent_id={notification.user_sent_id} notif_id={notification.notif_id} post_id={notification.post_id} notif_type={notification.notif_type}/>
-                </div>
-            ))}
+                            {notifications ? (
+                                notifications.map((notification) => (
+                                    <div key={notification.notif_id} className="notification">
+                                        <NotificationBox 
+                                            user_sent_id={notification.user_sent_id} 
+                                            notif_id={notification.notif_id} 
+                                            post_id={notification.post_id} 
+                                            notif_type={notification.notif_type} 
+                                            getNotifs={getNotifs}
+                                        />
+                                    </div>
+                                ))
+                            ) : (
+                                <p>Loading notifications...</p>
+                            )}
                         </div>
                         <div className="modal-footer">
                             <button type="button" id="closeBtn" className="header-button btn btn-secondary" data-bs-dismiss="modal">Close</button>
