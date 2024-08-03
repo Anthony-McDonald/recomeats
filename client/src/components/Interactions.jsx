@@ -6,7 +6,6 @@ import CommentModal from './CommentModal';
 
 const Interactions = ({type, post_id, getUpvotes, upvotes, commentBodyResult, registerComment, postReply, addNotif, original_post_id}) => {
   const [isUpvoted, setIsUpvoted] = useState(false);
-  console.log(type)
   const nextStage = type === "post" ? "comment" : "reply";
 
   useEffect(() => {
@@ -55,7 +54,7 @@ const Interactions = ({type, post_id, getUpvotes, upvotes, commentBodyResult, re
       getUpvotes();
       getUpvoteStatus(id);
       if (!isUpvoted) {
-        addNotif("post", original_post_id, "upvote");
+        addNotif(type, original_post_id, id, "upvote");
       }
     } catch (error) {
       console.error("Error upvoting:", error);

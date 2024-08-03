@@ -103,7 +103,6 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif })
   };
 
   async function postReply(parent_id, parent_type, commentBody) {
-    alert(parent_type)
     try {
       const requestBody = JSON.stringify({
         parent_id: parent_id,

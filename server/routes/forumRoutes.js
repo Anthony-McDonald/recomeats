@@ -264,7 +264,6 @@ router.post("/newnotif", authorisation, asyncHandler(async (req, res) => {
     const { user_notifying_id, post_id, notif_type } = req.body;
     const user_id = req.user.id;
 
-    console.log(user_notifying_id, post_id, notif_type)
     const newNotif = await pool.query("INSERT INTO Notifications (user_notifying_id, user_sent_id, post_id, notif_type) VALUES ($1,$2,$3,$4) RETURNING *",
         [user_notifying_id, user_id, post_id, notif_type]);
     
@@ -297,7 +296,7 @@ router.get("/getusernotifs", authorisation, asyncHandler(async (req, res) => {
 router.get("/getuserposted", authorisation, asyncHandler(async (req, res) => {
    const {type, id} = req.query;
    let response;
-    console.log("getting the " + type + " with an id of " + id)
+
    switch (type) {
     case "post":
         response = await pool.query("SELECT user_id From posts WHERE post_id = $1", [id])
@@ -312,7 +311,6 @@ router.get("/getuserposted", authorisation, asyncHandler(async (req, res) => {
         response = await pool.query("SELECT user_id FROM upvotes WHERE item_id = $1 AND item_type IN ('comment','reply','upvote')", [id]);
         break;
    }
-   console.log(response.rows[0].user_id + "  this is the response")
    return res.json(response.rows[0]);
 }))
 

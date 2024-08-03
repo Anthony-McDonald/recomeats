@@ -10,7 +10,6 @@ const {imgMock} = require("../mockdata/mockVisor")
 // get info
 router.get("/info", authorisation, asyncHandler(async (req,res,next) => {
     const {recipe_id} = req.query
-    console.log(recipe_id)
 
     const info = await pool.query("SELECT * FROM NutriInfo WHERE recipe_id = $1", [recipe_id]);
     const infoRes = info.rows[0]
@@ -27,7 +26,6 @@ router.post("/visor", authorisation, asyncHandler(async (req, res, next) => {
 
     // const imgInfo = await callVisor(imagePath);
     const imgInfo = imgMock
-    console.log(imgMock)
     
 
     res.json(aggregateNutritionalInfo(imgInfo, recipe_id, user_id));

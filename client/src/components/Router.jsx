@@ -43,8 +43,7 @@ const Router = () => {
   async function addNotif(type, post_id, id, notif_type) {
     try {
       const userResponse = await getUserWhoPosted(type, id);
-      console.log("userid", userResponse + " with ",type, id, notif_type )
-      const user_notifying_id = userResponse?.user_id; // Safely access user_id
+      const user_notifying_id = userResponse?.user_id; 
       if (!user_notifying_id) {
         console.error("user_notifying_id is undefined");
         return; 
@@ -63,7 +62,6 @@ const Router = () => {
         body: requestBody
       });
       
-      alert(response);
     } catch (error) {
       console.error("Error posting notification:", error);
     }
