@@ -9,20 +9,23 @@ const NotificationsModal = ({ updateUserProfileInfo, firstNameResult, lastNameRe
             "notif_id": 2,
             "user_notifying_id": 14,
             "user_sent_id": 14,
-            "notif_type": "upvote"
+            "post_id": 54,
+            "notif_type": "comment"
         },
         {
-            "notif_id": 4,
+            "notif_id": 2,
             "user_notifying_id": 14,
             "user_sent_id": 14,
-            "notif_type": "comment"
-        }
+            "post_id": 54,
+            "notif_type": "upvote"
+        },
     ]);
+    const notificationCount = notifications.length
 
     return (
         <>
             <button type="button" className="header-button btn btn-primary log-button" data-bs-toggle="modal" data-bs-target="#Modal">
-                View Notifications [1]
+                View Notifications [{notificationCount}]
             </button>
 
             <div className="modal fade modal-cover" id="Modal" tabIndex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
@@ -38,12 +41,12 @@ const NotificationsModal = ({ updateUserProfileInfo, firstNameResult, lastNameRe
                     {/* <p>Notification ID: {notification.notif_id}</p>
                     <p>User Notifying ID: {notification.user_notifying_id}</p>
                     <p>Notification Type: {notification.notif_type}</p> */}
-                    <NotificationBox user_sent_id={notification.user_sent_id} notif_type={notification.notif_type}/>
+                    <NotificationBox user_sent_id={notification.user_sent_id} notif_id={notification.notif_id} post_id={notification.post_id} notif_type={notification.notif_type}/>
                 </div>
             ))}
                         </div>
                         <div className="modal-footer">
-                            <button onClick={() => closePress()} type="button" id="closeBtn" className="header-button btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" id="closeBtn" className="header-button btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
