@@ -4,11 +4,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/comment-box.css';
 import Interactions from './Interactions';
 
-const Comment = ({ comment, getUpvoteInfo, level = 0, postReply }) => {
+const Comment = ({ comment, getUpvoteInfo, level = 0, postReply, getUserInfo }) => {
   const [username, setUsername] = useState("");
   const [upvotes, setUpvotes] = useState(0);
   const [type, setType] = useState("");
   const [idPassed, setIdPassed] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
+  const [madeUserImage, setMadeUserImage] = useState("");
 
   useEffect(() => {
     if (comment) {
@@ -20,8 +22,14 @@ const Comment = ({ comment, getUpvoteInfo, level = 0, postReply }) => {
         setIdPassed(comment.comment_id);
       }
       fetchUsername(comment.user_id);
+      getUserInfo(comment.user_id).then((user) => {
+        setUserInfo(user);
+        if (user && user.profile_image) {
+          setMadeUserImage("/images/profile-images/" + user.profile_image + ".png");
+        }
+      });
     }
-  }, [comment, level]);
+  }, [comment, level, getUserInfo]);
 
   useEffect(() => {
     if (type && idPassed !== null) {
@@ -42,6 +50,7 @@ const Comment = ({ comment, getUpvoteInfo, level = 0, postReply }) => {
   const fetchUsername = async (user_id) => {
     try {
       const url = new URL("http://localhost:5000/users/getuser/username");
+      url.searchParams.append("user_id", user_id);
       const response = await fetch(url, {
         method: "GET",
         headers: {
@@ -57,10 +66,12 @@ const Comment = ({ comment, getUpvoteInfo, level = 0, postReply }) => {
   };
 
   return (
-    <div style={{ marginLeft: level * 1.2 + 'rem' }}>
+    <div style={{ marginLeft: level * 0.6 + 'rem' }}>
       <div id="comment-box">
         <div id="msg-info">
-          <img src="/images/1.jpg" className="usr-img" alt="usr" />
+          {userInfo && madeUserImage && (
+            <img src={madeUserImage} className="usr-img" alt="usr" />
+          )}
           <h5 className="txt-usr-name">{username}</h5>
           <p id="timestamp">{formatDate(comment.created_at)}</p>
         </div>
@@ -74,7 +85,7 @@ const Comment = ({ comment, getUpvoteInfo, level = 0, postReply }) => {
         </div>
       </div>
       {comment.replies.map((reply, index) => (
-        <Comment key={index} comment={reply} getUpvoteInfo={getUpvoteInfo} level={level + 1} postReply={postReply} />
+        <Comment key={index} comment={reply} getUpvoteInfo={getUpvoteInfo} level={level + 1} postReply={postReply} getUserInfo={getUserInfo} />
       ))}
     </div>
   );
