@@ -175,7 +175,7 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo }) => {
               <p>Loading...</p>
             ) : (
               comments.map((comment, index) => (
-                <Comment key={index} comment={comment} getUpvoteInfo={getUpvoteInfo} postReply={postReply} />
+                <Comment key={index} comment={comment} getUpvoteInfo={getUpvoteInfo} getUserInfo={getUserInfo} postReply={postReply} />
               ))
             )}
           </div>
