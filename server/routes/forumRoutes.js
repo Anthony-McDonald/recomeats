@@ -262,11 +262,11 @@ router.get("/getimage", authorisation, asyncHandler(async (req, res) => {
 // add a notification
 
 router.post("/newnotif", authorisation, asyncHandler(async (req, res) => {
-    const { user_notifying_id, notif_type } = req.body;
+    const { user_notifying_id, post_id, notif_type } = req.body;
     const user_id = req.user.id;
 
-    const newNotif = await pool.query("INSERT INTO Notifications (user_notifying_id, user_sent_id, notif_type) VALUES ($1,$2,$3) RETURNING *",
-        [user_notifying_id, user_id, notif_type]);
+    const newNotif = await pool.query("INSERT INTO Notifications (user_notifying_id, user_sent_id, post_id, notif_type) VALUES ($1,$2,$3,$4) RETURNING *",
+        [user_notifying_id, user_id, post_id, notif_type]);
     
         const response = {
             newNotif: newNotif.rows[0]
