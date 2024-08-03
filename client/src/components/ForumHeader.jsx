@@ -1,9 +1,19 @@
-import React from 'react';
 import '../css/forum-header.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import ForumHeadUser from './ForumHeadUser'
 
 const ForumHeader = ({getUserInfo}) => {
+
+    function goTo() {
+        const currentUrl = window.location.href;
+        if (currentUrl.includes("/thread")) {
+            window.location.href = "/forum";
+        } else {
+            const newUrl = currentUrl.replace('/forum', '')
+            window.location.href = newUrl;
+        }
+
+      }
 
     return (
         <div id="forum-header">
@@ -11,7 +21,11 @@ const ForumHeader = ({getUserInfo}) => {
             <img className="reco-logo" id="forum-reco-logo" src="/images/recomeats.png" alt="reco-logo"></img>
             <h5 className='reco-logo-subtext'>forums</h5>
             </div>
-                <ForumHeadUser getUserInfo={getUserInfo}/>
+            <div className='forum-side'>
+            <ForumHeadUser getUserInfo={getUserInfo}/>
+            <button className='btn-primary btn' onClick={() => goTo()}>back</button>
+            </div>
+
 
         </div>
     )
