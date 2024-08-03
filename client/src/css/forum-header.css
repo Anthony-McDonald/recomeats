@@ -38,3 +38,8 @@ width: 2.5rem;
     left: 10.2rem;
     top: 3rem;
 }
+
+.forum-side {
+    display: flex;
+    gap: 1rem;
+}
