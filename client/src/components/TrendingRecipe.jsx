@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import '../css/header.css'
+import '../css/header.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import '../css/trending-recipe-box.css'
+import '../css/trending-recipe-box.css';
 
-const TrendingRecipe = ({postTitle, postBody, postPic, postId}) => {
+const TrendingRecipe = ({ postTitle, postBody, postPic, postId }) => {
   const [postPicSequenced, setPostPicSequenced] = useState(null);
 
   useEffect(() => {
-    setPostPicSequenced("http://localhost:5000/uploads/" + postPic)
+    if (postPic) { 
+      setPostPicSequenced("http://localhost:5000/uploads/" + postPic);
+    }
   }, [postPic]);
 
   function goTo(here) {
@@ -19,7 +21,9 @@ const TrendingRecipe = ({postTitle, postBody, postPic, postId}) => {
       id="trending-recipe"
       onClick={() => goTo(`/forum/thread/` + postId)}
     >
-      <img className='trending-recipe-img' src={postPicSequenced} alt={postTitle || "Recipe image"} />
+      {postPicSequenced && (
+        <img className='trending-recipe-img' src={postPicSequenced} alt={postTitle || "Recipe image"} />
+      )}
       <div id="tr-layout">
         <h5 className='tr-title'>{postTitle}</h5>
         <p>{postBody}</p>
