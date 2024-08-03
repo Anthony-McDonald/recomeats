@@ -294,4 +294,26 @@ router.get("/getusernotifs", authorisation, asyncHandler(async (req, res) => {
     res.json(response);
 }));
 
+router.get("/getuserposted", authorisation, asyncHandler(async (req, res) => {
+   const {type, id} = req.query;
+   let response;
+
+   switch (type) {
+    case "post":
+        response = await pool.query("SELECT user_id From posts WHERE post_id = $1", [id])
+        break;
+    case "comment":
+        response = await pool.query("SELECT user_id From comments WHERE comment_id = $1", [id])
+        break;
+    case "reply":
+        response = await pool.query("SELECT user_id From replies WHERE reply_id = $1", [id])
+        break;
+    case "upvote":
+        response = await pool.query("SELECT user_id FROM upvotes WHERE item_id = $1 AND item_type IN ('comment','reply','upvote')", [id]);
+        break;
+   }
+
+   return res.json(response.rows[0]);
+}))
+
 module.exports = router;
