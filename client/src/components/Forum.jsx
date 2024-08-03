@@ -6,7 +6,7 @@ import ForumPostDiv from './ForumPostDiv';
 import TrendingRecipeBox from './TrendingRecipeBox';
 import PostModal from './PostModal';
 
-const Forum = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo}) => {
+const Forum = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif}) => {
   const [posts, setPosts] = useState([]);
   const [userInfo, setUserInfo] = useState({});
   const [upvoteInfo, setUpvoteInfo] = useState({});
@@ -125,6 +125,8 @@ const Forum = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo}) => {
                   upvotes={upvote.count || 0}
                   post_id={post.post_id}
                   getUpvotes={fetchUpvotes}
+                  addNotif={addNotif}
+                  
                 />
               );
             })
