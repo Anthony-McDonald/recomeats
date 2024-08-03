@@ -123,13 +123,13 @@ const PostModal = ({ getPosts }) => {
                 body: JSON.stringify({ imagePath: imgPath, recipe_id: recipe_id }) // Pass the imagePath in the body
             });
     
-            const parseRes = await response.json();
+            await response.json();
         } catch (error) {
             console.error("Error fetching data:", error);
         }
     };
+   
     
-
     return (
         <>
             <button type="button" className="header-button btn btn-primary log-button" data-bs-toggle="modal" data-bs-target="#Modal">

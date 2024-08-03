@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../css/header.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import '../css/trending-recipe-box.css';
