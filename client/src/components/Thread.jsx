@@ -165,7 +165,7 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif })
 
   return (
     <div id='thread-div'>   
-      <ForumHeader />
+      <ForumHeader getUserInfo={getUserInfo} />
       <div id="thread-wrapper">
         <div id="left-sidebar-div"></div>
         <div id="thr-l">

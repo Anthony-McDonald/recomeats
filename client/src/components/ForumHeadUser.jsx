@@ -9,8 +9,8 @@ const ForumHeadUser = ({getUserInfo}) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const imageNum = await getUserInfo(); // Wait for the async function to resolve
-                const fullUrlToBe = "./images/profile-images/" + imageNum.profile_image + ".png"
+                const imageNum = await getUserInfo();
+                const fullUrlToBe = "/images/profile-images/" + imageNum.profile_image + ".png"
                 setFullProfileUrl(fullUrlToBe)
             } catch (error) {
                 console.error("Error fetching user info:", error);
