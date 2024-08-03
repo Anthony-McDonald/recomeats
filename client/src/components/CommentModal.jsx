@@ -8,6 +8,8 @@ const CommentModal = ({ parent_id, type, commentBodyResult, registerComment, mod
         commentBody: commentBodyResult || ''
     });
 
+    
+
     const { commentBody } = inputs;
 
     useEffect(() => {

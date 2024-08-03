@@ -45,7 +45,7 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif })
         body: requestBody,
       });
       fetchCommentsAndReplies(id);
-      addNotif(14,id, "comment")
+      addNotif("post", id, post_id, "comment")
     } catch (error) {
       console.error("Error posting comment:", error);
     }
@@ -103,6 +103,7 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif })
   };
 
   async function postReply(parent_id, parent_type, commentBody) {
+    alert(parent_type)
     try {
       const requestBody = JSON.stringify({
         parent_id: parent_id,
@@ -118,7 +119,7 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif })
         body: requestBody,
       });
       reload()
-      addNotif(14, id, "reply")
+      addNotif(parent_type, id,parent_id, "reply")
     } catch (error) {
       console.error("Error posting comment:", error);
     }

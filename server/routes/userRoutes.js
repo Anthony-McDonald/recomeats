@@ -90,6 +90,7 @@ const deleteUserFromDatabase = async (user_id) => {
         "DELETE FROM UserProfiles WHERE user_id = $1",
         "DELETE FROM UserPermissions WHERE user_id = $1",
         "DELETE FROM UserCuisinePreferences WHERE user_id = $1",
+        "DELETE FROM Notifications WHERE user_sent_id = $1",
         "DELETE FROM Upvotes WHERE user_id = $1",
         "DELETE FROM Replies WHERE user_id = $1",
         "DELETE FROM Comments WHERE user_id = $1",

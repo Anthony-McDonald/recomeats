@@ -40,11 +40,20 @@ const Router = () => {
     }
   }
 
-  async function addNotif(user_notifying_id, post_id, notif_type) {
-    alert("addnotif called")
+  async function addNotif(type, post_id, id, notif_type) {
     try {
-      const body = {user_notifying_id, post_id, notif_type};
+      const userResponse = await getUserWhoPosted(type, id);
+      console.log("userid", userResponse + " with ",type, id, notif_type )
+      const user_notifying_id = userResponse?.user_id; // Safely access user_id
+      if (!user_notifying_id) {
+        console.error("user_notifying_id is undefined");
+        return; 
+      }
+  
+      
+      const body = { user_notifying_id, post_id, notif_type };
       const requestBody = JSON.stringify(body);
+      
       const response = await fetch("http://localhost:5000/forum/newnotif/", {
         method: "POST",
         headers: {
@@ -53,12 +62,13 @@ const Router = () => {
         },
         body: requestBody
       });
+      
       alert(response);
-
     } catch (error) {
-      console.error("Error posting manual recipe:", error)
+      console.error("Error posting notification:", error);
     }
   }
+  
 
   async function getCuisines() {
     try {
@@ -141,6 +151,27 @@ const Router = () => {
       const url = new URL("http://localhost:5000/forum/upvotecount");
       url.searchParams.append("type_upvoted", type);
       url.searchParams.append("upvoted_id", id);
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          token: localStorage.getItem("token")
+        }
+      });
+
+      const parseRes = await response.json();
+      return parseRes;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const getUserWhoPosted = async (type, id) => {
+    try {
+      const url = new URL("http://localhost:5000/forum/getuserposted");
+      url.searchParams.append("type", type);
+      url.searchParams.append("id", id);
 
       const response = await fetch(url, {
         method: "GET",
