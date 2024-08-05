@@ -1,3 +1,5 @@
+
+// Path to ensure that information added is valid
 module.exports = (req, res, next) => {
   const { first_name, email_address, password } = req.body;
   

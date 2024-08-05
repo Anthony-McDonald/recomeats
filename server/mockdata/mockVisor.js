@@ -1,3 +1,5 @@
+// Mock api response
+
 const imgMock = {
     "analysis_id": "1175d31e-e7ea-4781-ba28-53fa02944e20",
     "scopes": [

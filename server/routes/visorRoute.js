@@ -7,7 +7,7 @@ const callVisor = require("../middleware/foodvisor");
 const {imgMock} = require("../mockdata/mockVisor")
 
 
-// get info
+// get nutrinfo
 router.get("/info", authorisation, asyncHandler(async (req,res,next) => {
     const {recipe_id} = req.query
 
@@ -77,6 +77,7 @@ function aggregateNutritionalInfo(imgInfo, recipe_id, user_id) {
         zinc_100g: 0
     };
 
+    // For each food item in the picture, add up its nutritional information
     imgInfo.items.forEach(item => {
 
         const food = item.food[0];
@@ -91,6 +92,7 @@ function aggregateNutritionalInfo(imgInfo, recipe_id, user_id) {
     return nutriInfo;
 }
 
+// adds nutritional info to db
 const addFoodInfoToDatabase = async (user_id, recipe_id, nutriInfo) => {
     const foodAdded = await pool.query(
         "INSERT INTO NutriInfo (user_id, recipe_id, nutrient_dictionary) VALUES ($1, $2, $3) RETURNING *",
