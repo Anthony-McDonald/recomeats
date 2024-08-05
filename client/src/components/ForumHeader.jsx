@@ -1,9 +1,11 @@
 import '../css/forum-header.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import ForumHeadUser from './ForumHeadUser'
+import PostModal from './PostModal';
 
-const ForumHeader = ({getUserInfo}) => {
+const ForumHeader = ({getUserInfo, getPosts}) => {
 
+    // Go back to previous level of website
     function goTo() {
         const currentUrl = window.location.href;
         if (currentUrl.includes("/thread")) {
@@ -22,8 +24,13 @@ const ForumHeader = ({getUserInfo}) => {
             <h5 className='reco-logo-subtext'>forums</h5>
             </div>
             <div className='forum-side'>
+            <div className="postbox">
+            {/* Create a post */}
+          <PostModal getPosts={getPosts}/>
+        </div>
+        {/* User profile picture */}
             <ForumHeadUser getUserInfo={getUserInfo}/>
-            <button className='btn-primary btn' onClick={() => goTo()}>back</button>
+            <button id="back-btn" className='btn-primary btn' onClick={() => goTo()}>back</button>
             </div>
 
 

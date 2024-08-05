@@ -8,7 +8,8 @@ import Thread from './Thread'
 import { useState, useEffect } from 'react'
 import RedirectComponent from "./RedirectComponent";
 
-
+// This component is particularly large as it is a common parent component of lots of components as it 
+// is reponsible for showing different components. As so lots of functions are present, I will try my best to comment all of them
 const Router = () => {
     
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -18,6 +19,7 @@ const Router = () => {
     getCuisines(); // Fetch user cuisines when the component mounts
   }, []);
 
+  // Path to add a recipe to the database
   async function addRecipe(recipe_name, recipe_description, recipe_ingredients, recipe_instructions) {
     try {
       const requestBody = JSON.stringify({
@@ -40,6 +42,7 @@ const Router = () => {
     }
   }
 
+  // Path to add a notification to the database
   async function addNotif(type, post_id, id, notif_type) {
     try {
       const userResponse = await getUserWhoPosted(type, id);
@@ -53,7 +56,7 @@ const Router = () => {
       const body = { user_notifying_id, post_id, notif_type };
       const requestBody = JSON.stringify(body);
       
-      const response = await fetch("http://localhost:5000/forum/newnotif/", {
+      await fetch("http://localhost:5000/forum/newnotif/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -68,6 +71,7 @@ const Router = () => {
   }
   
 
+  // Path to retrieve all cuisines
   async function getCuisines() {
     try {
       const response = await fetch("http://localhost:5000/cuisines/getuserpreferences", {
@@ -87,6 +91,7 @@ const Router = () => {
     }
   }
 
+  // Path to retrieve cuisine name from id
   async function getCuisineName(cuisine_id) {
     try {
       const response = await fetch("http://localhost:5000/cuisines/getcuisine/" + cuisine_id, {
@@ -100,6 +105,7 @@ const Router = () => {
     }
   }
 
+  // Path to get user profile info
   const getUserInfo = async (id) => {
     try {
       const url = new URL("http://localhost:5000/users/getuser/profile");
@@ -121,6 +127,7 @@ const Router = () => {
     }
   };
 
+  // Path to get image name from id
   const getImageName = async (id) => {
     if (id === null) {
       return;
@@ -144,6 +151,7 @@ const Router = () => {
     }
   };
 
+  // Path to get whether something has been upvoted
   const getUpvoteInfo = async (id, type) => {
     try {
       const url = new URL("http://localhost:5000/forum/upvotecount");
@@ -165,6 +173,7 @@ const Router = () => {
     }
   };
 
+  // Find out which user_id posted something
   const getUserWhoPosted = async (type, id) => {
     try {
       const url = new URL("http://localhost:5000/forum/getuserposted");
@@ -186,13 +195,12 @@ const Router = () => {
     }
   };
 
-
-
-
+  // sets whether user is authenticated or not
   const authenticateSwitch = (input) => {
     setIsAuthenticated(input);
   };
 
+  // Router that shows different components dependent on which path is in the url
   const router = createBrowserRouter([
     {
       path: "/",

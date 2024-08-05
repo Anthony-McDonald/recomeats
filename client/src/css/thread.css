@@ -26,7 +26,11 @@
     #related-threads {
         display: flex !important;
     }
+    #thr-r {
+        display: flex !important;
+    }
 }
+
 
 #recipe-thread-div {
     display: flex;
@@ -54,13 +58,25 @@ flex-shrink: 0;
 }
 
 #thr-r {
-    height: 100%;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: start;
-    height: 60rem;
+    height: auto;
+    width: 100%;
+    margin: 2rem;
+    top: 5px;
 }
+
+.nutrient-info-wrapper {
+    position: sticky;
+    top: 20px; 
+  }
+
+#thr-l {
+    margin: 0.8rem;
+}
+
 
 #related-threads {
     display: none;
@@ -70,12 +86,9 @@ flex-shrink: 0;
     margin: 1rem;
     align-items: center;
     height: 20rem;
-    background-color: #93785B;
     width: 17rem;
     top: 1rem;
-    position: sticky; 
     right: 0.3rem;  
-    overflow: scroll;
     padding-top: 1rem;
 
 }
@@ -102,18 +115,20 @@ flex-shrink: 0;
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
     margin-left: 0.5rem;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     line-height: 1.3rem;
+    
 }
 
 #thread-desc {
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
 }
 
 #ingredients {
     display: flex;
     justify-content: start;
     margin-left: 0.2rem;
+    flex-wrap: wrap;
 }
 
 #ingredient {

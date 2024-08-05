@@ -4,6 +4,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '../css/edit-info-modal.css';
 
 const PostModal = ({ getPosts }) => {
+    // Value stores for posts
     const [inputs, setInputs] = useState({
         title: "",
         body: "",
@@ -11,8 +12,9 @@ const PostModal = ({ getPosts }) => {
         image: null,
     });
     const [recipes, setRecipes] = useState([]);
-    const [error, setError] = useState(""); // State to manage error message
+    const [error, setError] = useState("");
 
+    // Get all existing recipes for this user
     useEffect(() => {
         getRecipes();
     }, []);
@@ -30,6 +32,7 @@ const PostModal = ({ getPosts }) => {
         }
     };
 
+    // Path to get recipes for user
     async function getRecipes() {
         try {
             const response = await fetch("http://localhost:5000/recipes/getrecipes/", {
@@ -44,6 +47,7 @@ const PostModal = ({ getPosts }) => {
         }
     }
 
+    // Path to post the created post
     async function createPost(title, body, recipe_id, image_store) {
         try {
             const requestBody = JSON.stringify({
@@ -66,6 +70,8 @@ const PostModal = ({ getPosts }) => {
         }
     }
 
+    // path to upload an image
+
     async function imageUpload(file) {
         try {
             const formData = new FormData();
@@ -86,6 +92,7 @@ const PostModal = ({ getPosts }) => {
         }
     }
 
+    // Reset the form area and the error message
     function resetForm() {
         const resetInputs = {
             title: "",
@@ -94,9 +101,10 @@ const PostModal = ({ getPosts }) => {
             image: null,
         };
         setInputs(resetInputs);
-        setError(""); // Reset error message
+        setError(""); 
     }
 
+    // On submit, if all criteria met, post and create nutritional info for posted photograph
     const onSubmitForm = async (e) => {
         e.preventDefault();
         if (!title.trim()) {
@@ -109,6 +117,7 @@ const PostModal = ({ getPosts }) => {
         resetForm();
     };
 
+    // Path to retrieve nutritional info from uploaded image
     const gatherStats = async (prepath, recipe_id) => {
         const imgPath = "./uploads/" + prepath;
         try {
@@ -155,6 +164,7 @@ const PostModal = ({ getPosts }) => {
                                     <textarea value={body} onChange={onChange} className="form-control" id="body" rows="3"></textarea>
                                 </div>
                                 <div className="mb-3">
+                                    {/* Dropdown area for user to select which recipe their post refers to */}
                                     <label htmlFor="recipe_selected" className="form-label">Select Recipe</label>
                                     <select value={recipe_selected} onChange={onChange} id="recipe_selected" className="form-select">
                                         <option value="">Choose a recipe</option>

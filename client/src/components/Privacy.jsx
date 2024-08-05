@@ -1,9 +1,9 @@
-import React from 'react';
-import '../css/privacy.css'
-import 'bootstrap/dist/css/bootstrap.min.css'; 
+import '../css/privacy.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+// No comments here as self explanatory
 const Privacy = () => {
-
     return (
         <div id='privacy-div'>
             <h1>Our Company Privacy Policy</h1>
@@ -49,15 +49,9 @@ const Privacy = () => {
                 <li>Process your recipes and manage your account.</li>
                 <li>Gain detailed statistical information regarding your types of recipes on the platform</li>
             </ul>
-            <p>POTENTIAL?? If you agree, Our Company will share your data with our partner companies so that they may offer you their products and services.</p>
-            <ul>
-                <li>[List organizations that will receive data]</li>
-            </ul>
-            <p>POTENTIAL?? When Our Company processes your order, it may send your data to, and also use the resulting information from, credit reference agencies to prevent fraudulent purchases.</p>
-
             <h3 id="data-storage">How do we store your data?</h3>
-            <p>Our Company securely stores your data at [enter the location and describe security precautions taken].</p>
-            <p>Our Company will keep your [enter type of data] for [enter time period]. Once this time period has expired, we will delete your data by [enter how you delete users’ data].</p>
+            <p>Our Company securely stores your data at our data warehouse hosted by AWS. All data is anonymised and encrypted before being stored ensuring your safety</p>
+            <p>Our Company will keep your data until you delete your account. Data is removed from the database effective immediately and irrecoverable henceforth.</p>
 
             <h3 id="data-protection-rights">What are your data protection rights?</h3>
             <p>Our Company would like to make sure you are fully aware of all of your data protection rights. Every user is entitled to the following:</p>

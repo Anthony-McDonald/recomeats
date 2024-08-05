@@ -85,6 +85,8 @@ router.get("/is-verify", authorisation, asyncHandler(async (req, res) => {
     res.json(true);
 }))
 
+// List of queries in order required to delete user from database whilst avoiding foreign key constraints
+
 const deleteUserFromDatabase = async (user_id) => {
     const queries = [
         "DELETE FROM UserProfiles WHERE user_id = $1",
@@ -106,11 +108,15 @@ const deleteUserFromDatabase = async (user_id) => {
     }
 };
 
+// Delete user while logged in
+
 router.delete("/deleteuser", authorisation, asyncHandler(async (req, res, next) => {
     const user_id = req.user.id;
     await deleteUserFromDatabase(user_id);
     res.send();
 }));
+
+// Delete user with id
 
 router.delete("/deleteuserasadmin", asyncHandler(async (req, res, next) => {
     const { user_id } = req.body;
@@ -119,6 +125,8 @@ router.delete("/deleteuserasadmin", asyncHandler(async (req, res, next) => {
     res.send(toSend);
 }));
 
+// Change user information
+
 const updateUser = async (user_id, user_name, email_address, password_hash) => {
     return pool.query(
         "UPDATE Users SET user_name = $1, email_address = $2, password_hash = $3 WHERE user_id = $4 RETURNING *",
@@ -126,12 +134,16 @@ const updateUser = async (user_id, user_name, email_address, password_hash) => {
     );
 };
 
+// Change user profile information
+
 const updateUserProfile = async (user_id, first_name, last_name, date_of_birth, profile_image) => {
     return pool.query(
         "UPDATE UserProfiles SET first_name = $1, last_name = $2, date_of_birth = $3, profile_image = $4 WHERE user_id = $5 RETURNING *",
         [first_name, last_name, date_of_birth, profile_image, user_id]
     );
 };
+
+// Change user permissions
 
 const updateUserPermission = async (user_id, permission_level) => {
     return pool.query(
@@ -141,6 +153,7 @@ const updateUserPermission = async (user_id, permission_level) => {
 };
 
 // Change User Information
+
 router.put("/edituser", authorisation, asyncHandler(async (req, res, next) => {
     const { user_name, first_name, last_name, date_of_birth, email_address, password_hash, permission_level } = req.body;
     const user_id = req.user.id;
@@ -159,6 +172,7 @@ router.put("/edituser", authorisation, asyncHandler(async (req, res, next) => {
 }));
 
 // Change User Profile Information
+
 router.put("/edituserprofile", authorisation, asyncHandler(async (req, res, next) => {
     const { first_name, last_name, profile_image } = req.body;
     const user_id = req.user.id;
@@ -174,6 +188,7 @@ router.put("/edituserprofile", authorisation, asyncHandler(async (req, res, next
 }));
 
 // Get User Name
+
 router.get("/getuser/username", authorisation, asyncHandler(async(req, res, next) => {
     let user_id;
 
@@ -211,7 +226,5 @@ router.get("/getuser/profile", authorisation, asyncHandler(async(req, res, next)
 
     res.json(response);
 }));
-
-// Other user-related routes...
 
 module.exports = router;

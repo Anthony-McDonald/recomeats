@@ -1,9 +1,9 @@
-import React from 'react';
 import '../css/header.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import '../css/satisfied-customers.css'
 import CustomerReviewBlock from './CustomerReviewBlock';
 
+// No comments here, self explanatory, shows customer review blocks
 const SatisfiedCustomers = () => {
   return (
     <>

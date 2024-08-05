@@ -2,6 +2,7 @@ const axios = require('axios');
 const fs = require('fs');
 const FormData = require('form-data');
 
+// Path to nutrient-gen api
 async function callVisor(imagePath) {
     const url = "https://vision.foodvisor.io/api/1.0/en/analysis/";
     const headers = {

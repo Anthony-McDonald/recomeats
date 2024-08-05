@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../css/forum.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import { useParams } from 'react-router-dom';
@@ -18,6 +18,7 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif })
   const [recipe_id, setRecipeId] = useState(0);
   const { id } = useParams();
 
+  // Fetch all info for the thread
   useEffect(() => {
     verifyAuthentication();
     getUpvotes();
@@ -25,11 +26,13 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif })
     fetchRecipeId(id);
   }, []);
 
+  // Function to comment
   const registerComment = (comment) => {
     setNewComment(comment);
     postComment(id, comment);
   }
 
+  // Path to post comment
   async function postComment(post_id, commentBody) {
     try {
       const requestBody = JSON.stringify({
@@ -51,10 +54,12 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif })
     }
   }
 
+  // Retrieves all comments and replies on call
   function reload() {
     fetchCommentsAndReplies(id);
   }
 
+  // Path to get ingredients
   async function getIngredients(recipe_id) {
     try {
       const response = await fetch("http://localhost:5000/recipes/getingredients/" + recipe_id, {
@@ -68,11 +73,14 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif })
     }
   }
 
+  // Path to get upvotes
   const getUpvotes = async () => {
     const upvoteNumber = await getUpvoteInfo(id, "post");
     setUpvotes(upvoteNumber.count);
   };
 
+
+  // Fetches comments and replies
   const fetchCommentsAndReplies = async (post_id) => {
     setIsLoading(true);
     try {
@@ -102,6 +110,7 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif })
     setIsLoading(false);
   };
 
+  // Path to post a reply
   async function postReply(parent_id, parent_type, commentBody) {
     try {
       const requestBody = JSON.stringify({
@@ -124,6 +133,7 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif })
     }
   }
 
+  // Path to return all replies for a particular comment
   const fetchReplies = async (comment_id) => {
     try {
       const url = new URL("http://localhost:5000/forum/replylist");
@@ -144,6 +154,7 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif })
     }
   };
 
+  // Path to retrieve recipe_id related to a post
   const fetchRecipeId = async (post_id) => {
     try {
       const url = new URL("http://localhost:5000/forum/thread/" + post_id);
@@ -163,16 +174,17 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif })
     }
   };
 
+  // Shows data in relation to post
   return (
     <div id='thread-div'>   
       <ForumHeader getUserInfo={getUserInfo} />
       <div id="thread-wrapper">
-        <div id="left-sidebar-div"></div>
         <div id="thr-l">
           <RecipeThreadDiv post_id={id} getUserInfo={getUserInfo} getImageName={getImageName} getIngredients={getIngredients} ingredients={ingredients} />
           <div id="interaction-div">
             <Interactions type={"post"} post_id={id} upvotes={upvotes} getUpvotes={getUpvotes} commentBodyResult={newComment} registerComment={registerComment} postId={id} addNotif={addNotif} original_post_id={id}/>
             <CommentModal modalId={1} type={"post"} commentBodyResult={newComment} registerComment={registerComment} postReply={postReply} />
+            {/* Shows all current comments */}
             {isLoading ? (
               <p>Loading...</p>
             ) : (
@@ -183,7 +195,7 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif })
           </div>
         </div>
         <div id="thr-r">
-          <div id="related-threads">
+          <div className="nutrient-info-wrapper">
             <NutrientInfo rec_id={recipe_id}/>
           </div>
         </div>
@@ -191,6 +203,7 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif })
     </div>
   );
 
+  // Ensures user is logged 
   async function verifyAuthentication() {
     try {
       const response = await fetch("http://localhost:5000/users/is-verify", {

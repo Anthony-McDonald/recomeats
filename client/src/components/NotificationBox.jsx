@@ -3,7 +3,7 @@ import '../css/notification-box.css';
 
 const NotificationBox = ({notif_id, post_id, notif_type, getNotifs }) => {
     const [message, setMessage] = useState("");
-
+    // Sets message that will be shown to user for this notification
     useEffect(() => {
         let notificationMessage;
         switch (notif_type) {
@@ -26,6 +26,7 @@ const NotificationBox = ({notif_id, post_id, notif_type, getNotifs }) => {
         window.location = "/forum/thread/" + path;
     };
 
+    // Path to delete notification
     async function deleteNotif(notif_id) {
         try {
             const body = { notif_id };
@@ -47,9 +48,11 @@ const NotificationBox = ({notif_id, post_id, notif_type, getNotifs }) => {
                 A user has {message}.
             </div>
             <div id="notif-interact">
+                {/* Go to thread the notification is from */}
                 <button id="notif-path" className="btn-primary btn" onClick={() => goToThread(post_id)}>
                     <img id="notif-img" src="/images/svgs/goto-arrow.svg" alt="" />
                 </button>
+                {/* Delete the notification */}
                 <button id="notif-close" className="btn-close btn" onClick={() => deleteNotif(notif_id)}></button>
             </div>
         </div>

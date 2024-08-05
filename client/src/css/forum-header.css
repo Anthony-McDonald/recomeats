@@ -42,4 +42,5 @@ width: 2.5rem;
 .forum-side {
     display: flex;
     gap: 1rem;
+    align-items: center;
 }

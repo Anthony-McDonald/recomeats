@@ -1,4 +1,3 @@
-import React from 'react';
 import '../css/recipes.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import RecipeBox from './RecipeBox'; 
@@ -27,6 +26,7 @@ const Recipes = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const recipesPerPage = 3; 
 
+  // Pages to show
   const totalPages = Math.ceil(recipes.length / recipesPerPage);
   const indexOfLastRecipe = currentPage * recipesPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
@@ -64,6 +64,7 @@ const Recipes = () => {
 
   }
 
+  // Path to add recipe
   async function addRecipe(recipe_name, recipe_description, recipe_ingredients, recipe_instructions) {
     try {
       const requestBody = JSON.stringify({
@@ -91,6 +92,7 @@ const Recipes = () => {
     getRecipes();
   }, []); 
 
+  // Path to get current recipes
   async function getRecipes() {
     setIsLoading(true);
     try {
@@ -109,6 +111,7 @@ const Recipes = () => {
     }
   }
 
+  // Path to get current ingredients
   async function getIngredients(recipe_id) {
     try {
       const response = await fetch("http://localhost:5000/recipes/getingredients/" + recipe_id, {
@@ -125,6 +128,7 @@ const Recipes = () => {
     }
   }
 
+  // Path to edit current recipe
   async function editRecipe(recipe_id, recipe_name, recipe_description, recipe_ingredients, recipe_instructions)  {
     try {
       const requestBody = JSON.stringify({
@@ -173,6 +177,7 @@ const Recipes = () => {
   }
 
 
+  // Logic to go between pages
   const nextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
@@ -185,6 +190,7 @@ const Recipes = () => {
     }
   };
   
+  // Path to delete recipe
   async function deleteRecipe(recipeId) {
     try {
        await fetch(`http://localhost:5000/recipes/deleterecipe/${recipeId}`, {
@@ -221,9 +227,12 @@ const Recipes = () => {
       </div>
 
       </div>
+      {/* If user is adding a recipe, show them the respective form, if user is editing a recipe show them the respective form */}
         <div className="recipe-boxes">
         {isAddingRecipe ? <AddRecipeForm setRecipeForm={setIsAddingRecipe} setRecipeName={setAddRecipeName} setRecipeDescription={setAddRecipeDescription} setRecipeIngredients={setAddRecipeIngredients} setRecipeInstructions={setAddRecipeInstructions} recipeIngredients={addRecipeIngredients} submitFunction={addRecipeSubmit}/> : null}
         {isEditingRecipe ? <EditRecipeForm editRecipeName={editRecipeName} editRecipeDescription={editRecipeDescription} editRecipeInstructions={editRecipeInstructions} setRecipeInstructions={setEditRecipeInstructions} setRecipeForm={setIsEditingRecipe} setRecipeName={setEditRecipeName} setRecipeDescription={setEditRecipeDescription} setRecipeIngredients={setEditRecipeIngredients} recipeIngredients={editRecipeIngredients} recipeInstructions={editRecipeInstructions} submitFunction={editRecipeSubmit}/> : null}
+
+        {/* If recipes are loading show 'Loading...', if there are no recipes saved, tell the user and if recipes are present, map over the recipes and show them to the user */}
         {isLoading ? (
         <h1 className='loading-message'>Loading...</h1>
       ) : recipes.length === 0 ? (

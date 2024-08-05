@@ -3,6 +3,7 @@ import '../css/header.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 const Header = ({setAuth}) => {
+  // Header when not logged in
   return (
     <div id="header">
         <img className='recomeats reco-header' src="/images/recomeats.png" alt="reco-logo" />

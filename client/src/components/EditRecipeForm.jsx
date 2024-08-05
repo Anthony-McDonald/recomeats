@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../css/edit-recipe-form.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+    // Not much comments will be here as this one is quite self explanatory considering comments in components above
 
 const EditRecipeForm = ({ editRecipeName, editRecipeDescription, editRecipeInstructions, setRecipeForm, setRecipeName, setRecipeDescription, setRecipeInstructions, setRecipeIngredients, recipeIngredients, submitFunction }) => {
     const [ingredientInputValue, setIngredientInputValue] = useState('');

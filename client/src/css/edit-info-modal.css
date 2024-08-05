@@ -9,6 +9,20 @@
     padding: 0.1rem;
 }
 
+.add-comment-button {
+    border-radius: 2rem;
+    padding: 0.4rem 1.3rem 0.4rem 1.2rem;
+    background-color: #3e362E;
+    color: white;
+    border: none;
+    width: 100%;
+    margin-left: -0.5rem;
+    height: 3rem;
+    margin-top: 1rem;
+    font-weight: bolder;
+    margin-bottom: 1.5rem;
+}
+
 .btn-close {
     background-color: #3E362E;
     opacity: 1.0;

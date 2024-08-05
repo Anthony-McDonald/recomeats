@@ -3,13 +3,13 @@
         text-align: center;
         display: flex;
         flex-direction: column;
-        min-height: 100vh !important; /* Set minimum height to cover the entire viewport */
+        min-height: 100vh !important; 
         background: linear-gradient(0deg, rgba(147, 120, 91, 0.2), rgba(147, 120, 91, 0.8)), url('/images/1.jpg');
         background-repeat: no-repeat;
         background-size: cover;
         background-position: top center;
         color: white;
-        position: relative !important; /* Set position to relative */
+        position: relative !important; 
     }
     .text-big {
         font-size: 3rem !important;
@@ -86,7 +86,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* background-color:  */
 }
 
 .suggested-recipes {

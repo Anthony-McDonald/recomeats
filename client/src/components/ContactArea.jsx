@@ -1,9 +1,9 @@
-import React from 'react';
 import '../css/header.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import '../css/contact-area.css'
 
 const ContactArea = () => {
+    // Variables defined above to not have to retype repeatedly
     const width = "4.5rem"
     const currentColor = "#3E362E";
   return (

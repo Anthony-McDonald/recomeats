@@ -7,7 +7,7 @@ const authorisation = require("../middleware/authorise");
 
 const router = express.Router();
 
-// Store
+// Store image
 const uploadsDir = path.join(__dirname, '../uploads');
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -24,7 +24,7 @@ const upload = multer({ storage: storage });
 const newWidth = 800;  
 const newHeight = 600; 
 
-
+// Image upload post
 router.post('/', authorisation, upload.single('image'), async (req, res) => {
     const image = req.file;
 
@@ -32,6 +32,7 @@ router.post('/', authorisation, upload.single('image'), async (req, res) => {
         return res.status(400).json({ error: 'Image is required' });
     }
 
+    // Uses sharp to process image
     try {
         await sharp(image.path)
             .resize(newWidth, newHeight) 

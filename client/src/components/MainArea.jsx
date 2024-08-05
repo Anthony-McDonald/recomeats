@@ -1,6 +1,6 @@
-import React from 'react';
 import "../css/main-area.css"
 
+// Component to show text to unlogged in users
 const MainArea = () => {
   return (
     <div id="main-area">

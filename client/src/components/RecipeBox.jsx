@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../css/recipe-box.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -10,6 +10,7 @@ const RecipeBox = ({ recipe, deleteRecipe, editRecipe }) => {
         getIngredients(recipe_id)
     },[])
 
+    // Path to retrieve ingredients of a recipe
     async function getIngredients(recipe_id) {
         try {
           const response = await fetch("http://localhost:5000/recipes/getingredients/" + recipe_id, {
