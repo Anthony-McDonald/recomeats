@@ -3,7 +3,7 @@ import '../css/profile.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import Cuisines from './Cuisines';
 import EditInfoModal from './EditInfoModal';
-import CookieConsent, { Cookies } from "react-cookie-consent";
+import CookieConsent from "react-cookie-consent";
 
 const Profile = ({userCuisines, getCuisines}) => {
   const [firstName, setFirstName] = useState("");
@@ -11,6 +11,7 @@ const Profile = ({userCuisines, getCuisines}) => {
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [profileImage, setProfileImage] = useState("")
 
+  // Create variables from state
   const fullName = firstName + " " + lastName;
   const fullProfileUrl = "./images/profile-images/" + profileImage + ".png"
 
@@ -19,6 +20,7 @@ const Profile = ({userCuisines, getCuisines}) => {
     getUserInfo()
   }, []);
 
+  // Path to get user's information
   async function getUserInfo() {
     try {
       const response = await fetch("http://localhost:5000/users/getuser/profile", {
@@ -38,6 +40,7 @@ const Profile = ({userCuisines, getCuisines}) => {
     }
   }
 
+  // path to update user's profile with new information
   async function updateUserProfileInfo(first_name, last_name, profile_image) {
     try {
       const body = {first_name, last_name, profile_image}
@@ -58,6 +61,7 @@ const Profile = ({userCuisines, getCuisines}) => {
 
   return (
     <div id="profile">
+      {/* Show cookie consent box if cookies have not been accepted before*/}
             <CookieConsent
         enableDeclineButton
         onDecline={() => {
@@ -79,16 +83,14 @@ const Profile = ({userCuisines, getCuisines}) => {
     <h5 className="text-muted">Date of Birth: {dateOfBirth}</h5>
   </div>
 
+        {/* Show cuisines selected */}
         <div className="info-bottom">
         <Cuisines userCuisines={userCuisines} getCuisines={getCuisines}/>
         </div>
+        {/* Modal to change user information */}
         <EditInfoModal updateUserProfileInfo={updateUserProfileInfo} firstNameResult={firstName} lastNameResult={lastName} profileImageResult={profileImage}/>
 
     </div>
-
-    
-
-
   );
 };
 

@@ -4,11 +4,10 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '../css/edit-info-modal.css';
 
 const CommentModal = ({ parent_id, type, commentBodyResult, registerComment, modalId, postReply }) => {
+    // As typed, this updates
     const [inputs, setInputs] = useState({
         commentBody: commentBodyResult || ''
     });
-
-    
 
     const { commentBody } = inputs;
 
@@ -18,6 +17,7 @@ const CommentModal = ({ parent_id, type, commentBodyResult, registerComment, mod
         });
     }, [commentBodyResult]);
 
+    // When modal is closed, reset values
     const closePress = () => {
         setTimeout(() => {
             setInputs({
@@ -40,11 +40,14 @@ const CommentModal = ({ parent_id, type, commentBodyResult, registerComment, mod
         }
     };
 
+    // Dependent on whether this comment is under a post or not, change the text within the button: either 'Add a comment' or 'Reply'
     const buttonText = type === "post" ? "Add a comment" : "Reply";
+    // Change the button's classes also so that the button appears different
     const buttonClass = type === "post" ? "header-button btn btn-primary add-comment-button" : "header-button btn btn-success reply-button";
 
     return (
         <>
+        {/* Generate button with variables above */}
             <button
                 type="button"
                 className={buttonClass}

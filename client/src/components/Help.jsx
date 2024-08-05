@@ -1,10 +1,9 @@
-import React from 'react';
-import Modal from './Modal';
 import '../css/help.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Accordion from 'react-bootstrap/Accordion';
 
+  // Help page, no comments provided as rather self-explanatory
 const Help = () => {
   return (
     <>

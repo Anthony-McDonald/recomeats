@@ -5,10 +5,12 @@ import "../css/dropdown.css"
 
 const Dropdown = ({ mainChange }) => {
 
+    // On click, take user to....
     const pathTo = (path) => {
         window.location = path
     };
 
+    // Showcase buttons which when clicked will show different component to user
     return (
         <div className="dropdown-div">
         <div className="dropdown-top-elements">

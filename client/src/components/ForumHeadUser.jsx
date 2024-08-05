@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../css/forum-header.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 

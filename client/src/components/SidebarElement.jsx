@@ -1,12 +1,10 @@
-import React from 'react';
 import '../css/sidebar-element.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
+// No comments here, self explanatory. Shows an svg image and text next to it
 const SidebarElement = ({svgImage, text, onClick}) => {
-
   const imageSrc = "/images/svgs/" + svgImage + ".svg";
   
-
   return (
     <div id="sidebar-element" onClick={onClick}>
         <div className="side-el-left">

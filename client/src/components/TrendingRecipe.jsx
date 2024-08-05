@@ -3,6 +3,7 @@ import '../css/header.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import '../css/trending-recipe-box.css';
 
+// No comments here, self explanatory. Takes in information and creates a div based off of it with an img and text
 const TrendingRecipe = ({ postTitle, postBody, postPic, postId }) => {
   const [postPicSequenced, setPostPicSequenced] = useState(null);
 

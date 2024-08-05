@@ -5,6 +5,7 @@ import '../css/comment-box.css';
 import Interactions from './Interactions';
 
 const Comment = ({ comment, getUpvoteInfo, level = 0, postReply, getUserInfo, addNotif, original_post_id}) => {
+  // States
   const [username, setUsername] = useState("");
   const [upvotes, setUpvotes] = useState(0);
   const [type, setType] = useState("");
@@ -12,6 +13,7 @@ const Comment = ({ comment, getUpvoteInfo, level = 0, postReply, getUserInfo, ad
   const [userInfo, setUserInfo] = useState(null);
   const [madeUserImage, setMadeUserImage] = useState("");
 
+  // Various effects to allow for loading of comment requirements
   useEffect(() => {
     if (comment) {
       if (level > 0) {
@@ -22,6 +24,7 @@ const Comment = ({ comment, getUpvoteInfo, level = 0, postReply, getUserInfo, ad
         setIdPassed(comment.comment_id);
       }
       fetchUsername(comment.user_id);
+      // Here, .then is used to ensure that the userInfo and MadeUserImage are set after the userInfo is retrieved.
       getUserInfo(comment.user_id).then((user) => {
         setUserInfo(user);
         if (user && user.profile_image) {
@@ -31,17 +34,20 @@ const Comment = ({ comment, getUpvoteInfo, level = 0, postReply, getUserInfo, ad
     }
   }, [comment, level, getUserInfo]);
 
+  // Ensure upvotes are gotten once type and idPassed variables are available
   useEffect(() => {
     if (type && idPassed !== null) {
       getUpvotes();
     }
   }, [type, idPassed]);
 
+  // Retrieve upvotes
   const getUpvotes = async () => {
     const upvoteNumber = await getUpvoteInfo(idPassed, type);
     setUpvotes(upvoteNumber.count);
   };
 
+  // Function to turn returned date format into the form of "x days ago" for example
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
     return date.toLocaleString();
@@ -78,6 +84,7 @@ const Comment = ({ comment, getUpvoteInfo, level = 0, postReply, getUserInfo, ad
     }
 }
 
+// Retrieve username
   const fetchUsername = async (user_id) => {
     try {
       const url = new URL("http://localhost:5000/users/getuser/username");
@@ -100,6 +107,7 @@ const Comment = ({ comment, getUpvoteInfo, level = 0, postReply, getUserInfo, ad
     <div style={{ marginLeft: level * 0.6 + 'rem' }}>
       <div id="comment-box">
         <div id="msg-info">
+          {/* Show user profile picture */}
           {userInfo && madeUserImage && (
             <img src={madeUserImage} className="usr-img" alt="usr" />
           )}
@@ -108,6 +116,7 @@ const Comment = ({ comment, getUpvoteInfo, level = 0, postReply, getUserInfo, ad
         </div>
         <div id="msg-text">{comment.body}</div>
         <div id="interactions">
+          {/* Show interactions if they are loaded, otherwise show that they are loading */}
           {type && idPassed !== null ? (
             <Interactions type={type} post_id={idPassed} upvotes={upvotes} getUpvotes={getUpvotes} postReply={postReply} addNotif={addNotif} original_post_id={original_post_id}/>
           ) : (
@@ -115,6 +124,7 @@ const Comment = ({ comment, getUpvoteInfo, level = 0, postReply, getUserInfo, ad
           )}
         </div>
       </div>
+      {/* Map over comments and for each one, show the reply. This is achieved recursively */}
       {comment.replies.map((reply, index) => (
         <Comment key={index} comment={reply} getUpvoteInfo={getUpvoteInfo} level={level + 1} postReply={postReply} getUserInfo={getUserInfo} addNotif={addNotif} original_post_id={original_post_id} />
       ))}

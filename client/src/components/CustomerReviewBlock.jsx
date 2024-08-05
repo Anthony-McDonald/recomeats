@@ -1,11 +1,12 @@
-import React from 'react';
 import '../css/customer-review-block.css';
 
 const CustomerReviewBlock = ({ personImage, personName, personReview }) => {
+    // Create path to img
     const personImageSrc = `/images/profiles/${personImage}`;
 
     const altText = "Image: " + personName;
 
+    // Component returned
     return (
         <div id="customer-review-div">
             <div className="img-holder">

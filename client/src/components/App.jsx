@@ -1,4 +1,3 @@
-// import { useState } from 'react'
 import '../css/app.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import SatisfiedCustomers from './SatisfiedCustomers';
@@ -11,6 +10,7 @@ import { useEffect } from 'react';
 
 function App({setAuth}) {
 
+  // Ensure user is logged in
   async function verifyAuthentication() {
     try {
     const response = await fetch("http://localhost:5000/users/is-verify", {
@@ -29,6 +29,7 @@ function App({setAuth}) {
   useEffect(() => {
     verifyAuthentication();
   }, []);
+  // Display pre-login screen
   return (
     <div className='whole-page'>
       <Header setAuth={setAuth}></Header>

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import "../css/dashboard.css"
 import SidebarElement from './SidebarElement';
@@ -13,15 +12,18 @@ import NotificationsModal from './NotificationsModal';
 
 
 const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
+  // States
   const [name, setName] = useState("basename");
   const [selectedElement, setSelectedElement] = useState("profile");
   const [showDropdown, setShowDropdown] = useState(false);
 
+  // Currently shown element in main area
   const mainChange = (e) => {
     setSelectedElement(e);
     setShowDropdown(false);
   }
 
+  // Logout functionality
   const logout = (e) => {
     if (e) e.preventDefault();
     localStorage.removeItem("token");
@@ -32,10 +34,12 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
     setShowDropdown(!showDropdown);
   }
 
+  // Get user's name on page load
   useEffect(() => {
     getName();
   }, []); 
 
+  // Path to retrieve username
   async function getName() {
     try {
       const response = await fetch("http://localhost:5000/users/dashboard/", {
@@ -59,6 +63,7 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
         <img className="reco-logo"src="/images/recomeats.png" alt="reco-logo" />
       </div>
       <div className="main-sidebar">
+        {/* Various sidebar elements that will change what component is shown in the main area on click */}
         <div className="top-elements">
         <SidebarElement svgImage={"profile"} text={"My Profile"} onClick={() => mainChange("profile")}/>
         <SidebarElement svgImage={"recipes"} text={"My Recipes"} onClick={() => mainChange("recipes")}/>
@@ -83,6 +88,7 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
       <button className="dash-logout btn btn-danger" onClick={logout}>Log out</button>
       </div>
       <div className="dash-main-bottom">
+      {/* Various dropdown elements that will change what component is shown in the main area on click*/}
           {showDropdown && <Dropdown mainChange={mainChange} />}
           {!showDropdown && selectedElement === "profile" && <Profile userCuisines={userCuisines} getCuisines={getCuisines} />}
           {!showDropdown && selectedElement === "recipes" && <Recipes/>}

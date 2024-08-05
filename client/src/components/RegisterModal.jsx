@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const RegisterModal = ({ setAuth }) => {
+  // Store of state
     const [inputs, setInputs] = useState({
         user_name: "",
         first_name: "",
@@ -21,6 +22,7 @@ const RegisterModal = ({ setAuth }) => {
     
     
 
+    // Ob submit, post a registration request with all form data passed
     const onSubmitForm = async e => {
         e.preventDefault();
 

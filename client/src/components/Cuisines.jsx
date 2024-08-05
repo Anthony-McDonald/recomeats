@@ -1,18 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
 import '../css/cuisines.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const Cuisines = ({userCuisines, getCuisines}) => {
   const [isCuisineAdding, setIsCuisineAdding] = useState(false);
+  const [isChecked, setIsChecked] = useState({
+    chinese: false,
+    indian: false,
+    italian: false,
+    african: false,
+    mediterranean: false,
+  });
 
-
+  // Retrieve cuisines on component load
   useEffect( () => {
     getCuisines();
   }, []);
 
-
+  // Logic for adding cuisine types to user
   const addCuisineSwitch = () => {
     setIsCuisineAdding(true);
 
@@ -54,14 +60,6 @@ const Cuisines = ({userCuisines, getCuisines}) => {
     
   }
 
-  const [isChecked, setIsChecked] = useState({
-    chinese: false,
-    indian: false,
-    italian: false,
-    african: false,
-    mediterranean: false,
-  });
-
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
     setIsChecked({ ...isChecked, [name]: checked });
@@ -72,6 +70,7 @@ const Cuisines = ({userCuisines, getCuisines}) => {
     saveSelectedCuisines(isChecked);
     resetBoxes();
   }
+  // Reset all cuisines to not selected
   const resetBoxes = () => {
     setIsChecked({
       chinese: false,
@@ -82,7 +81,7 @@ const Cuisines = ({userCuisines, getCuisines}) => {
     });
   };
   
-
+  // Logic to save cuisines selected
   function saveSelectedCuisines() {
     const {chinese, indian, italian, african, mediterranean} = isChecked;
 
@@ -103,6 +102,7 @@ const Cuisines = ({userCuisines, getCuisines}) => {
     }
   }
 
+  // Path to save a particular cuisine
   async function saveCuisine(cuisine_id) {
     try {
       await fetch("http://localhost:5000/cuisines/addusercuisine/" + cuisine_id, {
@@ -116,7 +116,7 @@ const Cuisines = ({userCuisines, getCuisines}) => {
     getCuisines();
   }
   
-
+  // Path to remove a cuisine from user preferences
   async function deleteUserCuisine() {
     try {
       await fetch("http://localhost:5000/cuisines/deleteusercuisine/", {
@@ -130,6 +130,7 @@ const Cuisines = ({userCuisines, getCuisines}) => {
 
   return (
     <div id="cuisines">
+      {/* If cuisines are not currently being added, show current cuisines selected */}
       <h3 className='cuisine-header'>Your current cuisines are:</h3>
       {isCuisineAdding?
       <>
@@ -203,6 +204,7 @@ const Cuisines = ({userCuisines, getCuisines}) => {
         : 
         <div className='cuisine-button-formatter'>
         <ul className='mt-2 list-group list-group-horizontal cuisines'>
+          {/* Display chosen cuisines */}
         {userCuisines.length === 0 ? (
           <p>You have not chosen a cuisine!</p>
         ) : (

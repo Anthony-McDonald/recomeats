@@ -7,6 +7,7 @@ import NotificationBox from './NotificationBox';
 const NotificationsModal = () => {
     const [notifications, setNotifications] = useState(null);
 
+    // Retrieve all notifications
     useEffect(() => {
         getNotifs();
     }, []);
@@ -29,7 +30,7 @@ const NotificationsModal = () => {
 
     return (
         <>
-            <button type="button" className="header-button btn btn-primary log-button" data-bs-toggle="modal" data-bs-target="#Modal">
+            <button type="button" className="header-button btn btn-primary log-button" data-bs-toggle="modal" data-bs-target="#NotifModal">
                 View Notifications [{notificationCount}]
             </button>
 
@@ -41,6 +42,7 @@ const NotificationsModal = () => {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
+                            {/* Map over all notifications, and display them within the modal, if they are loading show that that is the case */}
                             {notifications ? (
                                 notifications.map((notification) => (
                                     <div key={notification.notif_id} className="notification">

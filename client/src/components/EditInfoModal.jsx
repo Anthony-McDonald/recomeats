@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '../css/edit-info-modal.css'
 const EditInfoModal = ({ updateUserProfileInfo, firstNameResult, lastNameResult, profileImageResult}) => {
+    // Stores for variables that can be changed
     const [inputs, setInputs] = useState({
         firstName: "",
         lastName: "",
@@ -19,6 +20,7 @@ const EditInfoModal = ({ updateUserProfileInfo, firstNameResult, lastNameResult,
         });
     }, [firstNameResult, lastNameResult, profileImageResult]);
 
+    // When close is pressed, reset all variable inputs
     const closePress = () => {
         setTimeout(() => {
             setInputs({
@@ -29,7 +31,8 @@ const EditInfoModal = ({ updateUserProfileInfo, firstNameResult, lastNameResult,
         }, 1000);
     };
 
-    const imageOptions = [0,1,2,3,4,5,6,7,8,9,10,11]; // Add your image options here
+    // Image options declared here, numbers must refer to images in the database
+    const imageOptions = [0,1,2,3,4,5,6,7,8,9,10,11]; 
 
     const onChange = (e) => {
         const updatedInputs = { ...inputs, [e.target.id]: e.target.value };
@@ -72,6 +75,7 @@ const EditInfoModal = ({ updateUserProfileInfo, firstNameResult, lastNameResult,
                                 <div className="mb-3">
                                     <label className="form-label">Profile Image</label>
                                     <div className="image-selector">
+                                        {/* Show all image options by mapping over the imageOptions array and showing all images as clickable divs */}
                                         {imageOptions.map(image => (
                                             <img
                                                 key={image}

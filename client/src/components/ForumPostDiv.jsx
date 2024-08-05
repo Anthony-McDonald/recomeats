@@ -3,16 +3,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Interactions from './Interactions';
 
 const ForumPostDiv = ({ firstName, lastName, userPic, postTime, postTitle, postBody, postPic, upvotes, post_id, getUpvotes, addNotif }) => {
+    // Create image urls to be used later
     const userPicSequenced = `/images/profile-images/${userPic}.png`;
     const postPicSequenced = `http://localhost:5000/uploads/${postPic}`;
     const fullName = `${firstName} ${lastName}`;
-
+    // Function to turn timestamps into 'x days ago' format
     function timeBefore(postTime) {
         const postTimeDate = new Date(postTime);
         const now = new Date();
         
         const secondsBefore = Math.floor((now - postTimeDate) / 1000);
-    
         const minutesBefore = Math.floor(secondsBefore / 60);
         const hoursBefore = Math.floor(minutesBefore / 60);
         const daysBefore = Math.floor(hoursBefore / 24);
@@ -58,6 +58,7 @@ const ForumPostDiv = ({ firstName, lastName, userPic, postTime, postTitle, postB
                     <div className="post-desc-div">
                         <p id='post-description'>{postBody}</p>
                     </div>
+                    {/* Like and reply buttons */}
                     <Interactions 
                         type="post" 
                         post_id={post_id} 

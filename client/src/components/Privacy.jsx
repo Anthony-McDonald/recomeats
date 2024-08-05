@@ -1,7 +1,8 @@
-import React from 'react';
 import '../css/privacy.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+// No comments here as self explanatory
 const Privacy = () => {
     return (
         <div id='privacy-div'>

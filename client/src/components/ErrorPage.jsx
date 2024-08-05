@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom"
 
+// This page is shown when current components either do not exist or do not render properly
 const ErrorPage = () => {
     return (
         <div>

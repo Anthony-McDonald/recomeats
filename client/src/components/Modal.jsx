@@ -5,6 +5,7 @@ import RegisterModal from './RegisterModal';
 
 
 const Modal = ({setAuth}) => {
+  // Login modal
     const [inputs, setInputs] = useState({
         email: "",
         password: "",
@@ -18,6 +19,7 @@ const Modal = ({setAuth}) => {
     
     
 
+    // Once form is submitted, attempt login with inputted details
     const onSubmitForm = async e => {
         e.preventDefault();
 
@@ -83,6 +85,7 @@ const Modal = ({setAuth}) => {
           </div>
         </div>
       </div>
+      {/* Alternatively, click here to register */}
       <RegisterModal setAuth={setAuth}></RegisterModal>
     </>
   );

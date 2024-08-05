@@ -13,6 +13,7 @@ const RecipeThreadDiv = ({ post_id, getUserInfo, getImageName, getIngredients, i
     fetchData();
   }, []);
 
+  // Retrieve thread info
   const fetchData = async () => {
     try {
       const url = new URL("http://localhost:5000/forum/thread/" + post_id);
@@ -32,7 +33,7 @@ const RecipeThreadDiv = ({ post_id, getUserInfo, getImageName, getIngredients, i
       setUserData(userInfo);
       setDataToLoad(parseRes);
 
-      // Set the user image after fetching user data
+
       if (userInfo && userInfo.profile_image) {
         setMadeUserImage(`/images/profile-images/${userInfo.profile_image}.png`);
       }
@@ -44,6 +45,7 @@ const RecipeThreadDiv = ({ post_id, getUserInfo, getImageName, getIngredients, i
   return (
     <div id="recipe-thread-div">
       <div id="user-box">
+      {/* Lots of the same here again, if the variables have been filled, display the relevant information */}
         {madeUserImage ? (
           <img className='usr-img' src={madeUserImage} alt="usr-img" />
         ) : (

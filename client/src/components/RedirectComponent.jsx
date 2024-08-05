@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 
 const RedirectComponent = ({setAuth, isAuth}) => {
 
+  // Boot user out
     const negateAuthAndRedirect = () => {
         setAuth(false);
         window.location.href="/";
         
     }
 
+    // Check if user is logged in
     async function verifyAuthentication() {
         try {
         const response = await fetch("http://localhost:5000/users/is-verify", {
