@@ -65,13 +65,11 @@ flex-shrink: 0;
     height: auto;
     width: 100%;
     margin: 2rem;
-    top: 5px;
 }
 
-.nutrient-info-wrapper {
-    position: sticky;
-    top: 20px; 
-  }
+/* .nutrient-info-wrapper {
+
+  } */
 
 #thr-l {
     margin: 0.8rem;
