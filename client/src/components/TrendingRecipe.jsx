@@ -7,13 +7,10 @@ import '../css/trending-recipe-box.css';
 // No comments here, self explanatory. Takes in information and creates a div based off of it with an img and text
 const TrendingRecipe = ({ postTitle, postBody, postPic, postId }) => {
   const navigate = useNavigate();
-  const [postPicSequenced, setPostPicSequenced] = useState(null);
-
-  useEffect(() => {
-    if (postPic) { 
-      setPostPicSequenced("http://localhost:5000/uploads/" + postPic);
-    }
-  }, [postPic]);
+  let postPicSequenced = null
+  if (postPic !== undefined && postPic !== '') {
+      postPicSequenced = `http://localhost:5000/uploads/${postPic}`;
+  }
 
   function goTo(here) {
     navigate(here);

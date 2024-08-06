@@ -5,7 +5,10 @@ import Interactions from './Interactions';
 const ForumPostDiv = ({ firstName, lastName, userPic, postTime, postTitle, postBody, postPic, upvotes, post_id, getUpvotes, addNotif }) => {
     // Create image urls to be used later
     const userPicSequenced = `/images/profile-images/${userPic}.png`;
-    const postPicSequenced = `http://localhost:5000/uploads/${postPic}`;
+    let postPicSequenced = null
+    if (postPic !== '') {
+        postPicSequenced = `http://localhost:5000/uploads/${postPic}`;
+    }
     const fullName = `${firstName} ${lastName}`;
     // Function to turn timestamps into 'x days ago' format
     function timeBefore(postTime) {
@@ -71,7 +74,8 @@ const ForumPostDiv = ({ firstName, lastName, userPic, postTime, postTitle, postB
             </div>
             </div>
             <div className="pd-br">
-                    <img className='food-primary-img' src={postPicSequenced} alt=" " />
+                    {postPicSequenced && (
+                    <img className='food-primary-img' src={postPicSequenced} alt=" " />)}
                 </div>
         </div>
     );
