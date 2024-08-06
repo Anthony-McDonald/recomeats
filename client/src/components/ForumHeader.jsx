@@ -11,8 +11,7 @@ const ForumHeader = ({getUserInfo, getPosts}) => {
     return (
         <div id="forum-header">
             <div className="logo">
-            <img className="reco-logo" id="forum-reco-logo" src="/images/recomeats.png" alt="reco-logo"></img>
-            <h5 className='reco-logo-subtext'>forums</h5>
+            <img className="reco-logo" id="forum-reco-logo" src="/images/recomeats-forums.png" alt="reco-logo"></img>
             </div>
             <div className='forum-side'>
             <div className="postbox">

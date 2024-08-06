@@ -30,6 +30,8 @@
 
 .reco-logo {
     height: 4rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
 }
 
 .welcome-msg {
@@ -63,7 +65,7 @@ flex-direction: column;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 93vh;
+    height: 91vh;
 }
 
 .btn-primary:active {
