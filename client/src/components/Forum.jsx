@@ -109,14 +109,14 @@ const Forum = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif}) =
             posts.map((post, index) => {
               const user = userInfo[post.user] || {};
               const upvote = upvoteInfo[post.post_id] || {};
-              const postImage = post.image_id ? imageInfo[post.image_id] : 'default-image.jpg';
+              const postImage = post.image_id ? imageInfo[post.image_id] : '';
 
               return (
                 <ForumPostDiv
                   key={index}
                   firstName={user.first_name || 'Anonymous'}
                   lastName={user.last_name || ''}
-                  userPic={user.profile_image || 'default-image.jpg'}
+                  userPic={user.profile_image || ''}
                   postTime={post.created_at}
                   postTitle={post.title}
                   postBody={post.body}

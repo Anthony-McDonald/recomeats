@@ -13,7 +13,7 @@ const TrendingRecipeBox = ({ posts, imageInfo }) => {
       <div id="tr-entries">
         {/* For each post, return a TrendingRecipe box */}
         {postsToShow.map((post, index) => {
-          const postImage = post.image_id ? imageInfo[post.image_id] : 'default-image.jpg';
+          const postImage = post.image_id ? imageInfo[post.image_id] : '';
           return (
             <TrendingRecipe
               key={index}

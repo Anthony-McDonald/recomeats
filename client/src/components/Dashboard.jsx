@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "../css/dashboard.css"
 import SidebarElement from './SidebarElement';
 import SidebarSeperator from './SidebarSeperator';
@@ -12,6 +13,7 @@ import NotificationsModal from './NotificationsModal';
 
 
 const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
+  const navigate = useNavigate();
   // States
   const [name, setName] = useState("basename");
   const [selectedElement, setSelectedElement] = useState("profile");
@@ -54,6 +56,10 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
+  }
+
+  function goTo(here) {
+    navigate(here);
   }
 
   return (
@@ -102,9 +108,7 @@ const Dashboard = ({ setAuth, userCuisines, getCuisines }) => {
   );
 };
 
-function goTo(here) {
-  window.location.href = here;
-}
+
 
 
 

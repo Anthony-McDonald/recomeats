@@ -2,20 +2,11 @@ import '../css/forum-header.css'
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import ForumHeadUser from './ForumHeadUser'
 import PostModal from './PostModal';
+import { useNavigate } from 'react-router-dom';
 
 const ForumHeader = ({getUserInfo, getPosts}) => {
 
-    // Go back to previous level of website
-    function goTo() {
-        const currentUrl = window.location.href;
-        if (currentUrl.includes("/thread")) {
-            window.location.href = "/forum";
-        } else {
-            const newUrl = currentUrl.replace('/forum', '')
-            window.location.href = newUrl;
-        }
-
-      }
+    const navigate = useNavigate();
 
     return (
         <div id="forum-header">
@@ -30,7 +21,7 @@ const ForumHeader = ({getUserInfo, getPosts}) => {
         </div>
         {/* User profile picture */}
             <ForumHeadUser getUserInfo={getUserInfo}/>
-            <button id="back-btn" className='btn-primary btn' onClick={() => goTo()}>back</button>
+            <button id="back-btn" className='btn-primary btn' onClick={() => navigate(-1)}>back</button>
             </div>
 
 

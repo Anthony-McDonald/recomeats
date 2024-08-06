@@ -24,7 +24,10 @@ const RecipeImageBox = ({ getImageName, image_id }) => {
     }
   };
 
-  const postPicSequenced = `http://localhost:5000/uploads/${imageUrl}`;
+  let postPicSequenced
+  if (imageUrl !== '' ) {
+    postPicSequenced = `http://localhost:5000/uploads/${imageUrl}`;
+  }
 
   // Show image after sequencing above
   return (

@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/header.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import '../css/trending-recipe-box.css';
 
 // No comments here, self explanatory. Takes in information and creates a div based off of it with an img and text
 const TrendingRecipe = ({ postTitle, postBody, postPic, postId }) => {
+  const navigate = useNavigate();
   const [postPicSequenced, setPostPicSequenced] = useState(null);
 
   useEffect(() => {
@@ -14,7 +16,7 @@ const TrendingRecipe = ({ postTitle, postBody, postPic, postId }) => {
   }, [postPic]);
 
   function goTo(here) {
-    window.location.href = here;
+    navigate(here);
   }
 
   return (
