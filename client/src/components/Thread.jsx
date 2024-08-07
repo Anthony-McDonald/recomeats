@@ -180,7 +180,7 @@ const Thread = ({ setAuth, getUserInfo, getImageName, getUpvoteInfo, addNotif })
       <ForumHeader getUserInfo={getUserInfo} />
       <div id="thread-wrapper">
         <div id="thr-l">
-          <RecipeThreadDiv post_id={id} getUserInfo={getUserInfo} getImageName={getImageName} getIngredients={getIngredients} ingredients={ingredients} />
+          <RecipeThreadDiv post_id={id} getUserInfo={getUserInfo} getImageName={getImageName} getIngredients={getIngredients} ingredients={ingredients}/>
           <div id="interaction-div">
             <Interactions type={"post"} post_id={id} upvotes={upvotes} getUpvotes={getUpvotes} commentBodyResult={newComment} registerComment={registerComment} postId={id} addNotif={addNotif} original_post_id={id}/>
             <CommentModal modalId={1} type={"post"} commentBodyResult={newComment} registerComment={registerComment} postReply={postReply} />

@@ -117,6 +117,16 @@ router.get("/getrecipes", authorisation, asyncHandler(async(req, res, next) => {
     res.json(response);
 }));
 
+// Get Recipe Directions
+
+router.get("/getdirections/", asyncHandler(async(req, res, next) => {
+    const recipe_id = req.query.recipe_id;
+
+    const result = await pool.query("SELECT recipe_instructions FROM Recipes WHERE recipe_id = $1", [recipe_id]);
+    const instruction = result.rows[0];
+
+    res.json(instruction);
+}));
 
 
 // Get Recipe Ingredients

@@ -8,6 +8,7 @@ const RecipeThreadDiv = ({ post_id, getUserInfo, getImageName, getIngredients, i
   const [dataToLoad, setDataToLoad] = useState(null);
   const [userData, setUserData] = useState(null);
   const [madeUserImage, setMadeUserImage] = useState("");
+  const [directions, setDirections] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -29,6 +30,7 @@ const RecipeThreadDiv = ({ post_id, getUserInfo, getImageName, getIngredients, i
       const parseRes = await response.json();
       const userInfo = await getUserInfo(parseRes.user_id);
       await getIngredients(parseRes.recipe_id);
+      await getInstructions(parseRes.recipe_id);
 
       setUserData(userInfo);
       setDataToLoad(parseRes);
@@ -37,6 +39,25 @@ const RecipeThreadDiv = ({ post_id, getUserInfo, getImageName, getIngredients, i
       if (userInfo && userInfo.profile_image) {
         setMadeUserImage(`/images/profile-images/${userInfo.profile_image}.png`);
       }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  // get recipe instructions to create
+  const getInstructions = async (recipe_id) => {
+    try {
+      const url = new URL("http://localhost:5000/recipes/getdirections/");
+      url.searchParams.append("recipe_id", recipe_id);
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          token: localStorage.getItem("token"),
+        },
+      });
+      const parseRes = await response.json();
+      setDirections(parseRes.recipe_instructions);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -58,6 +79,10 @@ const RecipeThreadDiv = ({ post_id, getUserInfo, getImageName, getIngredients, i
         <>
           <div id="thread-title">{dataToLoad.title}</div>
           <div id="thread-desc">{dataToLoad.body}</div>
+          <div id="directions">
+            <h4>Directions:</h4>
+            {directions}
+          </div>
           <div id="ingredients">
             {ingredients.map((ingredient, index) => (
               <div key={index} id='ingredient' className="ingred-div">{ingredient}</div>
