@@ -16,6 +16,7 @@
     width: 100%;
     flex-direction: row;
     height: 80vh;
+    flex-wrap: wrap;
 }
 
 .info-bottom {

@@ -91,6 +91,7 @@
 .posted-time {
     color: #3E362E;
     font-size: 0.85rem;
+    flex-shrink: 0;
 }
 
 .post-div {
