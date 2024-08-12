@@ -107,7 +107,7 @@ const recipes = recommendations.recipes.map(recipeData => ({
       <div className="ai-text">
         <h1 className="text-big playfair-display">You have came to the right place</h1>
 
-        <h3 className='text-mid playfair-display'> Let us guide you into flavour exploration</h3>
+        <h3 className='text-mid playfair-display'>Let us guide you into flavour exploration</h3>
       </div>
       <a href="/"><button className='btn btn-primary home-btn'> Back to home</button></a>
 
