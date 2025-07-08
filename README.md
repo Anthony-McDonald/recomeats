@@ -40,9 +40,10 @@ This then opens up to the CRUD portion of the program. Other than the automatic 
 
 ### The Back End ###
 
-In the backend, this program runs on an Amazon Web Services EC2 instance with a PostgreSQL database allowing for 24/7 access through either of the links provided below:
+In the backend, this program *RAN* on an Amazon Web Services EC2 instance with a PostgreSQL database allowing for 24/7 access through either of the links provided below:
   - [http://13.60.10.44/](http://13.60.10.44/)
   - [http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com/](http://ec2-13-60-10-44.eu-north-1.compute.amazonaws.com/)
+These links are no longer functioning
 
 If you have any further questions or queries, feel free to message me on the details on my GitHub home page. I'd be happy to chat about my work process and what I went through during the creation of this project.
 
